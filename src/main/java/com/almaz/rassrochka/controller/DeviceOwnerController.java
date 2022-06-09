@@ -2,6 +2,7 @@ package com.almaz.rassrochka.controller;
 
 import com.almaz.rassrochka.domain.DeviceOwnerDb;
 import com.almaz.rassrochka.service.DeviceOwnerService;
+import com.almaz.rassrochka.service.dto.DeviceOwnerDto;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class DeviceOwnerController {
 
     @ApiOperation(value = "Добавить владельца девайса", notes = "Добавить владельца")
     @PostMapping("/addDeviceOwner")
-    public DeviceOwnerDb addDeviceOwner(@RequestBody DeviceOwnerDb deviceOwnerDb){
-        return deviceOwnerService.addDeviceOwner(deviceOwnerDb);
+    public DeviceOwnerDb addDeviceOwner(@RequestBody DeviceOwnerDto deviceOwnerDto){
+        return deviceOwnerService.addDeviceOwner(deviceOwnerDto);
     }
 }

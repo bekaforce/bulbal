@@ -1,7 +1,8 @@
 package com.almaz.rassrochka.service;
 
 import com.almaz.rassrochka.domain.CreditDb;
+import com.almaz.rassrochka.service.dto.CreditDto;
 
 public interface CreditService {
-    CreditDb addCredit(CreditDb creditDb);
+    CreditDb addCredit(CreditDto creditDto);
 }

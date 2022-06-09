@@ -2,6 +2,7 @@ package com.almaz.rassrochka.controller;
 
 import com.almaz.rassrochka.domain.DeviceDb;
 import com.almaz.rassrochka.service.DeviceService;
+import com.almaz.rassrochka.service.dto.DeviceDto;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,8 @@ public class DeviceController {
 
     @ApiOperation(value = "Добавить девайс в таблицу и привязать к профилю", notes = "Добавить новый девайс")
     @PostMapping("/addDevice")
-    public DeviceDb addDevice(@RequestBody DeviceDb deviceDb){
-        return deviceService.addDevice(deviceDb);
+    public DeviceDb addDevice(@RequestBody DeviceDto deviceDto){
+        return deviceService.addDevice(deviceDto);
     }
 
     @ApiOperation(value = "Получить список всех девайсов", notes = "Получить список всех девайсов")

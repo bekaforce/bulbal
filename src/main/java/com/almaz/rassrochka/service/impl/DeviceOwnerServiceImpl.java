@@ -3,7 +3,10 @@ package com.almaz.rassrochka.service.impl;
 import com.almaz.rassrochka.domain.DeviceOwnerDb;
 import com.almaz.rassrochka.domain.repository.DeviceOwnerRepo;
 import com.almaz.rassrochka.service.DeviceOwnerService;
+import com.almaz.rassrochka.service.dto.DeviceOwnerDto;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class DeviceOwnerServiceImpl implements DeviceOwnerService {
@@ -14,7 +17,14 @@ public class DeviceOwnerServiceImpl implements DeviceOwnerService {
     }
 
     @Override
-    public DeviceOwnerDb addDeviceOwner(DeviceOwnerDb deviceOwnerDb) {
+    public DeviceOwnerDb addDeviceOwner(DeviceOwnerDto deviceOwnerDto) {
+        DeviceOwnerDb deviceOwnerDb = new DeviceOwnerDb();
+        deviceOwnerDb.setDeviceOwner(deviceOwnerDto.getDeviceOwner());
+        deviceOwnerDb.setDeviceId(deviceOwnerDto.getDeviceId());
+        deviceOwnerDb.setDeviceOwnerIp(deviceOwnerDto.getDeviceOwnerIp());
+        deviceOwnerDb.setSalesmanLogin("Salesman Login");
+        deviceOwnerDb.setRegistrationDate(LocalDateTime.now());
+
         return deviceOwnerRepo.save(deviceOwnerDb);
     }
 }

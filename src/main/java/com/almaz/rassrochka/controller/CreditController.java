@@ -3,6 +3,7 @@ package com.almaz.rassrochka.controller;
 
 import com.almaz.rassrochka.domain.CreditDb;
 import com.almaz.rassrochka.service.CreditService;
+import com.almaz.rassrochka.service.dto.CreditDto;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,8 @@ public class CreditController {
 
     @ApiOperation(value = "Добавить кредит и привязать к профилю", notes = "Добавить кредит и привязать к профилю")
     @PostMapping("/addCredit")
-    public CreditDb addCredit(@RequestBody CreditDb creditDb){
-        return creditService.addCredit(creditDb);
+    public CreditDb addCredit(@RequestBody CreditDto creditDto){
+        return creditService.addCredit(creditDto);
     }
 
 }

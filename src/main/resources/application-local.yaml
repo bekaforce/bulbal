@@ -9,3 +9,17 @@ spring:
     password: 3edcVFR$
   jpa:
     generate-ddl: true
+
+
+  main:
+    allow-circular-references: true
+
+security:
+  jwt:
+    token:
+      secret-key: rassrochkaApp
+      expire-length: 14400000
+
+
+
+

@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.almaz.rassrochka.endpoints.Endpoints.PROFILES;
 
@@ -23,6 +24,24 @@ public class ProfileController {
     @GetMapping("/findAll")
     public List<ProfileDb> findAll(){
         return profileService.findAll();
+    }
+
+    @ApiOperation(value = "Получить пользователя по ID", notes = "Получить пользователя по ID")
+    @GetMapping("/findById/{id}")
+    public Optional<ProfileDb> findById(@PathVariable Long id){
+        return profileService.findById(id);
+    }
+
+    @ApiOperation(value = "Поиск по фамилии", notes = "Поиск по фамилии")
+    @GetMapping("/findByFullName/{fullName}")
+    public List<ProfileDb> findByFullName(@PathVariable String fullName){
+        return profileService.findByFullName(fullName);
+    }
+
+    @ApiOperation(value = "Поиск по ИНН паспорта", notes = "Поиск по ИНН паспорта")
+    @GetMapping("/findByPassportInn/{passportInn}")
+    public List<ProfileDb> findByPassportInn(@PathVariable String passportInn){
+        return profileService.findByPassportInn(passportInn);
     }
 
     @ApiOperation(value = "Добавить новый профиль в таблицу", notes = "Добавить новый профиль в таблицу")

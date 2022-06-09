@@ -53,6 +53,11 @@ public class ProfileDb {
 
     @NotNull
     @Size(min = 5, max = 100)
+    @Column(name = "work_address", length = 100)
+    private String workAddress;
+
+    @NotNull
+    @Size(min = 5, max = 100)
     @Column(name = "fact_address", length = 100)
     private String factAddress;
 
