@@ -1,7 +1,7 @@
 package com.almaz.rassrochka.service;
 
 import com.almaz.rassrochka.domain.DeviceDb;
-import com.almaz.rassrochka.service.dto.DeviceDto;
+import com.almaz.rassrochka.domain.dto.DeviceDto;
 
 import java.util.List;
 

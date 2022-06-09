@@ -3,7 +3,8 @@ package com.almaz.rassrochka.service.impl;
 import com.almaz.rassrochka.domain.BrotherDb;
 import com.almaz.rassrochka.domain.repository.BrotherDbRepo;
 import com.almaz.rassrochka.service.BrotherService;
-import com.almaz.rassrochka.service.dto.BrotherDto;
+import com.almaz.rassrochka.domain.dto.BrotherDto;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -36,7 +37,7 @@ public class BrotherServiceImpl implements BrotherService {
         brotherDb.setAddress(brotherDto.getAddress());
         brotherDb.setProfileId(brotherDto.getProfileId());
         brotherDb.setRegistrationDate(LocalDateTime.now());
-        brotherDb.setSalesmanLogin("Имя продавца");
+        brotherDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
 
         return brotherDbRepo.save(brotherDb);
     }

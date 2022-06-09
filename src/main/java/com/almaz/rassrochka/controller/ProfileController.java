@@ -1,6 +1,7 @@
 package com.almaz.rassrochka.controller;
 
 import com.almaz.rassrochka.domain.ProfileDb;
+import com.almaz.rassrochka.domain.dto.ProfileDto;
 import com.almaz.rassrochka.service.ProfileService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -46,8 +47,8 @@ public class ProfileController {
 
     @ApiOperation(value = "Добавить новый профиль в таблицу", notes = "Добавить новый профиль в таблицу")
     @PostMapping("/addProfiles")
-    public ProfileDb addProfiles(@RequestBody ProfileDb profileDb){
-        return profileService.addProfiles(profileDb);
+    public ProfileDb addProfiles(@RequestBody ProfileDto profileDto){
+        return profileService.addProfiles(profileDto);
     }
 
 

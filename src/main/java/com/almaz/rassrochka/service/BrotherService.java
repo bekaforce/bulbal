@@ -1,7 +1,7 @@
 package com.almaz.rassrochka.service;
 
 import com.almaz.rassrochka.domain.BrotherDb;
-import com.almaz.rassrochka.service.dto.BrotherDto;
+import com.almaz.rassrochka.domain.dto.BrotherDto;
 
 import java.util.List;
 

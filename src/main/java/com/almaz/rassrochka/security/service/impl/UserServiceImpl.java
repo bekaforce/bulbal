@@ -21,7 +21,8 @@ public class UserServiceImpl implements UserService {
     private final RoleServiceImpl roleService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepo userRepo, RoleServiceImpl roleService, BCryptPasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepo userRepo, RoleServiceImpl roleService,
+                           BCryptPasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
@@ -38,8 +39,6 @@ public class UserServiceImpl implements UserService {
             user = new User();
             user.setUsername(userDto.getName());
             Role roleUser = roleService.findByName("ROLE_USER");
-//            Role role = new Role();
-//            role.setName("ROLE_USER");
             List<Role> userRoles = new ArrayList<>();
             userRoles.add(roleUser);
             user.setRoles(userRoles);
@@ -52,18 +51,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepo.findAll();
-    }
-
-    @Override
     public User findByUsername(String userName) {
         return userRepo.findByUsername(userName);
     }
 
-    @Override
-    public User findById(Long id) {
-        return userRepo.findById(id).orElse(null);
-    }
 }
 

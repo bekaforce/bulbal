@@ -2,7 +2,7 @@ package com.almaz.rassrochka.controller;
 
 import com.almaz.rassrochka.domain.DeviceOwnerDb;
 import com.almaz.rassrochka.service.DeviceOwnerService;
-import com.almaz.rassrochka.service.dto.DeviceOwnerDto;
+import com.almaz.rassrochka.domain.dto.DeviceOwnerDto;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 

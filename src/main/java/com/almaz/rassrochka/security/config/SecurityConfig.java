@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String USER_ENDPOINTS = "/api/user/**";
     private static final String API = "/api";
     private static final String V1 = "/v1";
-    public static final String LOGIN = API + V1 + "/auth/**";
+    public static final String LOGIN = API + V1 + "/login/**";
 
     @Autowired
     public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
@@ -55,9 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers().permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers(USER_ENDPOINTS).permitAll()
-                .antMatchers("/rassrochka/api/v1/auth/auth").permitAll()
                 .antMatchers(LOGIN).permitAll()
-              //  .anyRequest().authenticated()
+ //               .anyRequest().authenticated()
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider))
                 .and().cors();

@@ -3,8 +3,11 @@ package com.almaz.rassrochka.service.impl;
 import com.almaz.rassrochka.domain.CreditDb;
 import com.almaz.rassrochka.domain.repository.CreditDbRepo;
 import com.almaz.rassrochka.service.CreditService;
-import com.almaz.rassrochka.service.dto.CreditDto;
+import com.almaz.rassrochka.domain.dto.CreditDto;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class CreditServiceImpl implements CreditService {
@@ -33,6 +36,8 @@ public class CreditServiceImpl implements CreditService {
         creditDb.setPercentFirstMonth(creditDto.getPercentFirstMonth());
         creditDb.setPercentSecondMonth(creditDto.getPercentSecondMonth());
         creditDb.setPercentThirdMonth(creditDb.getPercentThirdMonth());
+        creditDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        creditDb.setRegistrationDate(LocalDateTime.now());
         return creditDbRepo.save(creditDb);
     }
 }

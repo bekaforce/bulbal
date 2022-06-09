@@ -1,4 +1,4 @@
-package com.almaz.rassrochka.service.dto;
+package com.almaz.rassrochka.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

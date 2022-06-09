@@ -2,7 +2,7 @@ package com.almaz.rassrochka.controller;
 
 import com.almaz.rassrochka.domain.BrotherDb;
 import com.almaz.rassrochka.service.BrotherService;
-import com.almaz.rassrochka.service.dto.BrotherDto;
+import com.almaz.rassrochka.domain.dto.BrotherDto;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 

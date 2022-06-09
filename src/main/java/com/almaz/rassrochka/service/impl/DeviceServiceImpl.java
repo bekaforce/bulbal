@@ -3,7 +3,8 @@ package com.almaz.rassrochka.service.impl;
 import com.almaz.rassrochka.domain.DeviceDb;
 import com.almaz.rassrochka.domain.repository.DeviceDbRepo;
 import com.almaz.rassrochka.service.DeviceService;
-import com.almaz.rassrochka.service.dto.DeviceDto;
+import com.almaz.rassrochka.domain.dto.DeviceDto;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,7 +27,7 @@ public class DeviceServiceImpl implements DeviceService {
         deviceDb.setDevicePrice(deviceDto.getDevicePrice());
         deviceDb.setDeviceImei(deviceDto.getDeviceImei());
         deviceDb.setProfileId(deviceDto.getProfileId());
-        deviceDb.setSalesmanLogin("Salesman Login");
+        deviceDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         deviceDb.setRegistrationDate(LocalDateTime.now());
         return deviceDbRepo.save(deviceDb);
     }

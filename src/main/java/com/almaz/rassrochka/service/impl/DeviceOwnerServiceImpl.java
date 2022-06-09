@@ -3,7 +3,8 @@ package com.almaz.rassrochka.service.impl;
 import com.almaz.rassrochka.domain.DeviceOwnerDb;
 import com.almaz.rassrochka.domain.repository.DeviceOwnerRepo;
 import com.almaz.rassrochka.service.DeviceOwnerService;
-import com.almaz.rassrochka.service.dto.DeviceOwnerDto;
+import com.almaz.rassrochka.domain.dto.DeviceOwnerDto;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,7 +23,7 @@ public class DeviceOwnerServiceImpl implements DeviceOwnerService {
         deviceOwnerDb.setDeviceOwner(deviceOwnerDto.getDeviceOwner());
         deviceOwnerDb.setDeviceId(deviceOwnerDto.getDeviceId());
         deviceOwnerDb.setDeviceOwnerIp(deviceOwnerDto.getDeviceOwnerIp());
-        deviceOwnerDb.setSalesmanLogin("Salesman Login");
+        deviceOwnerDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         deviceOwnerDb.setRegistrationDate(LocalDateTime.now());
 
         return deviceOwnerRepo.save(deviceOwnerDb);

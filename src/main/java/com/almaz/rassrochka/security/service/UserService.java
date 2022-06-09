@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface UserService {
     User register(UserDto userDto);
-    List<User> getAll();
     User findByUsername(String userName);
-    User findById(Long id);
 }
 
