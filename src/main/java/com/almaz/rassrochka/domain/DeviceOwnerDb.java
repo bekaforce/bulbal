@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,12 +20,17 @@ public class DeviceOwnerDb {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "device_owner")
+    @NotNull
+    @Size(min = 3, max = 15)
+    @Column(name = "device_owner", length = 15)
     private String deviceOwner;
 
-    @Column(name = "device_owner_ip")
+    @Size(min = 3, max = 20)
+    @NotNull
+    @Column(name = "device_owner_ip", length = 20)
     private String deviceOwnerIp;
 
+    @NotNull
     @Column(name = "device_id")
     private Long deviceId;
 

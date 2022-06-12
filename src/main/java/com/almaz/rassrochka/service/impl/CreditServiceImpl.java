@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CreditServiceImpl implements CreditService {
@@ -21,6 +23,7 @@ public class CreditServiceImpl implements CreditService {
     public CreditDb addCredit(CreditDto creditDto) {
 
         CreditDb creditDb = new CreditDb();
+        creditDb.setDeviceId(creditDto.getDeviceId());
         creditDb.setDevicePrice(creditDto.getDevicePrice());
         creditDb.setZeroPayment(creditDto.getZeroPayment());
         creditDb.setZeroPaymentDate(creditDto.getZeroPaymentDate());
@@ -35,9 +38,19 @@ public class CreditServiceImpl implements CreditService {
         creditDb.setThirdStatus(creditDto.getThirdStatus());
         creditDb.setPercentFirstMonth(creditDto.getPercentFirstMonth());
         creditDb.setPercentSecondMonth(creditDto.getPercentSecondMonth());
-        creditDb.setPercentThirdMonth(creditDb.getPercentThirdMonth());
+        creditDb.setPercentThirdMonth(creditDto.getPercentThirdMonth());
         creditDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         creditDb.setRegistrationDate(LocalDateTime.now());
         return creditDbRepo.save(creditDb);
+    }
+
+    @Override
+    public List<CreditDb> getCreditByDeviceId(Long id) {
+        return creditDbRepo.findAllByDeviceId(id);
+    }
+
+    @Override
+    public Optional<CreditDb> findCreditById(Long id) {
+        return creditDbRepo.findById(id);
     }
 }

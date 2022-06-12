@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 
 
 import javax.persistence.*;

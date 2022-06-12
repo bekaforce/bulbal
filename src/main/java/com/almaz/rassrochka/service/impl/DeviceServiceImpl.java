@@ -33,7 +33,7 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public List<DeviceDb> findAllDevice() {
-        return deviceDbRepo.findAll();
+    public List<DeviceDb> findDeviceById(Long id) {
+        return deviceDbRepo.findAllByProfileId(id);
     }
 }

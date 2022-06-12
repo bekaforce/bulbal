@@ -26,10 +26,10 @@ public class DeviceController {
         return deviceService.addDevice(deviceDto);
     }
 
-    @ApiOperation(value = "Получить список всех девайсов", notes = "Получить список всех девайсов")
-    @GetMapping("/getAllDevice")
-    public List<DeviceDb> findAllDevice(){
-        return deviceService.findAllDevice();
+    @ApiOperation(value = "Получить список девайсов по profile_ID", notes = "Получить список девайсов по profile_ID")
+    @GetMapping("/getDeviceByProfileID/{id}")
+    public List<DeviceDb> findAllDevice(@PathVariable Long id){
+        return deviceService.findDeviceById(id);
 
     }
 }

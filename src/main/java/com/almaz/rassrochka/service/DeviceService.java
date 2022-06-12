@@ -8,7 +8,7 @@ import java.util.List;
 public interface DeviceService {
     DeviceDb addDevice(DeviceDto deviceDto);
 
-    List<DeviceDb> findAllDevice();
+    List<DeviceDb> findDeviceById(Long id);
 
 
 }

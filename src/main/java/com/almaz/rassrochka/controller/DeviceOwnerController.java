@@ -6,6 +6,8 @@ import com.almaz.rassrochka.domain.dto.DeviceOwnerDto;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.almaz.rassrochka.endpoints.Endpoints.OWNER;
 
 @CrossOrigin
@@ -22,5 +24,12 @@ public class DeviceOwnerController {
     @PostMapping("/addDeviceOwner")
     public DeviceOwnerDb addDeviceOwner(@RequestBody DeviceOwnerDto deviceOwnerDto){
         return deviceOwnerService.addDeviceOwner(deviceOwnerDto);
+    }
+
+    @ApiOperation(value = "Получить DeviceOwnerById", notes = "Получить DeviceOwnerById")
+    @GetMapping("/getDeviceOwnerById/{id}")
+    public List<DeviceOwnerDb> getDeviceOwnerById(@PathVariable Long id) {
+        return deviceOwnerService.getDeviceOwnerById(id);
+
     }
 }

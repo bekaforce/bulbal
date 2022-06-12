@@ -21,12 +21,12 @@ import static com.almaz.rassrochka.endpoints.Endpoints.LOGIN;
 @RestController
 @CrossOrigin
 @RequestMapping(value = LOGIN)
-public class AuthenticationRestController {
+public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
 
-    public AuthenticationRestController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService) {
+    public AuthenticationController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userService = userService;

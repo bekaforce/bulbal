@@ -21,19 +21,18 @@ public class CreditDb {
     private Long id;
 
     @NotNull
-    @Size(min = 2, max = 6)
-    @Column(name = "device_price", length = 6)
+    @Column(name = "device_price", length = 7)
     private Integer devicePrice;
 
-    @Size(min = 2, max = 6)
-    @Column(name = "zero_payment")
+    @NotNull
+    @Column(name = "zero_payment", length = 7)
     private Integer zeroPayment;
 
+    @NotNull
     @Column(name = "zero_payment_date")
     private LocalDateTime zeroPaymentDate;
 
-    @Size(min = 2, max = 6)
-    @Column(name = "first_payment")
+    @Column(name = "first_payment", length = 7)
     private Integer firstPayment;
 
     @Column(name = "first_status")
@@ -42,7 +41,7 @@ public class CreditDb {
     @Column(name = "first_payment_date")
     private LocalDateTime firstPaymentDate;
 
-    @Column(name = "second_payment")
+    @Column(name = "second_payment", length = 7)
     private Integer secondPayment;
 
     @Column(name = "second_status")
@@ -51,7 +50,7 @@ public class CreditDb {
     @Column(name = "second_payment_date")
     private LocalDateTime secondPaymentDate;
 
-    @Column(name = "third_payment")
+    @Column(name = "third_payment", length = 7)
     private Integer thirdPayment;
 
     @Column(name = "third_status")

@@ -20,19 +20,13 @@ public class BrotherController {
         this.brotherService = brotherService;
     }
 
-    @ApiOperation(value = "Добавить нового поручителя в таблицу", notes = "Добавить нового поручителя в таблицу")
-    @PostMapping("/addBrothers")
-    public BrotherDb addBrothers(@RequestBody BrotherDb brotherDb){
-        return brotherService.addBrother(brotherDb);
-    }
-
     @ApiOperation(value = "Добавить нового поручителя в таблицу DTO", notes = "Добавить нового поручителя в таблицу DTO")
     @PostMapping("/addBrothersDto")
     public BrotherDb addBrotherDto(@RequestBody BrotherDto brotherDto){
         return brotherService.addBrotherDto(brotherDto);
     }
 
-    @ApiOperation(value = "Поиск поручителя по id", notes = "Поиск поручителя по ID")
+    @ApiOperation(value = "Поиск поручителя по ProfileId", notes = "Поиск поручителя по ProfileIdId")
     @GetMapping("/getBrothersById/{id}")
     public List<BrotherDb> findByProfileId(@PathVariable Long id){
         return brotherService.findByProfileId(id);

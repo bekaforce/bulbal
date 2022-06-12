@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class DeviceOwnerServiceImpl implements DeviceOwnerService {
@@ -27,5 +29,10 @@ public class DeviceOwnerServiceImpl implements DeviceOwnerService {
         deviceOwnerDb.setRegistrationDate(LocalDateTime.now());
 
         return deviceOwnerRepo.save(deviceOwnerDb);
+    }
+
+    @Override
+    public List<DeviceOwnerDb> getDeviceOwnerById(Long id) {
+        return deviceOwnerRepo.findAllById(Collections.singleton(id));
     }
 }

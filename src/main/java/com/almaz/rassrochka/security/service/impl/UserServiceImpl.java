@@ -7,12 +7,14 @@ import com.almaz.rassrochka.security.domain.repo.UserRepo;
 import com.almaz.rassrochka.security.dto.UserDto;
 import com.almaz.rassrochka.security.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -53,6 +55,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String userName) {
         return userRepo.findByUsername(userName);
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        return userRepo.findAll();
+    }
+
+    @Override
+    public Optional<User> editUserName(Long id, UserDto userDto) {
+        return userRepo.findById(id)
+                .map(us ->{
+                    us.setPassword(passwordEncoder.encode(userDto.getPassword()));
+                    us.setUsername(userDto.getName());
+                    us.setPhoneNumber(userDto.getPhoneNumber());
+                    us.setDate(LocalDateTime.now());
+                    us.setAdminLogin(SecurityContextHolder
+                            .getContext()
+                            .getAuthentication()
+                            .getName());
+                    return userRepo.save(us);
+                });
     }
 
 }
