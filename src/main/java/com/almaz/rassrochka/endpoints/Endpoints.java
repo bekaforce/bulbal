@@ -11,5 +11,6 @@ public class Endpoints {
     public static final String BROTHER = API + V1 + "/brother";
     public static final String DEVICE = API + V1 + "/device";
     public static final String CREDIT = API + V1 + "/credit";
+    public static final String MONTH = API + V1 + CREDIT + "/month";
     public static final String OWNER = API + V1 + "/owner";
 }

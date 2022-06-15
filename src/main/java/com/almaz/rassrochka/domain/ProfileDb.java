@@ -4,11 +4,10 @@ import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.validator.constraints.UniqueElements;
-
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -26,6 +25,9 @@ public class ProfileDb {
     @Size(min = 2, max = 50)
     @Column(name = "full_name", length = 50)
     private String fullName;
+
+    @Column(name = "birthday", length = 11)
+    private LocalDate birthday;
 
     @NotNull
     @Size(min = 14, max = 14)
