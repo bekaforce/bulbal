@@ -15,5 +15,4 @@ public class CreditMonthDto {
     private Integer zeroPayment;
     private Long deviceId;
     private List<MonthCreditDb> monthCreditDbList;
-    private Long creditId;
 }

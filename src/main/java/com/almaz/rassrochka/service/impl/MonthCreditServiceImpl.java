@@ -20,4 +20,9 @@ public class MonthCreditServiceImpl implements MonthCreditService {
         return monthCreditDbRepo.findAll();
     }
 
+    @Override
+    public MonthCreditDb findAllByCreditId(Long id) {
+        return monthCreditDbRepo.findAllByCreditId(id);
+    }
+
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CreditServiceImpl implements CreditService {
@@ -35,10 +36,15 @@ public class CreditServiceImpl implements CreditService {
         creditDb.setStatusType(StatusType.WAIT);
         creditDb.setDeviceId(creditMonthDto.getDeviceId());
         creditDb.setRegistrationDate(LocalDateTime.now());
-        creditDb.setCreditId(creditMonthDto.getCreditId());
         creditDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
 
         return creditDbRepo.save(creditDb);
     }
+
+    @Override
+    public Optional<CreditDb> findAllById(Long id) {
+        return creditDbRepo.findById(id);
+    }
+
 
 }

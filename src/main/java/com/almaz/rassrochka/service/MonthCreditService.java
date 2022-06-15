@@ -7,5 +7,7 @@ import java.util.List;
 public interface MonthCreditService {
     List<MonthCreditDb> findAll();
 
+    MonthCreditDb findAllByCreditId(Long id);
+
 
 }

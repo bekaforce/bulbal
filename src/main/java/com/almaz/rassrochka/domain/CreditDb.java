@@ -9,6 +9,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,9 +28,8 @@ public class CreditDb {
     @Column(name = "zero_payment", length = 7)
     private Integer zeroPayment;
 
-    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "credit_id", insertable = false, updatable = false)
+    @JoinColumn(name = "credit_id")
     private List<MonthCreditDb> monthCreditDb;
 
     @Enumerated(EnumType.STRING)
@@ -38,9 +38,6 @@ public class CreditDb {
 
     @Column(name = "device_id")
     private Long deviceId;
-
-    @Column(name = "credit_id")
-    private Long creditId;
 
     @OneToOne
     @JoinColumn (name = "device_id", referencedColumnName = "id", insertable = false, updatable = false)

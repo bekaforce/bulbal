@@ -7,6 +7,7 @@ import com.almaz.rassrochka.service.CreditService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 import static com.almaz.rassrochka.endpoints.Endpoints.CREDIT;
@@ -14,7 +15,7 @@ import static com.almaz.rassrochka.endpoints.Endpoints.CREDIT;
 @RestController
 @CrossOrigin
 @RequestMapping(value = CREDIT)
-public class CreditController {
+public class CreditController  {
     private final CreditService creditService;
 
     public CreditController(CreditService creditService) {

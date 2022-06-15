@@ -9,4 +9,6 @@ public interface CreditDbRepo extends JpaRepository<CreditDb, Long> {
 
     List<CreditDb> findAllByDeviceId(Long id);
 
+    CreditDb findAllById(Long id);
+
 }
