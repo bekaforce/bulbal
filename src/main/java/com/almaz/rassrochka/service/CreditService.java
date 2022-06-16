@@ -12,7 +12,7 @@ public interface CreditService {
 
     CreditDb addMonthDto(CreditMonthDto creditMonthDto);
 
-    Optional<CreditDb> findAllById(Long id);
+    CreditDb findAllById(Long id);
 
 
 

@@ -1,12 +1,13 @@
 package com.almaz.rassrochka.domain;
 
 import com.almaz.rassrochka.enums.StatusType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -28,8 +29,14 @@ public class MonthCreditDb {
     @Column(name = "percent")
     private Double percent;
 
+    @Column(name = "pay_date")
+    private LocalDate payDate;
+
     @Column(name = "debt")
     private Double debt;
+
+    @Column(name = "debt_closed_date")
+    private LocalDateTime debtClosedDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_type")

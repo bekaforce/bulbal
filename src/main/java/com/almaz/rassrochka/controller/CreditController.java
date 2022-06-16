@@ -7,7 +7,6 @@ import com.almaz.rassrochka.service.CreditService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
 import java.util.List;
 
 import static com.almaz.rassrochka.endpoints.Endpoints.CREDIT;
@@ -26,6 +25,12 @@ public class CreditController  {
     @GetMapping("/findCreditByDeviceId/{id}")
     public List<CreditDb> findCreditByDeviceId (@PathVariable Long id) {
         return creditService.getCreditByDeviceId(id);
+    }
+
+    @ApiOperation(value = "Поиск кредита по ID", notes = "Поиск кредита по Device ID")
+    @GetMapping("/findAllById/{id}")
+    public CreditDb findAllById (@PathVariable Long id) {
+        return creditService.findAllById(id);
     }
 
     @ApiOperation(value = "Добавить скелит с месяцами", notes = "Добавить скелит с месяцами")

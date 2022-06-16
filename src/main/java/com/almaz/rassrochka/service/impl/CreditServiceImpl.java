@@ -42,8 +42,8 @@ public class CreditServiceImpl implements CreditService {
     }
 
     @Override
-    public Optional<CreditDb> findAllById(Long id) {
-        return creditDbRepo.findById(id);
+    public CreditDb findAllById(Long id) {
+        return creditDbRepo.findAllById(id);
     }
 
 
