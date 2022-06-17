@@ -1,6 +1,7 @@
 package com.almaz.rassrochka.domain;
 
 import com.almaz.rassrochka.enums.StatusType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class MonthCreditDb {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @JsonIgnore
     @Column(name = "credit_id")
     private Long creditId;
 

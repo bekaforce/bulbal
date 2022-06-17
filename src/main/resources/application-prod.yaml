@@ -4,8 +4,8 @@ spring:
       matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://172.28.141.198:5432/azamat
-    username: smssurvey
+    url: jdbc:postgresql://172.28.141.23:5432/azamat
+    username: sweatter
     password: 3edcVFR$
   jpa:
     generate-ddl: true

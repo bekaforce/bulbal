@@ -29,7 +29,7 @@ public class CreditDb {
     private Integer zeroPayment;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "credit_id")
+    @JoinColumn(name = "credit_id", referencedColumnName = "id")
     private List<MonthCreditDb> monthCreditDb;
 
     @Enumerated(EnumType.STRING)
