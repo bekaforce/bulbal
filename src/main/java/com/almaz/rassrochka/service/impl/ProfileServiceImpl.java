@@ -1,13 +1,16 @@
 package com.almaz.rassrochka.service.impl;
 
 import com.almaz.rassrochka.domain.ProfileDb;
+import com.almaz.rassrochka.domain.dto.CallActiveProfileDto;
 import com.almaz.rassrochka.domain.dto.ProfileDto;
+import com.almaz.rassrochka.domain.repository.CallProfileDto;
 import com.almaz.rassrochka.domain.repository.ProfileDbRepo;
 import com.almaz.rassrochka.service.ProfileService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,5 +55,31 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public List<ProfileDb> findByPassportInn(String passportInn) {
         return profileDbRepo.findByPassportInnIgnoreCaseContaining(passportInn);
+    }
+
+    @Override
+    public List<CallActiveProfileDto> findCallProfile() {
+        List<CallProfileDto> callDto = profileDbRepo.findCallProfile();
+
+        List<CallActiveProfileDto> result = new ArrayList<>();
+        for(CallProfileDto d : callDto){
+            result.add(CallActiveProfileDto.builder()
+                            .id(d.getId())
+                            .fullName(d.getFullName())
+                            .deviceModel(d.getDeviceModel())
+                            .devicePrice(d.getDevicePrice())
+                            .zeroPayment(d.getZeroPayment())
+                            .countMonth(d.getCountMonth())
+                            .payDate(d.getPayDate())
+                            .statusType(d.getStatusType())
+                            .salesmanLogin(d.getSalesmanLogin())
+                            .comment(d.getComment())
+                            .creditId(d.getCreditId())
+                            .mcId(d.getMcId())
+                    .build());
+
+        }
+
+        return result;
     }
 }

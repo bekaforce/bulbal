@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @Table(name = "month_credit", schema = "azamat")
 public class MonthCreditDb {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
