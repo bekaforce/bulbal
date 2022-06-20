@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.almaz.rassrochka.endpoints.Endpoints.BROTHER;
 
@@ -30,5 +31,10 @@ public class BrotherController {
     @GetMapping("/getBrothersById/{id}")
     public List<BrotherDb> findByProfileId(@PathVariable Long id){
         return brotherService.findByProfileId(id);
+    }
+    @ApiOperation(value = "Обновить поручителя", notes = "Обновить поручителя")
+    @PutMapping("/editBrothers")
+    public Optional<BrotherDb> editBrothers (@RequestBody BrotherDto brotherDto){
+        return brotherService.editBrother(brotherDto);
     }
 }

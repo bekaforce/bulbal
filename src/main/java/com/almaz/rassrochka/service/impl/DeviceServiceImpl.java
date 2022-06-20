@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DeviceServiceImpl implements DeviceService {
@@ -35,5 +36,20 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public List<DeviceDb> findDeviceById(Long id) {
         return deviceDbRepo.findAllByProfileId(id);
+    }
+
+    @Override
+    public Optional<DeviceDb> editDevice(DeviceDto deviceDto) {
+        return deviceDbRepo.findById(deviceDto.getId())
+                .map(list -> {
+                    list.setId(deviceDto.getId());
+                    list.setDeviceModel(deviceDto.getDeviceModel());
+                    list.setDeviceMemory(deviceDto.getDeviceMemory());
+                    list.setDevicePrice(deviceDto.getDevicePrice());
+                    list.setDeviceImei(deviceDto.getDeviceImei());
+                    list.setRegistrationDate(LocalDateTime.now());
+                    list.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+                    return deviceDbRepo.save(list);
+                });
     }
 }

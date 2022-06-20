@@ -12,9 +12,11 @@ import java.time.LocalDate;
 public class CallActiveProfileDto {
     private Long id;
     private String fullName;
+    private String phone;
     private String deviceModel;
     private String devicePrice;
     private Integer zeroPayment;
+    private Double debt;
     private Integer countMonth;
     private LocalDate payDate;
     private String statusType;

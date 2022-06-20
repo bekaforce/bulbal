@@ -48,6 +48,12 @@ public class MonthCreditDb {
     @Column(name = "comment")
     private String comment;
 
+    @Column(name = "registration_date")
+    private LocalDateTime registrationDate;
+
+    @Column(name = "salesman_login")
+    private String salesmanLogin;
+
     public MonthCreditDb() {
 
     }

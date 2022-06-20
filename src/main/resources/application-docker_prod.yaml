@@ -4,11 +4,11 @@ spring:
       matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://172.28.141.23:5432/sweatter
+    url: jdbc:postgresql://psg:5432/sweatter
     username: beenavigator
-    password: beenavigator123
-#  jpa:
-#    generate-ddl: true
+    password: beenav12345
+    jpa:
+      generate-ddl: true
 
 
   main:

@@ -1,11 +1,13 @@
 package com.almaz.rassrochka.controller;
 
 import com.almaz.rassrochka.domain.MonthCreditDb;
+import com.almaz.rassrochka.domain.dto.MonthCreditDto;
 import com.almaz.rassrochka.service.MonthCreditService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.almaz.rassrochka.endpoints.Endpoints.MONTH;
 
@@ -29,6 +31,12 @@ public class MonthCreditController {
     @GetMapping("/findAllByCreditId/{id}")
     public MonthCreditDb findAllByCreditId(@PathVariable Long id){
         return monthCreditService.findAllByCreditId(id);
+    }
+
+    @ApiOperation(value = "Обновить статусы по месячным кредитам", notes = "Обновить статусы по месячным кредитам")
+    @PutMapping("/editMontCredit")
+    public Optional<MonthCreditDb> editMontCredit (@RequestBody MonthCreditDto monthCreditDto){
+        return monthCreditService.editMonthCredit(monthCreditDto);
     }
 
 }

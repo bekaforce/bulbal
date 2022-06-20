@@ -13,8 +13,8 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
     List<ProfileDb> findByPassportInnIgnoreCaseContaining (String passportInn);
 
 
-    @Query(value = "SELECT p.id, p.full_name as fullName, d.device_model as deviceModel, d.device_price as devicePrice, " +
-            "c.zero_payment as zeroPayment, mc.credit_id as creditId, mc.id as mcId, mc.count_month as countMonth, mc.pay_date as payDate, " +
+    @Query(value = "SELECT p.id, p.full_name as fullName, p.phone as phone, d.device_model as deviceModel, d.device_price as devicePrice, " +
+            "c.zero_payment as zeroPayment, mc.credit_id as creditId, mc.id as mcId, mc.count_month as countMonth, mc.debt as debt, mc.pay_date as payDate, " +
             "mc.status_type as StatusType, mc.\"comment\", c.salesman_login as salesmanLogin " +
             "FROM azamat.profile p, azamat.device d, azamat.credit c, azamat.month_credit mc " +
             "where p.id=d.profile_id " +

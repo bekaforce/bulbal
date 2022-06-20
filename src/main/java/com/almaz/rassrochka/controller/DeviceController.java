@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.almaz.rassrochka.endpoints.Endpoints.DEVICE;
 
@@ -30,6 +31,10 @@ public class DeviceController {
     @GetMapping("/getDeviceByProfileID/{id}")
     public List<DeviceDb> findAllDevice(@PathVariable Long id){
         return deviceService.findDeviceById(id);
-
+    }
+    @ApiOperation(value = "Изменить Device", notes = "Изменить Device")
+    @PutMapping("/editDevice")
+    public Optional<DeviceDb> findAllDevice(@RequestBody DeviceDto deviceDto){
+        return deviceService.editDevice(deviceDto);
     }
 }

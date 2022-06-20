@@ -66,10 +66,12 @@ public class ProfileServiceImpl implements ProfileService {
             result.add(CallActiveProfileDto.builder()
                             .id(d.getId())
                             .fullName(d.getFullName())
+                            .phone(d.getPhone())
                             .deviceModel(d.getDeviceModel())
                             .devicePrice(d.getDevicePrice())
                             .zeroPayment(d.getZeroPayment())
                             .countMonth(d.getCountMonth())
+                            .debt(d.getDebt())
                             .payDate(d.getPayDate())
                             .statusType(d.getStatusType())
                             .salesmanLogin(d.getSalesmanLogin())
@@ -81,5 +83,26 @@ public class ProfileServiceImpl implements ProfileService {
         }
 
         return result;
+    }
+
+    @Override
+    public Optional<ProfileDb> editUserProfile(ProfileDb profileDb) {
+        return profileDbRepo.findById(profileDb.getId())
+                .map(list -> {
+                    list.setId(profileDb.getId());
+                    list.setFullName(profileDb.getFullName());
+                    list.setBirthday(profileDb.getBirthday());
+                    list.setPassportInn(profileDb.getPassportInn());
+                    list.setPassportSeries(profileDb.getPassportSeries());
+                    list.setPassportDate(profileDb.getPassportDate());
+                    list.setPassportDepartment(profileDb.getPassportDepartment());
+                    list.setPassportAddress(profileDb.getPassportAddress());
+                    list.setWorkAddress(profileDb.getWorkAddress());
+                    list.setFactAddress(profileDb.getFactAddress());
+                    list.setPhone(profileDb.getPhone());
+                    list.setRegistrationDate(LocalDateTime.now());
+                    list.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+                    return profileDbRepo.save(list);
+                });
     }
 }

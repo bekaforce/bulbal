@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DeviceOwnerServiceImpl implements DeviceOwnerService {
@@ -34,5 +35,18 @@ public class DeviceOwnerServiceImpl implements DeviceOwnerService {
     @Override
     public List<DeviceOwnerDb> getDeviceOwnerById(Long id) {
         return deviceOwnerRepo.findAllById(Collections.singleton(id));
+    }
+
+    @Override
+    public Optional<DeviceOwnerDb> editDeviceOwner(DeviceOwnerDto deviceOwnerDto) {
+        return deviceOwnerRepo.findById(deviceOwnerDto.getId())
+                .map(list -> {
+                    list.setId(deviceOwnerDto.getId());
+                    list.setDeviceOwner(deviceOwnerDto.getDeviceOwner());
+                    list.setDeviceOwnerIp(deviceOwnerDto.getDeviceOwnerIp());
+                    list.setRegistrationDate(LocalDateTime.now());
+                    list.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+                    return deviceOwnerRepo.save(list);
+                });
     }
 }

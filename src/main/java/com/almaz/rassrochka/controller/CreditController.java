@@ -33,7 +33,7 @@ public class CreditController  {
         return creditService.findAllById(id);
     }
 
-    @ApiOperation(value = "Добавить скелит с месяцами", notes = "Добавить скелит с месяцами")
+    @ApiOperation(value = "Добавить кредит с месяцами", notes = "Добавить кредит с месяцами")
     @PostMapping("/addCredit")
     public CreditDb addCredit(@RequestBody CreditMonthDto creditMonthDto){
         return creditService.addMonthDto(creditMonthDto);

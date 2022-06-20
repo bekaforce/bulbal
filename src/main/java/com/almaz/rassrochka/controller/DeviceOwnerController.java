@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.almaz.rassrochka.endpoints.Endpoints.OWNER;
 
@@ -30,6 +31,10 @@ public class DeviceOwnerController {
     @GetMapping("/getDeviceOwnerById/{id}")
     public List<DeviceOwnerDb> getDeviceOwnerById(@PathVariable Long id) {
         return deviceOwnerService.getDeviceOwnerById(id);
-
+    }
+    @ApiOperation(value = "Обновить владельца девайса", notes = "Изменить владельца")
+    @PutMapping("/editDeviceOwner")
+    public Optional<DeviceOwnerDb> editDeviceOwner(@RequestBody DeviceOwnerDto deviceOwnerDto){
+        return deviceOwnerService.editDeviceOwner(deviceOwnerDto);
     }
 }

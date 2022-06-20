@@ -59,5 +59,11 @@ public class ProfileController {
         return profileService.addProfiles(profileDto);
     }
 
+    @ApiOperation(value = "Изменить данные по профилю", notes = "Изменить данные по профилю")
+    @PutMapping("/editProfiles")
+    public Optional<ProfileDb> editProfiles(@RequestBody ProfileDb profileDb){
+        return profileService.editUserProfile(profileDb);
+    }
+
 
 }
