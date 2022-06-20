@@ -6,8 +6,10 @@ import com.almaz.rassrochka.domain.dto.ProfileDto;
 import com.almaz.rassrochka.domain.repository.CallProfileDto;
 import com.almaz.rassrochka.service.ProfileService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +65,12 @@ public class ProfileController {
     @PutMapping("/editProfiles")
     public Optional<ProfileDb> editProfiles(@RequestBody ProfileDb profileDb){
         return profileService.editUserProfile(profileDb);
+    }
+    @ApiOperation(value = "Поиск по ИНН паспорта", notes = "Поиск по ИНН паспорта")
+    @GetMapping("/findProfileByDate/{start}/{end}")
+    public List<ProfileDb> findByProfileByDate(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+                                               @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end){
+        return profileService.findProfileByPeriod(start,end);
     }
 
 

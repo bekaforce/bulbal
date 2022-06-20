@@ -105,4 +105,9 @@ public class ProfileServiceImpl implements ProfileService {
                     return profileDbRepo.save(list);
                 });
     }
+
+    @Override
+    public List<ProfileDb> findProfileByPeriod(LocalDateTime start, LocalDateTime end) {
+        return profileDbRepo.findAllByRegistrationDateBetween(start, end);
+    }
 }

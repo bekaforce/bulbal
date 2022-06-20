@@ -3,8 +3,10 @@ package com.almaz.rassrochka.domain.repository;
 import com.almaz.rassrochka.domain.ProfileDb;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 @Repository
 public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
@@ -23,5 +25,10 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
             "and mc.status_type ='EXPIRED' " +
             "order by mc.credit_id asc", nativeQuery = true)
     List<CallProfileDto> findCallProfile();
+
+    @Query(value = "SELECT * from azamat.profile where registration_date between :start and :end " +
+            "order by id desc", nativeQuery = true)
+    List<ProfileDb> findAllByRegistrationDateBetween(@Param("start") LocalDateTime start,
+                                                     @Param("end") LocalDateTime end);
 
 }

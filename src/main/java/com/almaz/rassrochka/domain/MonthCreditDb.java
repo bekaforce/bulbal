@@ -2,6 +2,7 @@ package com.almaz.rassrochka.domain;
 
 import com.almaz.rassrochka.enums.StatusType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 public class MonthCreditDb {
     @Id
     @JsonIgnore
+    @JsonProperty("id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
