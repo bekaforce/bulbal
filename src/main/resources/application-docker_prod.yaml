@@ -7,9 +7,8 @@ spring:
     url: jdbc:postgresql://psg:5432/sweatter
     username: beenavigator
     password: beenav12345
-    jpa:
-      generate-ddl: true
-
+  jpa:
+    generate-ddl: true
 
   main:
     allow-circular-references: true
