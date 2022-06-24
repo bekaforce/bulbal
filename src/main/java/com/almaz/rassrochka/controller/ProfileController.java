@@ -7,6 +7,7 @@ import com.almaz.rassrochka.domain.repository.CallProfileDto;
 import com.almaz.rassrochka.service.ProfileService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -55,6 +56,7 @@ public class ProfileController {
         return profileService.findByPassportInn(passportInn);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ApiOperation(value = "Добавить новый профиль в таблицу", notes = "Добавить новый профиль в таблицу")
     @PostMapping("/addProfiles")
     public ProfileDb addProfiles(@RequestBody ProfileDto profileDto){

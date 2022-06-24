@@ -17,7 +17,7 @@ public class ChangeMonthStatusScheduler {
         this.monthCreditService = monthCreditService;
     }
 
-    @Scheduled(cron = "*/5 * * * * *")
+    @Scheduled(cron = "*/120 * * * * *")
     public void monthCreditStatusWait(){
         monthCreditService.getAllStatusByWait(Collections.singletonList(StatusType.WAIT))
                 .stream()
