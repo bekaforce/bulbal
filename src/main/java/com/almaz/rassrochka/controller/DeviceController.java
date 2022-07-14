@@ -37,4 +37,9 @@ public class DeviceController {
     public Optional<DeviceDb> findAllDevice(@RequestBody DeviceDto deviceDto){
         return deviceService.editDevice(deviceDto);
     }
+    @ApiOperation(value = "Find device by Device Imei", notes = "Find device by Device Imei")
+    @GetMapping("/findDeviceByImei/{deviceImei}")
+    public List<DeviceDb> getDeviceByDeviceImei(@PathVariable String deviceImei){
+        return deviceService.getDeviceByImei(deviceImei);
+    }
 }

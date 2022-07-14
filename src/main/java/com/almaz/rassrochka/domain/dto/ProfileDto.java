@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -18,5 +20,6 @@ public class ProfileDto {
     private String workAddress;
     private String factAddress;
     private String phone;
+    private LocalDateTime registrationDate;
 
 }

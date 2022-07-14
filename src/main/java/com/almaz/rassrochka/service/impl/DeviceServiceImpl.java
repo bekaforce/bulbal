@@ -52,4 +52,10 @@ public class DeviceServiceImpl implements DeviceService {
                     return deviceDbRepo.save(list);
                 });
     }
+
+    @Override
+    public List<DeviceDb> getDeviceByImei(String deviceImei) {
+        return deviceDbRepo.findByDeviceImeiIgnoreCaseContaining(deviceImei);
+    }
+
 }

@@ -44,7 +44,7 @@ public class ProfileServiceImpl implements ProfileService {
         profileDb.setFactAddress(profileDto.getFactAddress());
         profileDb.setPhone(profileDto.getPhone());
         profileDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        profileDb.setRegistrationDate(LocalDateTime.now());
+        profileDb.setRegistrationDate(profileDto.getRegistrationDate());
 
         return profileDbRepo.save(profileDb);
     }

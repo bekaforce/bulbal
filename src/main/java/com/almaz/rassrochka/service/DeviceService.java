@@ -13,5 +13,7 @@ public interface DeviceService {
 
     Optional<DeviceDb> editDevice(DeviceDto deviceDto);
 
+    List<DeviceDb> getDeviceByImei(String deviceImei);
+
 
 }

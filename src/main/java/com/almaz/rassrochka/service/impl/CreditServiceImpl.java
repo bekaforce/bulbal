@@ -16,18 +16,14 @@ import java.util.Optional;
 @Service
 public class CreditServiceImpl implements CreditService {
     private final CreditDbRepo creditDbRepo;
-    private final MonthCreditDbRepo monthCreditDbRepo;
 
-    public CreditServiceImpl(CreditDbRepo creditDbRepo, MonthCreditDbRepo monthCreditDbRepo) {
+    public CreditServiceImpl(CreditDbRepo creditDbRepo) {
         this.creditDbRepo = creditDbRepo;
-        this.monthCreditDbRepo = monthCreditDbRepo;
     }
-
     @Override
     public List<CreditDb> getCreditByDeviceId(Long id) {
         return creditDbRepo.findAllByDeviceId(id);
     }
-
     @Override
     public CreditDb addMonthDto(CreditMonthDto creditMonthDto) {
         CreditDb creditDb = new CreditDb();
@@ -35,12 +31,11 @@ public class CreditServiceImpl implements CreditService {
         creditDb.setZeroPayment(creditMonthDto.getZeroPayment());
         creditDb.setStatusType(StatusType.WAIT);
         creditDb.setDeviceId(creditMonthDto.getDeviceId());
-        creditDb.setRegistrationDate(LocalDateTime.now());
+        creditDb.setRegistrationDate(creditMonthDto.getRegistrationDate());
         creditDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
 
         return creditDbRepo.save(creditDb);
     }
-
     @Override
     public CreditDb findAllById(Long id) {
         return creditDbRepo.findAllById(id);

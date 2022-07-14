@@ -9,4 +9,6 @@ public interface DeviceDbRepo extends JpaRepository<DeviceDb, Long> {
 
     List<DeviceDb> findAllByProfileId(Long id);
 
+    List<DeviceDb> findByDeviceImeiIgnoreCaseContaining(String deviceImei);
+
 }
