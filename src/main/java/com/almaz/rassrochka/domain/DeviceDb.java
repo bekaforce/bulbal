@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Builder
 @AllArgsConstructor
-@Table(name = "device", schema = "public")
+@Table(name = "device", schema = "azamat")
 
 public class DeviceDb {
     @Id
@@ -25,6 +25,16 @@ public class DeviceDb {
     @Size(min = 3)
     @Column(name = "device_model", length = 30)
     private String deviceModel;
+
+    @NotNull
+    @Size(min = 3)
+    @Column(name = "cloud_login", length = 50)
+    private String cloudLogin;
+
+    @NotNull
+    @Size(min = 3)
+    @Column(name = "cloud_pass", length = 50)
+    private String cloudPass;
 
     @NotNull
     @Size(min = 2)

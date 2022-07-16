@@ -20,6 +20,5 @@ public class ProfileDto {
     private String workAddress;
     private String factAddress;
     private String phone;
-    private LocalDateTime registrationDate;
 
 }

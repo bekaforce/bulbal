@@ -2,6 +2,7 @@ package com.almaz.rassrochka.service;
 
 import com.almaz.rassrochka.domain.ProfileDb;
 import com.almaz.rassrochka.domain.dto.CallActiveProfileDto;
+import com.almaz.rassrochka.domain.dto.MainDashProfileDto;
 import com.almaz.rassrochka.domain.dto.ProfileDto;
 
 import java.time.LocalDateTime;
@@ -25,4 +26,13 @@ public interface ProfileService {
     Optional<ProfileDb> editUserProfile(ProfileDb profileDb);
 
     List<ProfileDb> findProfileByPeriod(LocalDateTime start, LocalDateTime end);
+    List<MainDashProfileDto> findProfileForDash(LocalDateTime start, LocalDateTime end);
+
+    List<MainDashProfileDto> findProfileByFullName(String fullName);
+
+    List<MainDashProfileDto> findProfileByDeviceImei(String deviceImei);
+
+    List<MainDashProfileDto> findProfileByPassportInn(String passportInn);
+
+
 }

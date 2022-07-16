@@ -2,8 +2,10 @@ package com.almaz.rassrochka.service.impl;
 
 import com.almaz.rassrochka.domain.ProfileDb;
 import com.almaz.rassrochka.domain.dto.CallActiveProfileDto;
+import com.almaz.rassrochka.domain.dto.MainDashProfileDto;
 import com.almaz.rassrochka.domain.dto.ProfileDto;
 import com.almaz.rassrochka.domain.repository.CallProfileDto;
+import com.almaz.rassrochka.domain.repository.MainDashRepoDto;
 import com.almaz.rassrochka.domain.repository.ProfileDbRepo;
 import com.almaz.rassrochka.service.ProfileService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,7 +46,7 @@ public class ProfileServiceImpl implements ProfileService {
         profileDb.setFactAddress(profileDto.getFactAddress());
         profileDb.setPhone(profileDto.getPhone());
         profileDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        profileDb.setRegistrationDate(profileDto.getRegistrationDate());
+        profileDb.setRegistrationDate(LocalDateTime.now());
 
         return profileDbRepo.save(profileDb);
     }
@@ -109,5 +111,45 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public List<ProfileDb> findProfileByPeriod(LocalDateTime start, LocalDateTime end) {
         return profileDbRepo.findAllByRegistrationDateBetween(start, end);
+    }
+
+    @Override
+    public List<MainDashProfileDto> findProfileForDash(LocalDateTime start, LocalDateTime end) {
+        List<MainDashRepoDto> mainDashRepoDtos = profileDbRepo.dashBoardProfile(start, end);
+        return getMainDashProfileDtos(mainDashRepoDtos);
+    }
+
+    private List<MainDashProfileDto> getMainDashProfileDtos(List<MainDashRepoDto> mainDashRepoDtos) {
+        List<MainDashProfileDto> result = new ArrayList<>();
+        for(MainDashRepoDto d : mainDashRepoDtos){
+            result.add(MainDashProfileDto.builder()
+                            .id(d.getId())
+                            .fullName(d.getFullName())
+                            .passportInn(d.getPassportInn())
+                            .deviceImei(d.getDeviceImei())
+                            .statusType(d.getStatus())
+                            .registrationDate(d.getRegistrationDate())
+                            .salesmanLogin(d.getSalesmanLogin())
+                    .build());
+        }
+        return result;
+    }
+
+    @Override
+    public List<MainDashProfileDto> findProfileByFullName(String fullName) {
+        List<MainDashRepoDto> mainDashRepoDtos = profileDbRepo.findByFullName(fullName);
+        return getMainDashProfileDtos(mainDashRepoDtos);
+    }
+
+    @Override
+    public List<MainDashProfileDto> findProfileByDeviceImei(String deviceImei) {
+        List<MainDashRepoDto> mainDashRepoDtos = profileDbRepo.findByDeviceImei(deviceImei);
+        return getMainDashProfileDtos(mainDashRepoDtos);
+    }
+
+    @Override
+    public List<MainDashProfileDto> findProfileByPassportInn(String passportInn) {
+        List<MainDashRepoDto> mainDashRepoDtos = profileDbRepo.findByPassportInnDto(passportInn);
+        return getMainDashProfileDtos(mainDashRepoDtos);
     }
 }

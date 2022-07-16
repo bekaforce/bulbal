@@ -2,8 +2,10 @@ package com.almaz.rassrochka.controller;
 
 import com.almaz.rassrochka.domain.ProfileDb;
 import com.almaz.rassrochka.domain.dto.CallActiveProfileDto;
+import com.almaz.rassrochka.domain.dto.MainDashProfileDto;
 import com.almaz.rassrochka.domain.dto.ProfileDto;
 import com.almaz.rassrochka.domain.repository.CallProfileDto;
+import com.almaz.rassrochka.domain.repository.MainDashRepoDto;
 import com.almaz.rassrochka.service.ProfileService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,7 +45,6 @@ public class ProfileController {
     public List<ProfileDb> findByFullName(@PathVariable String fullName){
         return profileService.findByFullName(fullName);
     }
-
     @ApiOperation(value = "Список для Обзвона", notes = "Список для обзвона")
     @GetMapping("/findCallProfile")
     public List<CallActiveProfileDto> findCallProfile(){
@@ -55,7 +56,6 @@ public class ProfileController {
     public List<ProfileDb> findByPassportInn(@PathVariable String passportInn){
         return profileService.findByPassportInn(passportInn);
     }
-
     @PreAuthorize("hasAnyRole('ADMIN')")
     @ApiOperation(value = "Добавить новый профиль в таблицу", notes = "Добавить новый профиль в таблицу")
     @PostMapping("/addProfiles")
@@ -74,6 +74,27 @@ public class ProfileController {
                                                @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end){
         return profileService.findProfileByPeriod(start,end);
     }
+    @ApiOperation(value = "DTO for Main Page", notes = "DTO for Main Page")
+    @GetMapping("/getDtoForMain/{start}/{end}")
+    public List<MainDashProfileDto> getDtoForMain (@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+                                                   @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end){
+        return profileService.findProfileForDash(start,end);
+    }
+    @ApiOperation(value = "DTO find by Full name in Main Page", notes = "DTO find by Full name in Main Page")
+    @GetMapping("/getDtoForMainByFullName/{fullName}")
+    public List<MainDashProfileDto> getDtoForMainByFullName (@PathVariable String fullName){
+        return profileService.findProfileByFullName(fullName);
+    }
 
+    @ApiOperation(value = "DTO find by Device IMEI in Main Page", notes = "DTO find by Device IMEI in Main Page")
+    @GetMapping("/getDtoForMainByDeviceImei/{deviceImei}")
+    public List<MainDashProfileDto> getDtoForMainByDeviceImei (@PathVariable String deviceImei) {
+        return profileService.findProfileByDeviceImei(deviceImei);
+    }
+    @ApiOperation(value = "DTO find by Device IMEI in Main Page", notes = "DTO find by Device IMEI in Main Page")
+    @GetMapping("/getDtoForMainByPassInn/{passportInn}")
+    public List<MainDashProfileDto> getDtoForMainByPassInn (@PathVariable String passportInn) {
+        return profileService.findProfileByPassportInn(passportInn);
+    }
 
 }
