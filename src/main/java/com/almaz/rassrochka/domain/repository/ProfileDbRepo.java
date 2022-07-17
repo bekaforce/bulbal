@@ -28,7 +28,7 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
 
     @Query(value = "select p.id, p.full_name as fullName, p.passport_inn as passportInn, d.device_imei as deviceImei, " +
             "c.status_type as statusType, c.registration_date as registrationDate, c.salesman_login as salesmanLogin  \n" +
-            "from azamat.profile p, azamat.credit c, azamat.device d \n" +
+            "from public.profile p, public.credit c, public.device d \n" +
             "where p.id=d.profile_id\n" +
             "and c.device_id=d.id\n" +
             "and c.registration_date between :start and :end " +
@@ -36,14 +36,14 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
     List<MainDashRepoDto> dashBoardProfile(@Param("start") LocalDateTime start,
                                            @Param("end") LocalDateTime end);
 
-    @Query(value = "SELECT * from azamat.profile where registration_date between :start and :end " +
+    @Query(value = "SELECT * from public.profile where registration_date between :start and :end " +
             "order by id desc", nativeQuery = true)
     List<ProfileDb> findAllByRegistrationDateBetween(@Param("start") LocalDateTime start,
                                                      @Param("end") LocalDateTime end);
 
     @Query(value = "select p.id, p.full_name as fullName, p.passport_inn as passportInn, d.device_imei as deviceImei, " +
             "c.status_type as statusType, c.registration_date as registrationDate, c.salesman_login as salesmanLogin  \n" +
-            "from azamat.profile p, azamat.credit c, azamat.device d \n" +
+            "from public.profile p, public.credit c, public.device d \n" +
             "where p.id=d.profile_id\n" +
             "and c.device_id=d.id\n" +
             "and p.full_name ILIKE %:fullName% " +
@@ -52,7 +52,7 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
 
     @Query(value = "select p.id, p.full_name as fullName, p.passport_inn as passportInn, d.device_imei as deviceImei, " +
             "c.status_type as statusType, c.registration_date as registrationDate, c.salesman_login as salesmanLogin  \n" +
-            "from azamat.profile p, azamat.credit c, azamat.device d \n" +
+            "from public.profile p, public.credit c, public.device d \n" +
             "where p.id=d.profile_id\n" +
             "and c.device_id=d.id\n" +
             "and d.device_imei ILIKE %:deviceImei% " +
@@ -61,7 +61,7 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
 
     @Query(value = "select p.id, p.full_name as fullName, p.passport_inn as passportInn, d.device_imei as deviceImei, " +
             "c.status_type as statusType, c.registration_date as registrationDate, c.salesman_login as salesmanLogin  \n" +
-            "from azamat.profile p, azamat.credit c, azamat.device d \n" +
+            "from public.profile p, public.credit c, public.device d \n" +
             "where p.id=d.profile_id\n" +
             "and c.device_id=d.id\n" +
             "and p.passport_inn ILIKE %:passportInn% " +

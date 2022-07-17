@@ -13,6 +13,7 @@ public class DeviceDto {
     private String deviceMemory;
     private Integer devicePrice;
     private String deviceImei;
+    private String cloudLogin;
+    private String cloudPass;
     private Long profileId;
-
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Builder
 @AllArgsConstructor
-@Table(name = "credit", schema = "azamat")
+@Table(name = "credit", schema = "public")
 public class CreditDb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

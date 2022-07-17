@@ -28,6 +28,8 @@ public class DeviceServiceImpl implements DeviceService {
         deviceDb.setDevicePrice(deviceDto.getDevicePrice());
         deviceDb.setDeviceImei(deviceDto.getDeviceImei());
         deviceDb.setProfileId(deviceDto.getProfileId());
+        deviceDb.setCloudLogin(deviceDto.getCloudLogin());
+        deviceDb.setCloudPass(deviceDto.getCloudPass());
         deviceDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         deviceDb.setRegistrationDate(LocalDateTime.now());
         return deviceDbRepo.save(deviceDb);
@@ -41,15 +43,17 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public Optional<DeviceDb> editDevice(DeviceDto deviceDto) {
         return deviceDbRepo.findById(deviceDto.getId())
-                .map(list -> {
-                    list.setId(deviceDto.getId());
-                    list.setDeviceModel(deviceDto.getDeviceModel());
-                    list.setDeviceMemory(deviceDto.getDeviceMemory());
-                    list.setDevicePrice(deviceDto.getDevicePrice());
-                    list.setDeviceImei(deviceDto.getDeviceImei());
-                    list.setRegistrationDate(LocalDateTime.now());
-                    list.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-                    return deviceDbRepo.save(list);
+                .map(deviceDb -> {
+                    deviceDb.setId(deviceDto.getId());
+                    deviceDb.setDeviceModel(deviceDto.getDeviceModel());
+                    deviceDb.setDeviceMemory(deviceDto.getDeviceMemory());
+                    deviceDb.setDevicePrice(deviceDto.getDevicePrice());
+                    deviceDb.setDeviceImei(deviceDto.getDeviceImei());
+                    deviceDb.setRegistrationDate(LocalDateTime.now());
+                    deviceDb.setCloudLogin(deviceDto.getCloudLogin());
+                    deviceDb.setCloudPass(deviceDto.getCloudPass());
+                    deviceDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+                    return deviceDbRepo.save(deviceDb);
                 });
     }
 
