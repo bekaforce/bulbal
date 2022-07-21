@@ -4,8 +4,6 @@ import com.almaz.rassrochka.domain.ProfileDb;
 import com.almaz.rassrochka.domain.dto.CallActiveProfileDto;
 import com.almaz.rassrochka.domain.dto.MainDashProfileDto;
 import com.almaz.rassrochka.domain.dto.ProfileDto;
-import com.almaz.rassrochka.domain.repository.CallProfileDto;
-import com.almaz.rassrochka.domain.repository.MainDashRepoDto;
 import com.almaz.rassrochka.service.ProfileService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.format.annotation.DateTimeFormat;

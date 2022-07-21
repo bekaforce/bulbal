@@ -2,12 +2,14 @@ package com.almaz.rassrochka.controller;
 
 
 import com.almaz.rassrochka.domain.CreditDb;
+import com.almaz.rassrochka.domain.dto.CreditBlackListDto;
 import com.almaz.rassrochka.domain.dto.CreditMonthDto;
 import com.almaz.rassrochka.service.CreditService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.almaz.rassrochka.endpoints.Endpoints.CREDIT;
 
@@ -37,6 +39,12 @@ public class CreditController  {
     @PostMapping("/addCredit")
     public CreditDb addCredit(@RequestBody CreditMonthDto creditMonthDto){
         return creditService.addMonthDto(creditMonthDto);
+
+    }
+    @ApiOperation(value = "Add and edit black list for creditId", notes = "Add and edit black list for creditId")
+    @PostMapping("/addBlackList")
+    public Optional<CreditDb> addBlackList(@RequestBody CreditBlackListDto creditBlackListDto){
+        return creditService.addBlackListForCredit(creditBlackListDto);
 
     }
 

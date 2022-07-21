@@ -1,10 +1,10 @@
 package com.almaz.rassrochka.enums;
 
 public enum StatusType {
-    DEFAULTER("DEFAULTER"),
+    DEFAULTER("DEFAULTER"), //
     EXPIRED("EXPIRED"),
     DONE("DONE"),
-    DELAY("DELAY"),
+    DELAY("DELAY"), // Затягивает
     WAIT("WAIT");
     private final String value;
 

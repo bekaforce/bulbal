@@ -1,6 +1,7 @@
 package com.almaz.rassrochka.service;
 
 import com.almaz.rassrochka.domain.CreditDb;
+import com.almaz.rassrochka.domain.dto.CreditBlackListDto;
 import com.almaz.rassrochka.domain.dto.CreditMonthDto;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public interface CreditService {
     CreditDb addMonthDto(CreditMonthDto creditMonthDto);
 
     CreditDb findAllById(Long id);
+
+    Optional<CreditDb> addBlackListForCredit(CreditBlackListDto creditBlackListDto);
 
 
 

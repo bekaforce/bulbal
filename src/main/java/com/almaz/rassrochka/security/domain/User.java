@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Data
 
-@Table(name = "users", schema = "public")
+@Table(name = "users", schema = "azamat")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class User {
     private String adminLogin;
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles", schema = "public", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+    @JoinTable(name = "user_roles", schema = "azamat", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
     @Enumerated(EnumType.STRING)

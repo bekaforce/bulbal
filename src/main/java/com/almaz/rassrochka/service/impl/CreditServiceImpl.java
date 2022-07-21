@@ -1,15 +1,14 @@
 package com.almaz.rassrochka.service.impl;
 
 import com.almaz.rassrochka.domain.CreditDb;
+import com.almaz.rassrochka.domain.dto.CreditBlackListDto;
 import com.almaz.rassrochka.domain.dto.CreditMonthDto;
 import com.almaz.rassrochka.domain.repository.CreditDbRepo;
-import com.almaz.rassrochka.domain.repository.MonthCreditDbRepo;
 import com.almaz.rassrochka.enums.StatusType;
 import com.almaz.rassrochka.service.CreditService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +38,16 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public CreditDb findAllById(Long id) {
         return creditDbRepo.findAllById(id);
+    }
+
+    @Override
+    public Optional<CreditDb> addBlackListForCredit(CreditBlackListDto creditBlackListDto) {
+        return creditDbRepo.findById(creditBlackListDto.getId())
+                .map(list->{
+                    list.setStatusType(creditBlackListDto.getStatusType());
+                    list.setComments(creditBlackListDto.getComments());
+                    return creditDbRepo.save(list);
+                });
     }
 
 

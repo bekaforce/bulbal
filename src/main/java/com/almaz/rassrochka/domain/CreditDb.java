@@ -1,15 +1,12 @@
 package com.almaz.rassrochka.domain;
 
 import com.almaz.rassrochka.enums.StatusType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,7 +14,7 @@ import java.util.List;
 @Entity
 @Builder
 @AllArgsConstructor
-@Table(name = "credit", schema = "public")
+@Table(name = "credit", schema = "azamat")
 public class CreditDb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +24,9 @@ public class CreditDb {
     @NotNull
     @Column(name = "zero_payment", length = 7)
     private Integer zeroPayment;
+
+    @Column(name = "comments")
+    private String comments;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "credit_id", referencedColumnName = "id")
