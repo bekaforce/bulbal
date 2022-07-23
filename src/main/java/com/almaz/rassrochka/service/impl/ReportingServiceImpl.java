@@ -21,14 +21,24 @@ public class ReportingServiceImpl implements ReportingService {
     @Override
     public List<ReportDto> getAllReportByDate(LocalDateTime start, LocalDateTime end) {
         List<ReportRepoDto> dtos = reportingDbRepo.findAllReportByDate(start, end);
+        return getReportDtos(dtos);
+    }
+
+    @Override
+    public List<ReportDto> getAllReportByDateAndUserName(LocalDateTime start, LocalDateTime end, String username) {
+        List<ReportRepoDto> dtos = reportingDbRepo.findAllReportByDateAndUserName(start, end, username);
+        return getReportDtos(dtos);
+    }
+
+    private List<ReportDto> getReportDtos(List<ReportRepoDto> dtos) {
         List<ReportDto> reportDtos = new ArrayList<>();
         for (ReportRepoDto d : dtos){
             reportDtos.add(ReportDto.builder()
-                            .debtReport(d.getDebtReport())
-                            .fullName(d.getFullName())
-                            .registrationDate(d.getRegistrationDate())
-                            .salesmanLogin(d.getSalesmanLogin())
-                            .id(d.getId())
+                    .debtReport(d.getDebtReport())
+                    .fullName(d.getFullName())
+                    .registrationDate(d.getRegistrationDate())
+                    .salesmanLogin(d.getSalesmanLogin())
+                    .id(d.getId())
                     .build());
         }
         return reportDtos;

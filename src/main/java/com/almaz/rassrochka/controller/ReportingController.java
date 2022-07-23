@@ -27,4 +27,12 @@ public class ReportingController {
                                            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
         return reportingService.getAllReportByDate(start, end);
     }
+
+    @ApiOperation(value = "Get all reporting by date and userName", notes = "Get all reporting by date and UserName")
+    @GetMapping("/getReportingByDateAndUserName/{start}/{end}/{username}")
+    public List<ReportDto> getReportByDateAndUserName(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+                                                      @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end,
+                                                      @PathVariable String username) {
+        return reportingService.getAllReportByDateAndUserName(start, end, username);
+    }
 }

@@ -5,6 +5,7 @@ import com.almaz.rassrochka.domain.ReportingDb;
 import com.almaz.rassrochka.domain.dto.ChangeMonthStatusDto;
 import com.almaz.rassrochka.domain.dto.MonthCreditDto;
 import com.almaz.rassrochka.domain.repository.MonthCreditDbRepo;
+import com.almaz.rassrochka.domain.repository.ReportingDbRepo;
 import com.almaz.rassrochka.enums.StatusType;
 import com.almaz.rassrochka.service.MonthCreditService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,9 +18,11 @@ import java.util.Optional;
 @Service
 public class MonthCreditServiceImpl implements MonthCreditService {
     private final MonthCreditDbRepo monthCreditDbRepo;
+    private final ReportingDbRepo reportingDbRepo;
 
-    public MonthCreditServiceImpl(MonthCreditDbRepo monthCreditDbRepo) {
+    public MonthCreditServiceImpl(MonthCreditDbRepo monthCreditDbRepo, ReportingDbRepo reportingDbRepo) {
         this.monthCreditDbRepo = monthCreditDbRepo;
+        this.reportingDbRepo = reportingDbRepo;
     }
 
     @Override
@@ -49,11 +52,13 @@ public class MonthCreditServiceImpl implements MonthCreditService {
 
     @Override
     public Optional<MonthCreditDb> editMonthCredit(MonthCreditDto monthCreditDto) {
+
         ReportingDb reporting = new ReportingDb();
         reporting.setCreditId(monthCreditDto.getId());
         reporting.setDebtReport(monthCreditDto.getDebtReport());
         reporting.setRegistrationDate(LocalDateTime.now());
         reporting.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+        reportingDbRepo.save(reporting);
 
         return monthCreditDbRepo.findById(monthCreditDto.getId())
                 .map(list -> {
@@ -62,7 +67,7 @@ public class MonthCreditServiceImpl implements MonthCreditService {
                     list.setDebt(monthCreditDto.getDebt());
                     list.setPayDate(monthCreditDto.getPayDate());
                     list.setComment(monthCreditDto.getComment());
-                    list.setDebtReport(monthCreditDto.getDebtReport());
+                    list.setDebtReport(monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport()+monthCreditDto.getDebtReport());
                     list.setRegistrationDate(LocalDateTime.now());
                     list.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
                     return monthCreditDbRepo.save(list);
