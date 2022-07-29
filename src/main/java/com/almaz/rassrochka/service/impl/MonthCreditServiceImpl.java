@@ -54,7 +54,7 @@ public class MonthCreditServiceImpl implements MonthCreditService {
     public Optional<MonthCreditDb> editMonthCredit(MonthCreditDto monthCreditDto) {
 
         ReportingDb reporting = new ReportingDb();
-        reporting.setCreditId(monthCreditDto.getId());
+        reporting.setCreditId(monthCreditDbRepo.getOne(monthCreditDto.getId()).getCreditId());
         reporting.setDebtReport(monthCreditDto.getDebtReport());
         reporting.setRegistrationDate(LocalDateTime.now());
         reporting.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -67,7 +67,12 @@ public class MonthCreditServiceImpl implements MonthCreditService {
                     list.setDebt(monthCreditDto.getDebt());
                     list.setPayDate(monthCreditDto.getPayDate());
                     list.setComment(monthCreditDto.getComment());
-                    list.setDebtReport(monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport()+monthCreditDto.getDebtReport());
+                    if (monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport()!=null) {
+                        list.setDebtReport(monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport() + monthCreditDto.getDebtReport());
+                    }
+                    else {
+                        list.setDebtReport(monthCreditDto.getDebtReport());
+                    }
                     list.setRegistrationDate(LocalDateTime.now());
                     list.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
                     return monthCreditDbRepo.save(list);

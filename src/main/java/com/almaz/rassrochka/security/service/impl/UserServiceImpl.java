@@ -78,5 +78,11 @@ public class UserServiceImpl implements UserService {
                 });
     }
 
+    @Override
+    public List<Object> getAllUserName() {
+
+        return userRepo.findUserName();
+    }
+
 }
 

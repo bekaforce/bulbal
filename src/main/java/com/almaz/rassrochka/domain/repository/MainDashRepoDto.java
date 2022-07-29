@@ -9,7 +9,7 @@ public interface MainDashRepoDto {
     String getFullName();
     String getPassportInn();
     String getDeviceImei();
-    StatusType getStatus();
+    StatusType getStatusType();
     LocalDateTime getRegistrationDate();
     String getSalesmanLogin();
 

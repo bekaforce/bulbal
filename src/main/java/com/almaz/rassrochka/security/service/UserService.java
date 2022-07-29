@@ -13,5 +13,7 @@ public interface UserService {
     List<User> findAllUsers();
 
     Optional<User> editUserName(Long id, UserDto userDto);
+
+    List<Object> getAllUserName();
 }
 

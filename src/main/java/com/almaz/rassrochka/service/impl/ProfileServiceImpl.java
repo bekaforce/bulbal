@@ -127,7 +127,7 @@ public class ProfileServiceImpl implements ProfileService {
                             .fullName(d.getFullName())
                             .passportInn(d.getPassportInn())
                             .deviceImei(d.getDeviceImei())
-                            .statusType(d.getStatus())
+                            .statusType(d.getStatusType())
                             .registrationDate(d.getRegistrationDate())
                             .salesmanLogin(d.getSalesmanLogin())
                     .build());

@@ -42,5 +42,10 @@ public class UserController {
     public Optional<User> editUser(@RequestBody UserDto userDto, @PathVariable Long id){
         return userService.editUserName(id, userDto);
     }
+    @ApiOperation(value = "Get only users List", notes = "Get only users List")
+    @GetMapping("/getUsersList")
+    public List<Object> getAllUsersList(){
+        return userService.getAllUserName();
+    }
 
 }
