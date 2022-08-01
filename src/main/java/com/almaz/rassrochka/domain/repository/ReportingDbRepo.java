@@ -17,7 +17,8 @@ public interface ReportingDbRepo extends JpaRepository<ReportingDb, Long> {
             "FROM azamat.report r, azamat.credit c, azamat.device d, azamat.profile p  \n" +
             "where c.device_id = d.id\n" +
             "and d.profile_id = p.id \n" +
-            "and r.credit_id = c.device_id \n" +
+            "and r.credit_id = c.device_id " +
+            "and r.debt_report is not null " +
             "and r.registration_date between :start and :end " +
             "order by r.registration_date desc\n", nativeQuery = true)
     List<ReportRepoDto> findAllReportByDate(@Param("start") LocalDateTime start,
@@ -28,6 +29,7 @@ public interface ReportingDbRepo extends JpaRepository<ReportingDb, Long> {
             "FROM azamat.report r, azamat.credit c, azamat.device d, azamat.profile p  \n" +
             "where c.device_id = d.id\n" +
             "and d.profile_id = p.id and r.credit_id = c.device_id " +
+            "and r.debt_report is not null " +
             "and r.registration_date between :start and :end " +
             "and r.salesman_login=:username " +
             "order by r.registration_date desc\n", nativeQuery = true)

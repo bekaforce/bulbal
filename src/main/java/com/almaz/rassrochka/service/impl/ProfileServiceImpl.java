@@ -2,9 +2,11 @@ package com.almaz.rassrochka.service.impl;
 
 import com.almaz.rassrochka.domain.ProfileDb;
 import com.almaz.rassrochka.domain.dto.CallActiveProfileDto;
+import com.almaz.rassrochka.domain.dto.DistinctCallProfileDto;
 import com.almaz.rassrochka.domain.dto.MainDashProfileDto;
 import com.almaz.rassrochka.domain.dto.ProfileDto;
 import com.almaz.rassrochka.domain.repository.CallProfileDto;
+import com.almaz.rassrochka.domain.repository.DistinctCallProfileRepoDto;
 import com.almaz.rassrochka.domain.repository.MainDashRepoDto;
 import com.almaz.rassrochka.domain.repository.ProfileDbRepo;
 import com.almaz.rassrochka.service.ProfileService;
@@ -151,5 +153,22 @@ public class ProfileServiceImpl implements ProfileService {
     public List<MainDashProfileDto> findProfileByPassportInn(String passportInn) {
         List<MainDashRepoDto> mainDashRepoDtos = profileDbRepo.findByPassportInnDto(passportInn);
         return getMainDashProfileDtos(mainDashRepoDtos);
+    }
+
+    @Override
+    public List<DistinctCallProfileDto> distinctCallProfile() {
+        List<DistinctCallProfileRepoDto> callDto = profileDbRepo.distinctCallProfile();
+
+        List<DistinctCallProfileDto> result = new ArrayList<>();
+        for(DistinctCallProfileRepoDto d : callDto){
+            result.add(DistinctCallProfileDto.builder()
+                            .creditId(d.getCreditId())
+                            .fullName(d.getFullName())
+                            .deviceModel(d.getDeviceModel())
+                            .devicePrice(d.getDevicePrice())
+                            .salesmanLogin(d.getSalesmanLogin())
+                    .build());
+        }
+        return result;
     }
 }

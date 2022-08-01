@@ -31,7 +31,7 @@ public class MonthCreditServiceImpl implements MonthCreditService {
     }
 
     @Override
-    public MonthCreditDb findAllByCreditId(Long id) {
+    public List<MonthCreditDb> findAllByCreditId(Long id) {
         return monthCreditDbRepo.findAllByCreditId(id);
     }
 
@@ -53,12 +53,19 @@ public class MonthCreditServiceImpl implements MonthCreditService {
     @Override
     public Optional<MonthCreditDb> editMonthCredit(MonthCreditDto monthCreditDto) {
 
-        ReportingDb reporting = new ReportingDb();
-        reporting.setCreditId(monthCreditDbRepo.getOne(monthCreditDto.getId()).getCreditId());
-        reporting.setDebtReport(monthCreditDto.getDebtReport());
-        reporting.setRegistrationDate(LocalDateTime.now());
-        reporting.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        reportingDbRepo.save(reporting);
+            ReportingDb reporting = new ReportingDb();
+            reporting.setCreditId(monthCreditDbRepo.getOne(monthCreditDto.getId()).getCreditId());
+            if (monthCreditDto.getDebtReport()!=null) {
+                reporting.setDebtReport(monthCreditDto.getDebtReport());
+            }
+            else {
+                reporting.setDebtReport(null);
+            }
+            reporting.setRegistrationDate(LocalDateTime.now());
+            reporting.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+            reportingDbRepo.save(reporting);
+
+
 
         return monthCreditDbRepo.findById(monthCreditDto.getId())
                 .map(list -> {
@@ -67,11 +74,11 @@ public class MonthCreditServiceImpl implements MonthCreditService {
                     list.setDebt(monthCreditDto.getDebt());
                     list.setPayDate(monthCreditDto.getPayDate());
                     list.setComment(monthCreditDto.getComment());
-                    if (monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport()!=null) {
+                    if (monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport()!=null && monthCreditDto.getDebtReport()!=null) {
                         list.setDebtReport(monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport() + monthCreditDto.getDebtReport());
                     }
                     else {
-                        list.setDebtReport(monthCreditDto.getDebtReport());
+                        list.setDebtReport(null);
                     }
                     list.setRegistrationDate(LocalDateTime.now());
                     list.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());

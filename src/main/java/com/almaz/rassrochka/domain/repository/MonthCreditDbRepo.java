@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface MonthCreditDbRepo extends JpaRepository<MonthCreditDb, Long> {
-    MonthCreditDb findAllByCreditId(Long id);
+    List<MonthCreditDb> findAllByCreditId(Long id);
 
     List<MonthCreditDb> findAllByStatusType(@Param("statusType")StatusType statusType);
 }

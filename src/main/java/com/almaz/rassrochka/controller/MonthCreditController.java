@@ -29,7 +29,7 @@ public class MonthCreditController {
 
     @ApiOperation(value = "Получить весь список по кредитам", notes = "Получить список по кредита")
     @GetMapping("/findAllByCreditId/{id}")
-    public MonthCreditDb findAllByCreditId(@PathVariable Long id){
+    public List<MonthCreditDb> findAllByCreditId(@PathVariable Long id){
         return monthCreditService.findAllByCreditId(id);
     }
 

@@ -2,6 +2,7 @@ package com.almaz.rassrochka.controller;
 
 import com.almaz.rassrochka.domain.ProfileDb;
 import com.almaz.rassrochka.domain.dto.CallActiveProfileDto;
+import com.almaz.rassrochka.domain.dto.DistinctCallProfileDto;
 import com.almaz.rassrochka.domain.dto.MainDashProfileDto;
 import com.almaz.rassrochka.domain.dto.ProfileDto;
 import com.almaz.rassrochka.service.ProfileService;
@@ -54,7 +55,6 @@ public class ProfileController {
     public List<ProfileDb> findByPassportInn(@PathVariable String passportInn){
         return profileService.findByPassportInn(passportInn);
     }
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @ApiOperation(value = "Добавить новый профиль в таблицу", notes = "Добавить новый профиль в таблицу")
     @PostMapping("/addProfiles")
     public ProfileDb addProfiles(@RequestBody ProfileDto profileDto){
@@ -93,6 +93,11 @@ public class ProfileController {
     @GetMapping("/getDtoForMainByPassInn/{passportInn}")
     public List<MainDashProfileDto> getDtoForMainByPassInn (@PathVariable String passportInn) {
         return profileService.findProfileByPassportInn(passportInn);
+    }
+    @ApiOperation(value = "new call profile where distinct credit_id", notes = "new call profile where distinct credit_id")
+    @GetMapping("/findDistinctCallProfile")
+    public List<DistinctCallProfileDto> findDistinctCallProfile(){
+        return profileService.distinctCallProfile();
     }
 
 }

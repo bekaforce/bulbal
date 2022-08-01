@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface MonthCreditService {
     List<MonthCreditDb> findAll();
 
-    MonthCreditDb findAllByCreditId(Long id);
+    List<MonthCreditDb> findAllByCreditId(Long id);
 
     List<MonthCreditDb> getAllStatusByWait(List<StatusType> statusTypes);
 

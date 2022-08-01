@@ -26,6 +26,17 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
             "order by mc.credit_id, mc.count_month asc", nativeQuery = true)
     List<CallProfileDto> findCallProfile();
 
+    @Query(value = "SELECT p.id, p.full_name as fullName, p.phone as phone, d.device_model as deviceModel, d.device_price as devicePrice, " +
+            "c.zero_payment as zeroPayment, mc.credit_id as creditId, mc.id as mcId, mc.count_month as countMonth, mc.debt as debt, mc.pay_date as payDate, " +
+            "mc.status_type as StatusType, mc.\"comment\", c.salesman_login as salesmanLogin " +
+            "FROM azamat.profile p, azamat.device d, azamat.credit c, azamat.month_credit mc " +
+            "where p.id=d.profile_id " +
+            "and c.device_id=d.id " +
+            "and mc.credit_id=c.id " +
+            "and mc.status_type ='EXPIRED' " +
+            "order by mc.credit_id, mc.count_month asc", nativeQuery = true)
+    List<DistinctCallProfileRepoDto> distinctCallProfile();
+
     @Query(value = "select p.id, p.full_name as fullName, p.passport_inn as passportInn, d.device_imei as deviceImei, " +
             "c.status_type as statusType, c.registration_date as registrationDate, c.salesman_login as salesmanLogin  \n" +
             "from azamat.profile p, azamat.credit c, azamat.device d \n" +
