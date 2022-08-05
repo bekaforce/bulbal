@@ -38,5 +38,7 @@ public interface ProfileService {
 
     List<MainDashProfileDto> findProfileByFullNameByDeletedStatus(String fullName);
 
+    List<MainDashProfileDto> findDeletedProfileByDate(LocalDateTime start, LocalDateTime end);
+
 
 }

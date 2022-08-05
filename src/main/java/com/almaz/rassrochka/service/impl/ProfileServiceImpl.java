@@ -159,6 +159,12 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public List<MainDashProfileDto> findDeletedProfileByDate(LocalDateTime start, LocalDateTime end) {
+        List<MainDashRepoDto> mainDashRepoDtos = profileDbRepo.dashBoardProfileDeleteByDate(start, end);
+        return getMainDashProfileDtos(mainDashRepoDtos);
+    }
+
+    @Override
     public List<DistinctCallProfileDto> distinctCallProfile() {
         List<DistinctCallProfileRepoDto> callDto = profileDbRepo.distinctCallProfile();
 
