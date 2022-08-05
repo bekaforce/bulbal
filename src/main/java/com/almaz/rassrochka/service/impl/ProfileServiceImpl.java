@@ -1,10 +1,7 @@
 package com.almaz.rassrochka.service.impl;
 
 import com.almaz.rassrochka.domain.ProfileDb;
-import com.almaz.rassrochka.domain.dto.CallActiveProfileDto;
-import com.almaz.rassrochka.domain.dto.DistinctCallProfileDto;
-import com.almaz.rassrochka.domain.dto.MainDashProfileDto;
-import com.almaz.rassrochka.domain.dto.ProfileDto;
+import com.almaz.rassrochka.domain.dto.*;
 import com.almaz.rassrochka.domain.repository.CallProfileDto;
 import com.almaz.rassrochka.domain.repository.DistinctCallProfileRepoDto;
 import com.almaz.rassrochka.domain.repository.MainDashRepoDto;
@@ -156,19 +153,41 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public List<MainDashProfileDto> findProfileByFullNameByDeletedStatus(String fullName) {
+        List<MainDashRepoDto> mainDashRepoDtos = profileDbRepo.findByFullNameByDeletedStatus(fullName);
+        return getMainDashProfileDtos(mainDashRepoDtos);
+    }
+
+    @Override
     public List<DistinctCallProfileDto> distinctCallProfile() {
         List<DistinctCallProfileRepoDto> callDto = profileDbRepo.distinctCallProfile();
 
         List<DistinctCallProfileDto> result = new ArrayList<>();
         for(DistinctCallProfileRepoDto d : callDto){
             result.add(DistinctCallProfileDto.builder()
+                            .id(d.getId())
                             .creditId(d.getCreditId())
                             .fullName(d.getFullName())
                             .deviceModel(d.getDeviceModel())
                             .devicePrice(d.getDevicePrice())
-                            .salesmanLogin(d.getSalesmanLogin())
+                            .phone(d.getPhone())
+                            .zeroPayment(d.getZeroPayment())
                     .build());
         }
         return result;
     }
+
+    @Override
+    public Optional<ProfileDb> deleteProfileStatus(DeletedStatusDto deletedStatusDto) {
+        return profileDbRepo.findById(deletedStatusDto.getId())
+                .map(d->{
+                    d.setDeleted(deletedStatusDto.getDeleted());
+                    return profileDbRepo.save(d);
+                });
+
+    }
+
+
+
+
 }

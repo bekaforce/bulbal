@@ -1,10 +1,7 @@
 package com.almaz.rassrochka.service;
 
 import com.almaz.rassrochka.domain.ProfileDb;
-import com.almaz.rassrochka.domain.dto.CallActiveProfileDto;
-import com.almaz.rassrochka.domain.dto.DistinctCallProfileDto;
-import com.almaz.rassrochka.domain.dto.MainDashProfileDto;
-import com.almaz.rassrochka.domain.dto.ProfileDto;
+import com.almaz.rassrochka.domain.dto.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,6 +33,10 @@ public interface ProfileService {
     List<MainDashProfileDto> findProfileByPassportInn(String passportInn);
 
     List<DistinctCallProfileDto> distinctCallProfile();
+
+    Optional<ProfileDb> deleteProfileStatus(DeletedStatusDto deletedStatusDto);
+
+    List<MainDashProfileDto> findProfileByFullNameByDeletedStatus(String fullName);
 
 
 }

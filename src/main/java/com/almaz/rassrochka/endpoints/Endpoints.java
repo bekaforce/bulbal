@@ -8,6 +8,7 @@ public class Endpoints {
     public static final String USER = API + V1 + "/user";
 
     public static final String PROFILES = API + V1 + "/profiles";
+    public static final String DELETED = API + V1 + "/deleted";
     public static final String BROTHER = API + V1 + "/brother";
     public static final String DEVICE = API + V1 + "/device";
     public static final String CREDIT = API + V1 + "/credit";

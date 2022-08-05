@@ -75,6 +75,9 @@ public class ProfileDb {
     @Column(name = "salesman_login")
     private String salesmanLogin;
 
+    @Column(name = "deleted")
+    private Boolean deleted;
+
     public ProfileDb() {
 
     }

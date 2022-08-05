@@ -1,14 +1,10 @@
 package com.almaz.rassrochka.controller;
 
 import com.almaz.rassrochka.domain.ProfileDb;
-import com.almaz.rassrochka.domain.dto.CallActiveProfileDto;
-import com.almaz.rassrochka.domain.dto.DistinctCallProfileDto;
-import com.almaz.rassrochka.domain.dto.MainDashProfileDto;
-import com.almaz.rassrochka.domain.dto.ProfileDto;
+import com.almaz.rassrochka.domain.dto.*;
 import com.almaz.rassrochka.service.ProfileService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -99,5 +95,9 @@ public class ProfileController {
     public List<DistinctCallProfileDto> findDistinctCallProfile(){
         return profileService.distinctCallProfile();
     }
-
+    @ApiOperation(value = "Change delete status by profile_id", notes = "Change delete status by profile_id")
+    @PostMapping("/deleteStatus")
+    Optional<ProfileDb> deleteProfileStatus(@RequestBody DeletedStatusDto deletedStatusDto) {
+       return profileService.deleteProfileStatus(deletedStatusDto);
+    }
 }
