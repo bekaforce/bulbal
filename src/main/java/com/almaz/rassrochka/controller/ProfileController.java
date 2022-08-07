@@ -23,11 +23,11 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @ApiOperation(value = "Получить список всех пользователей", notes = "Получить список всех пользователей")
-    @GetMapping("/findAll")
-    public List<ProfileDb> findAll(){
-        return profileService.findAll();
-    }
+//    @ApiOperation(value = "Получить список всех пользователей", notes = "Получить список всех пользователей")
+//    @GetMapping("/findAll")
+//    public List<ProfileDb> findAll(){
+//        return profileService.findAll();
+//    }
 
     @ApiOperation(value = "Получить пользователя по ID", notes = "Получить пользователя по ID")
     @GetMapping("/findById/{id}")
@@ -35,22 +35,22 @@ public class ProfileController {
         return profileService.findById(id);
     }
 
-    @ApiOperation(value = "Поиск по фамилии", notes = "Поиск по фамилии")
-    @GetMapping("/findByFullName/{fullName}")
-    public List<ProfileDb> findByFullName(@PathVariable String fullName){
-        return profileService.findByFullName(fullName);
-    }
-    @ApiOperation(value = "Список для Обзвона", notes = "Список для обзвона")
-    @GetMapping("/findCallProfile")
-    public List<CallActiveProfileDto> findCallProfile(){
-        return profileService.findCallProfile();
-    }
+//    @ApiOperation(value = "Поиск по фамилии", notes = "Поиск по фамилии")
+//    @GetMapping("/findByFullName/{fullName}")
+//    public List<ProfileDb> findByFullName(@PathVariable String fullName){
+//        return profileService.findByFullName(fullName);
+//    }
+//    @ApiOperation(value = "Список для Обзвона", notes = "Список для обзвона")
+//    @GetMapping("/findCallProfile")
+//    public List<CallActiveProfileDto> findCallProfile(){
+//        return profileService.findCallProfile();
+//    }
 
-    @ApiOperation(value = "Поиск по ИНН паспорта", notes = "Поиск по ИНН паспорта")
-    @GetMapping("/findByPassportInn/{passportInn}")
-    public List<ProfileDb> findByPassportInn(@PathVariable String passportInn){
-        return profileService.findByPassportInn(passportInn);
-    }
+//    @ApiOperation(value = "Поиск по ИНН паспорта", notes = "Поиск по ИНН паспорта")
+//    @GetMapping("/findByPassportInn/{passportInn}")
+//    public List<ProfileDb> findByPassportInn(@PathVariable String passportInn){
+//        return profileService.findByPassportInn(passportInn);
+//    }
     @ApiOperation(value = "Добавить новый профиль в таблицу", notes = "Добавить новый профиль в таблицу")
     @PostMapping("/addProfiles")
     public ProfileDb addProfiles(@RequestBody ProfileDto profileDto){
@@ -62,12 +62,12 @@ public class ProfileController {
     public Optional<ProfileDb> editProfiles(@RequestBody ProfileDb profileDb){
         return profileService.editUserProfile(profileDb);
     }
-    @ApiOperation(value = "Поиск по ИНН паспорта", notes = "Поиск по ИНН паспорта")
-    @GetMapping("/findProfileByDate/{start}/{end}")
-    public List<ProfileDb> findByProfileByDate(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
-                                               @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end){
-        return profileService.findProfileByPeriod(start,end);
-    }
+//    @ApiOperation(value = "Поиск по ИНН паспорта", notes = "Поиск по ИНН паспорта")
+//    @GetMapping("/findProfileByDate/{start}/{end}")
+//    public List<ProfileDb> findByProfileByDate(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+//                                               @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end){
+//        return profileService.findProfileByPeriod(start,end);
+//    }
     @ApiOperation(value = "DTO for Main Page", notes = "DTO for Main Page")
     @GetMapping("/getDtoForMain/{start}/{end}")
     public List<MainDashProfileDto> getDtoForMain (@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
