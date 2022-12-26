@@ -74,12 +74,13 @@ public class MonthCreditServiceImpl implements MonthCreditService {
                     list.setDebt(monthCreditDto.getDebt());
                     list.setPayDate(monthCreditDto.getPayDate());
                     list.setComment(monthCreditDto.getComment());
-                    if (monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport()!=null && monthCreditDto.getDebtReport()!=null) {
-                        list.setDebtReport(monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport() + monthCreditDto.getDebtReport());
+                    if (monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport()==null) {
+                        list.setDebtReport(monthCreditDto.getDebtReport());
                     }
                     else {
-                        list.setDebtReport(null);
+                        list.setDebtReport(monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport()+monthCreditDto.getDebtReport());
                     }
+
                     list.setRegistrationDate(LocalDateTime.now());
                     list.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
                     return monthCreditDbRepo.save(list);

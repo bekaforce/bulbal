@@ -33,20 +33,21 @@ public class CreditServiceImpl implements CreditService {
     }
     @Override
     public CreditDb addMonthDto(CreditMonthDto creditMonthDto) {
-// add reporting fixme
-        ReportingDb reporting = new ReportingDb();
-        reporting.setCreditId(creditMonthDto.getId());
-        if (creditMonthDto.getZeroPayment()!=null) {
-            reporting.setDebtReport(creditMonthDto.getZeroPayment());
-        }
-        else {
-            reporting.setDebtReport(null);
-        }
-        reporting.setRegistrationDate(LocalDateTime.now());
-        reporting.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        reportingDbRepo.save(reporting);
-
-  //
+//// add reporting fixme
+//        ReportingDb reporting = new ReportingDb();
+////        reporting.setCreditId(creditMonthDto.getId());
+//        reporting.setCreditId(creditDbRepo.findByDeviceId(creditMonthDto.getDeviceId()));
+//        if (creditMonthDto.getZeroPayment()!=null) {
+//            reporting.setDebtReport(creditMonthDto.getZeroPayment());
+//        }
+//        else {
+//            reporting.setDebtReport(null);
+//        }
+//        reporting.setRegistrationDate(LocalDateTime.now());
+//        reporting.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+//        reportingDbRepo.save(reporting);
+//
+//  //
         CreditDb creditDb = new CreditDb();
         creditDb.setMonthCreditDb(creditMonthDto.getMonthCreditDbList());
         creditDb.setZeroPayment(creditMonthDto.getZeroPayment());

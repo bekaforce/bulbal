@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Builder
 @AllArgsConstructor
-@Table(name = "profile", schema = "azamat")
+@Table(name = "profile", schema = "public")
 public class ProfileDb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,18 +39,18 @@ public class ProfileDb {
     @Column(name = "passport_series", length = 15)
     private String passportSeries;
 
-    @NotNull
+//    @NotNull
     @Size(min = 5, max = 10)
     @Column(name = "passport_date", length = 10)
     private String passportDate;
 
-    @NotNull
-    @Size(min = 5, max = 10)
+//    @NotNull
+//    @Size(min = 5, max = 10)
     @Column(name = "passport_department", length = 10)
     private String passportDepartment;
 
-    @NotNull
-    @Size(min = 5, max = 100)
+//    @NotNull
+//    @Size(min = 5, max = 100)
     @Column(name = "passport_address", length = 100)
     private String passportAddress;
 

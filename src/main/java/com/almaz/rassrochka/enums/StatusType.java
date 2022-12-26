@@ -2,12 +2,12 @@ package com.almaz.rassrochka.enums;
 
 public enum StatusType {
     DEFAULTER("DEFAULTER"), // Добросовестный
-    EXPIRED("EXPIRED"),
+    EXPIRED("EXPIRED"), // Истекший
     FRAUD("FRAUD"), // Аферист
     PRISONER("PRISONER"), //Подсудимый
-    DONE("DONE"),
+    DONE("DONE"), // Оплачен
     DELAY("DELAY"), // Затягивает
-    WAIT("WAIT");
+    WAIT("WAIT"); // Ожидание
     private final String value;
 
     StatusType (String value) {

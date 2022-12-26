@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @Builder
 @AllArgsConstructor
-@Table(name = "month_credit", schema = "azamat")
+@Table(name = "month_credit", schema = "public")
 public class MonthCreditDb {
     @Id
     @JsonIgnore

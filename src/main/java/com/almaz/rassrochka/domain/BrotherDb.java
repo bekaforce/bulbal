@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "brother", schema = "azamat")
+@Table(name = "brother", schema = "public")
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 
 public class BrotherDb {
@@ -26,22 +26,22 @@ public class BrotherDb {
     private Long id;
 
     @NotNull
-    @Size(min = 5, max = 25)
-    @Column(name = "full_name", length = 25)
+    @Size(min = 5, max = 50)
+    @Column(name = "full_name", length = 50)
     private String fullName;
 
     @NotNull
-    @Size(max = 20, min = 3)
-    @Column(name = "brother_type", length = 20)
+    @Size(min = 5, max = 50)
+    @Column(name = "brother_type", length = 50)
     private String brotherType;
 
     @NotNull
-    @Size(min = 9, max = 15)
-    @Column(name = "phone_number", length = 15)
+    @Size(min = 5, max = 50)
+    @Column(name = "phone_number", length = 50)
     private String phoneNumber;
 
     @NotNull
-    @Size(min = 9, max = 50)
+    @Size(min = 5, max = 50)
     @Column(name = "address", length = 50)
     private String address;
 
