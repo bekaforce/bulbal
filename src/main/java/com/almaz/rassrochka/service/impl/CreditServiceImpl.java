@@ -1,10 +1,11 @@
 package com.almaz.rassrochka.service.impl;
 
 import com.almaz.rassrochka.domain.CreditDb;
-import com.almaz.rassrochka.domain.ReportingDb;
+import com.almaz.rassrochka.domain.DeviceDb;
 import com.almaz.rassrochka.domain.dto.CreditBlackListDto;
 import com.almaz.rassrochka.domain.dto.CreditMonthDto;
 import com.almaz.rassrochka.domain.repository.CreditDbRepo;
+import com.almaz.rassrochka.domain.repository.DeviceDbRepo;
 import com.almaz.rassrochka.domain.repository.MonthCreditDbRepo;
 import com.almaz.rassrochka.domain.repository.ReportingDbRepo;
 import com.almaz.rassrochka.enums.StatusType;
@@ -12,18 +13,20 @@ import com.almaz.rassrochka.service.CreditService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CreditServiceImpl implements CreditService {
     private final CreditDbRepo creditDbRepo;
+
+    private final DeviceDbRepo deviceDbRepo;
     private final MonthCreditDbRepo monthCreditDbRepo;
     private final ReportingDbRepo reportingDbRepo;
 
-    public CreditServiceImpl(CreditDbRepo creditDbRepo, MonthCreditDbRepo monthCreditDbRepo, ReportingDbRepo reportingDbRepo) {
+    public CreditServiceImpl(CreditDbRepo creditDbRepo, DeviceDbRepo deviceDbRepo, MonthCreditDbRepo monthCreditDbRepo, ReportingDbRepo reportingDbRepo) {
         this.creditDbRepo = creditDbRepo;
+        this.deviceDbRepo = deviceDbRepo;
         this.monthCreditDbRepo = monthCreditDbRepo;
         this.reportingDbRepo = reportingDbRepo;
     }
@@ -65,12 +68,11 @@ public class CreditServiceImpl implements CreditService {
     }
 
     @Override
-    public Optional<CreditDb> addBlackListForCredit(CreditBlackListDto creditBlackListDto) {
-        return creditDbRepo.findById(creditBlackListDto.getId())
+public Optional<DeviceDb> addBlackListForCredit(CreditBlackListDto creditBlackListDto) {
+        return deviceDbRepo.findById(creditBlackListDto.getId())
                 .map(list->{
                     list.setStatusType(creditBlackListDto.getStatusType());
-                    list.setComments(creditBlackListDto.getComments());
-                    return creditDbRepo.save(list);
+                    return deviceDbRepo.save(list);
                 });
     }
 

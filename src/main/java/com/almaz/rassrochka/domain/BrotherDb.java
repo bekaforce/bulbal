@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "brother", schema = "public")
+@Table(name = "brother", schema = "azamat")
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 
 public class BrotherDb {

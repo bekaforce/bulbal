@@ -1,5 +1,6 @@
 package com.almaz.rassrochka.domain;
 
+import com.almaz.rassrochka.enums.StatusType;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,12 +9,13 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
 @Builder
 @AllArgsConstructor
-@Table(name = "device", schema = "public")
+@Table(name = "device", schema = "azamat")
 
 public class DeviceDb {
     @Id
@@ -44,6 +46,22 @@ public class DeviceDb {
     @NotNull
     @Column(name = "device_price", length = 6)
     private Integer devicePrice;
+
+    @NotNull
+    @Column(name = "zero_payment", length = 7)
+    private Integer zeroPayment;
+
+    @NotNull
+    @Column(name = "payment_type", length = 50)
+    private String paymentType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_type")
+    private StatusType statusType;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "device_id", referencedColumnName = "id")
+    private List<MonthCreditDb> monthCreditDb;
 
     @NotNull
     @Size(min = 12, max = 20)

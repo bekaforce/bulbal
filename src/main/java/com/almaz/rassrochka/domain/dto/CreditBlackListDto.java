@@ -9,5 +9,4 @@ import lombok.Data;
 public class CreditBlackListDto {
     private Long id;
     private StatusType statusType;
-    private String comments;
 }

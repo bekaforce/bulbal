@@ -2,6 +2,8 @@ package com.almaz.rassrochka.controller;
 
 import com.almaz.rassrochka.domain.ProfileDb;
 import com.almaz.rassrochka.domain.dto.*;
+import com.almaz.rassrochka.domain.repository.CallProfileDto;
+import com.almaz.rassrochka.domain.repository.MainDashRepoDto;
 import com.almaz.rassrochka.service.ProfileService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,34 +25,18 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-//    @ApiOperation(value = "Получить список всех пользователей", notes = "Получить список всех пользователей")
-//    @GetMapping("/findAll")
-//    public List<ProfileDb> findAll(){
-//        return profileService.findAll();
-//    }
 
     @ApiOperation(value = "Получить пользователя по ID", notes = "Получить пользователя по ID")
     @GetMapping("/findById/{id}")
     public Optional<ProfileDb> findById(@PathVariable Long id){
         return profileService.findById(id);
     }
+    @ApiOperation(value = "Удалить профиль по ID", notes = "Удалить профиль по ID")
+    @DeleteMapping("/deleteById/{id}")
+    public void deleteById(@PathVariable Long id){
+        profileService.deleteById(id);
+    }
 
-//    @ApiOperation(value = "Поиск по фамилии", notes = "Поиск по фамилии")
-//    @GetMapping("/findByFullName/{fullName}")
-//    public List<ProfileDb> findByFullName(@PathVariable String fullName){
-//        return profileService.findByFullName(fullName);
-//    }
-//    @ApiOperation(value = "Список для Обзвона", notes = "Список для обзвона")
-//    @GetMapping("/findCallProfile")
-//    public List<CallActiveProfileDto> findCallProfile(){
-//        return profileService.findCallProfile();
-//    }
-
-//    @ApiOperation(value = "Поиск по ИНН паспорта", notes = "Поиск по ИНН паспорта")
-//    @GetMapping("/findByPassportInn/{passportInn}")
-//    public List<ProfileDb> findByPassportInn(@PathVariable String passportInn){
-//        return profileService.findByPassportInn(passportInn);
-//    }
     @ApiOperation(value = "Добавить новый профиль в таблицу", notes = "Добавить новый профиль в таблицу")
     @PostMapping("/addProfiles")
     public ProfileDb addProfiles(@RequestBody ProfileDto profileDto){
@@ -59,45 +45,26 @@ public class ProfileController {
 
     @ApiOperation(value = "Изменить данные по профилю", notes = "Изменить данные по профилю")
     @PutMapping("/editProfiles")
-    public Optional<ProfileDb> editProfiles(@RequestBody ProfileDb profileDb){
-        return profileService.editUserProfile(profileDb);
+    public Optional<ProfileDb> editProfiles(@RequestBody ProfileDto profileDto){
+        return profileService.editProfiles(profileDto);
     }
-//    @ApiOperation(value = "Поиск по ИНН паспорта", notes = "Поиск по ИНН паспорта")
-//    @GetMapping("/findProfileByDate/{start}/{end}")
-//    public List<ProfileDb> findByProfileByDate(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
-//                                               @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end){
-//        return profileService.findProfileByPeriod(start,end);
-//    }
-    @ApiOperation(value = "DTO for Main Page", notes = "DTO for Main Page")
+
+    @ApiOperation(value = "Получение данных на главную таблицу", notes = "Получение данных на главную таблицу")
     @GetMapping("/getDtoForMain/{start}/{end}")
-    public List<MainDashProfileDto> getDtoForMain (@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
-                                                   @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end){
+    public List<MainDashRepoDto> getDtoForMain (@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+                                                @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end){
         return profileService.findProfileForDash(start,end);
     }
-    @ApiOperation(value = "DTO find by Full name in Main Page", notes = "DTO find by Full name in Main Page")
+    @ApiOperation(value = "Поиск по ФИО", notes = "Поиск по ФИО")
     @GetMapping("/getDtoForMainByFullName/{fullName}")
-    public List<MainDashProfileDto> getDtoForMainByFullName (@PathVariable String fullName){
+    public List<MainDashRepoDto> getDtoForMainByFullName (@PathVariable String fullName){
         return profileService.findProfileByFullName(fullName);
     }
 
-    @ApiOperation(value = "DTO find by Device IMEI in Main Page", notes = "DTO find by Device IMEI in Main Page")
-    @GetMapping("/getDtoForMainByDeviceImei/{deviceImei}")
-    public List<MainDashProfileDto> getDtoForMainByDeviceImei (@PathVariable String deviceImei) {
-        return profileService.findProfileByDeviceImei(deviceImei);
+    @ApiOperation(value = "Вывод EXPIRED профилей", notes = "new call profile where distinct credit_id")
+    @GetMapping("/findExpiredProfile")
+    public List<CallProfileDto> findCallProfile(){
+        return profileService.findCallProfile();
     }
-    @ApiOperation(value = "DTO find by Device IMEI in Main Page", notes = "DTO find by Device IMEI in Main Page")
-    @GetMapping("/getDtoForMainByPassInn/{passportInn}")
-    public List<MainDashProfileDto> getDtoForMainByPassInn (@PathVariable String passportInn) {
-        return profileService.findProfileByPassportInn(passportInn);
-    }
-    @ApiOperation(value = "new call profile where distinct credit_id", notes = "new call profile where distinct credit_id")
-    @GetMapping("/findDistinctCallProfile")
-    public List<DistinctCallProfileDto> findDistinctCallProfile(){
-        return profileService.distinctCallProfile();
-    }
-    @ApiOperation(value = "Change delete status by profile_id", notes = "Change delete status by profile_id")
-    @PostMapping("/deleteStatus")
-    Optional<ProfileDb> deleteProfileStatus(@RequestBody DeletedStatusDto deletedStatusDto) {
-       return profileService.deleteProfileStatus(deletedStatusDto);
-    }
+
 }

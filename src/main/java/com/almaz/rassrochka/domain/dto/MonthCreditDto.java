@@ -15,6 +15,7 @@ public class MonthCreditDto {
     private Double debt;
     private LocalDate payDate;
     private StatusType statusType;
+    private String paymentType;
     private String comment;
     private Integer debtReport;
 }

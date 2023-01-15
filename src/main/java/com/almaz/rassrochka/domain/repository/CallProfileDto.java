@@ -4,21 +4,20 @@ import java.time.LocalDate;
 
 public interface CallProfileDto {
 
-    Long getId();
+    Long getMonthId();
+    Long getDeviceId();
     String getFullName();
     String getPhone();
     String getDeviceModel();
     String getDevicePrice();
     Integer getZeroPayment();
+    Integer getDebtReport();
+    String getPaymentType();
     Integer getCountMonth();
-
-    Double getDebt();
     LocalDate getPayDate();
     String getStatusType();
     String getSalesmanLogin();
     String getComment();
-    Long getCreditId();
-    Long getMcId();
 
 
 

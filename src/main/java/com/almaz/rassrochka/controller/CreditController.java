@@ -2,6 +2,7 @@ package com.almaz.rassrochka.controller;
 
 
 import com.almaz.rassrochka.domain.CreditDb;
+import com.almaz.rassrochka.domain.DeviceDb;
 import com.almaz.rassrochka.domain.dto.CreditBlackListDto;
 import com.almaz.rassrochka.domain.dto.CreditMonthDto;
 import com.almaz.rassrochka.service.CreditService;
@@ -43,7 +44,7 @@ public class CreditController  {
     }
     @ApiOperation(value = "Add and edit black list for creditId", notes = "Add and edit black list for creditId")
     @PostMapping("/addBlackList")
-    public Optional<CreditDb> addBlackList(@RequestBody CreditBlackListDto creditBlackListDto){
+    public Optional<DeviceDb> addBlackList(@RequestBody CreditBlackListDto creditBlackListDto){
         return creditService.addBlackListForCredit(creditBlackListDto);
 
     }

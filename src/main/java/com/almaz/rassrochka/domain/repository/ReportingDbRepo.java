@@ -14,7 +14,7 @@ public interface ReportingDbRepo extends JpaRepository<ReportingDb, Long> {
 
     @Query(value = "SELECT r.id, p.full_name as fullName, r.debt_report as debtReport, r.registration_date as registrationDate,\n" +
             "            r.salesman_login as salesmanLogin " +
-            "FROM public.report r, public.credit c, public.device d, public.profile p  \n" +
+            "FROM azamat.report r, azamat.credit c, azamat.device d, azamat.profile p  \n" +
             "            where p.id = d.profile_id\n" +
             "            and d.id = c.device_id\n" +
             "            and r.credit_id = c.id\n" +
@@ -27,7 +27,7 @@ public interface ReportingDbRepo extends JpaRepository<ReportingDb, Long> {
 
     @Query(value = "SELECT r.id, p.full_name as fullName, r.debt_report as debtReport, r.registration_date as registrationDate,\n" +
             "            r.salesman_login as salesmanLogin " +
-            "FROM public.report r, public.credit c, public.device d, public.profile p  \n" +
+            "FROM azamat.report r, azamat.credit c, azamat.device d, azamat.profile p  \n" +
             "            where p.id = d.profile_id\n" +
             "            and d.id = c.device_id\n" +
             "            and r.credit_id = c.id\n" +

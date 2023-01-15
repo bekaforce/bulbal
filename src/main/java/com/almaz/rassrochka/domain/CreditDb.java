@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Builder
 @AllArgsConstructor
-@Table(name = "credit", schema = "public")
+@Table(name = "credit", schema = "azamat")
 public class CreditDb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class CreditDb {
     private String comments;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "credit_id", referencedColumnName = "id")
+    @JoinColumn(name = "device_id", referencedColumnName = "id")
     private List<MonthCreditDb> monthCreditDb;
 
     @Enumerated(EnumType.STRING)

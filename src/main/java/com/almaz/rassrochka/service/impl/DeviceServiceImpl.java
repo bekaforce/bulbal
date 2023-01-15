@@ -1,9 +1,10 @@
 package com.almaz.rassrochka.service.impl;
 
 import com.almaz.rassrochka.domain.DeviceDb;
-import com.almaz.rassrochka.domain.repository.DeviceDbRepo;
-import com.almaz.rassrochka.service.DeviceService;
 import com.almaz.rassrochka.domain.dto.DeviceDto;
+import com.almaz.rassrochka.domain.repository.DeviceDbRepo;
+import com.almaz.rassrochka.enums.StatusType;
+import com.almaz.rassrochka.service.DeviceService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +15,15 @@ import java.util.Optional;
 @Service
 public class DeviceServiceImpl implements DeviceService {
     private final DeviceDbRepo deviceDbRepo;
-
     public DeviceServiceImpl(DeviceDbRepo deviceDbRepo) {
         this.deviceDbRepo = deviceDbRepo;
     }
 
-
     @Override
     public DeviceDb addDevice(DeviceDto deviceDto) {
+
         DeviceDb deviceDb = new DeviceDb();
+        deviceDb.setMonthCreditDb(deviceDto.getMonthCreditDbList());
         deviceDb.setDeviceModel(deviceDto.getDeviceModel());
         deviceDb.setDeviceMemory(deviceDto.getDeviceMemory());
         deviceDb.setDevicePrice(deviceDto.getDevicePrice());
@@ -30,9 +31,13 @@ public class DeviceServiceImpl implements DeviceService {
         deviceDb.setProfileId(deviceDto.getProfileId());
         deviceDb.setCloudLogin(deviceDto.getCloudLogin());
         deviceDb.setCloudPass(deviceDto.getCloudPass());
+        deviceDb.setPaymentType(deviceDto.getPaymentType());
+        deviceDb.setZeroPayment(deviceDto.getZeroPayment());
+        deviceDb.setStatusType(StatusType.WAIT);
         deviceDb.setSalesmanLogin(SecurityContextHolder.getContext().getAuthentication().getName());
         deviceDb.setRegistrationDate(LocalDateTime.now());
         return deviceDbRepo.save(deviceDb);
+
     }
 
     @Override
@@ -49,6 +54,7 @@ public class DeviceServiceImpl implements DeviceService {
                     deviceDb.setDeviceMemory(deviceDto.getDeviceMemory());
                     deviceDb.setDevicePrice(deviceDto.getDevicePrice());
                     deviceDb.setDeviceImei(deviceDto.getDeviceImei());
+                    deviceDb.setStatusType(deviceDto.getStatusType());
                     deviceDb.setRegistrationDate(LocalDateTime.now());
                     deviceDb.setCloudLogin(deviceDto.getCloudLogin());
                     deviceDb.setCloudPass(deviceDto.getCloudPass());

@@ -32,7 +32,7 @@ public class MonthCreditServiceImpl implements MonthCreditService {
 
     @Override
     public List<MonthCreditDb> findAllByCreditId(Long id) {
-        return monthCreditDbRepo.findAllByCreditId(id);
+        return monthCreditDbRepo.findAllByDeviceId(id);
     }
 
     @Override
@@ -54,7 +54,9 @@ public class MonthCreditServiceImpl implements MonthCreditService {
     public Optional<MonthCreditDb> editMonthCredit(MonthCreditDto monthCreditDto) {
 
             ReportingDb reporting = new ReportingDb();
-            reporting.setCreditId(monthCreditDbRepo.getOne(monthCreditDto.getId()).getCreditId());
+            reporting.setDeviceId(monthCreditDbRepo.getReferenceById(monthCreditDto.getId()).getDeviceId());
+            reporting.setCountMonth(monthCreditDbRepo.getReferenceById(monthCreditDto.getId()).getCountMonth());
+            reporting.setPaymentType(monthCreditDbRepo.getReferenceById(monthCreditDto.getId()).getPaymentType());
             if (monthCreditDto.getDebtReport()!=null) {
                 reporting.setDebtReport(monthCreditDto.getDebtReport());
             }
@@ -74,11 +76,11 @@ public class MonthCreditServiceImpl implements MonthCreditService {
                     list.setDebt(monthCreditDto.getDebt());
                     list.setPayDate(monthCreditDto.getPayDate());
                     list.setComment(monthCreditDto.getComment());
-                    if (monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport()==null) {
+                    list.setPaymentType(monthCreditDto.getPaymentType());
+                    if (monthCreditDbRepo.getReferenceById(monthCreditDto.getId()).getDebtReport() == null) {
                         list.setDebtReport(monthCreditDto.getDebtReport());
-                    }
-                    else {
-                        list.setDebtReport(monthCreditDbRepo.getOne(monthCreditDto.getId()).getDebtReport()+monthCreditDto.getDebtReport());
+                    } else {
+                        list.setDebtReport(monthCreditDbRepo.getReferenceById(monthCreditDto.getId()).getDebtReport() + monthCreditDto.getDebtReport());
                     }
 
                     list.setRegistrationDate(LocalDateTime.now());

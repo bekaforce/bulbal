@@ -27,13 +27,13 @@ public class MonthCreditController {
         return monthCreditService.findAll();
     }
 
-    @ApiOperation(value = "Получить весь список по кредитам", notes = "Получить список по кредита")
+    @ApiOperation(value = "Получить кредлит по ID Device", notes = "Получить кредлит по ID Device")
     @GetMapping("/findAllByCreditId/{id}")
     public List<MonthCreditDb> findAllByCreditId(@PathVariable Long id){
         return monthCreditService.findAllByCreditId(id);
     }
 
-    @ApiOperation(value = "Обновить статусы по месячным кредитам", notes = "Обновить статусы по месячным кредитам")
+    @ApiOperation(value = "Изменить кредиты по месяцам", notes = "Изменить кредиты по месяцам")
     @PutMapping("/editMontCredit")
     public Optional<MonthCreditDb> editMontCredit (@RequestBody MonthCreditDto monthCreditDto){
         return monthCreditService.editMonthCredit(monthCreditDto);

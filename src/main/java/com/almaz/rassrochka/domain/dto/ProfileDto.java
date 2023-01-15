@@ -12,13 +12,8 @@ import java.time.LocalDateTime;
 public class ProfileDto {
     private Long id;
     private String fullName;
-    private String passportInn;
-    private String passportSeries;
-    private String passportDate;
-    private String passportDepartment;
-    private String passportAddress;
-    private String workAddress;
-    private String factAddress;
     private String phone;
+    private String phoneSecond;
+    private Boolean delete;
 
 }

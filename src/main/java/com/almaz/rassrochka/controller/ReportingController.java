@@ -1,12 +1,12 @@
 package com.almaz.rassrochka.controller;
 
-import com.almaz.rassrochka.domain.dto.ReportDto;
-import com.almaz.rassrochka.service.ReportingService;
+import com.almaz.rassrochka.domain.dto.ReportPaymentRequestDto;
+import com.almaz.rassrochka.domain.repository.ReportMonthPaymentDto;
+import com.almaz.rassrochka.domain.repository.ReportZeroPaymentDto;
+import com.almaz.rassrochka.service.ProfileService;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.almaz.rassrochka.endpoints.Endpoints.PROFILES;
@@ -15,24 +15,23 @@ import static com.almaz.rassrochka.endpoints.Endpoints.PROFILES;
 @CrossOrigin
 @RequestMapping(value = PROFILES)
 public class ReportingController {
-    private final ReportingService reportingService;
+    private final ProfileService profileService;
 
-    public ReportingController(ReportingService reportingService) {
-        this.reportingService = reportingService;
+    public ReportingController(ProfileService profileService) {
+        this.profileService = profileService;
     }
 
-    @ApiOperation(value = "Get all reporting by date", notes = "Get all reporting by date")
-    @GetMapping("/getReportingByDate/{start}/{end}")
-    public List<ReportDto> getReportByDate(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
-                                           @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
-        return reportingService.getAllReportByDate(start, end);
+    @ApiOperation(value = "Получить отчет по ZeroPayment за выбранный период, тип платежа и логин продавца",
+            notes = "Получить отчет по ZeroPayment за выбранный период, тип платежа и логин продавца")
+    @PostMapping("/zeroPaymentReport")
+    public List<ReportZeroPaymentDto> zeroPaymentProfile(@RequestBody ReportPaymentRequestDto reportPaymentRequestDto) {
+        return profileService.zeroPaymentProfile(reportPaymentRequestDto);
     }
 
-    @ApiOperation(value = "Get all reporting by date and userName", notes = "Get all reporting by date and UserName")
-    @GetMapping("/getReportingByDateAndUserName/{start}/{end}/{username}")
-    public List<ReportDto> getReportByDateAndUserName(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
-                                                      @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end,
-                                                      @PathVariable String username) {
-        return reportingService.getAllReportByDateAndUserName(start, end, username);
+    @ApiOperation(value = "Получить отчет по MonthPayment за выбранный период, тип платежа и логин продавца",
+            notes = "Получить отчет по MonthPayment за выбранный период, тип платежа и логин продавца")
+    @PostMapping("/monthPaymentReport")
+    public List<ReportMonthPaymentDto> monthPaymentProfile (@RequestBody ReportPaymentRequestDto reportPaymentRequestDto) {
+        return profileService.monthPaymentProfile(reportPaymentRequestDto);
     }
 }

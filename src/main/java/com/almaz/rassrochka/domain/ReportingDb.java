@@ -13,18 +13,23 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "report", schema = "public")
+@Table(name = "report", schema = "azamat")
 public class ReportingDb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "credit_id")
-    private Long creditId;
+    @Column(name = "device_id")
+    private Long deviceId;
+    @Column(name = "count_month")
+    private Integer countMonth;
 
     @Column(name = "debt_report")
     private Integer debtReport;
+
+    @Column(name = "payment_type", length = 50)
+    private String paymentType;
 
     @Column(name = "registration_date")
     private LocalDateTime registrationDate;
