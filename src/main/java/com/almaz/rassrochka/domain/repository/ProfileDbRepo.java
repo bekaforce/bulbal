@@ -12,10 +12,10 @@ import java.util.List;
 public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
 
 // old CallProfile
-    @Query(value = "select mc.id as monthId, d.id as deviceId, p.full_name as fullName, p.phone, d.device_model as deviceModel, \n" +
+    @Query(value = "select p.id as profileId, mc.id as monthId, d.id as deviceId, p.full_name as fullName, p.phone, d.device_model as deviceModel, \n" +
             "d.device_price as devicePrice, d.zero_payment as zeroPayment,  mc.count_month as countMonth, mc.pay_date as payDate,  \n" +
             "mc.debt_report as debtReport, mc.payment_type as paymentType, mc.status_type as statusType, mc.\"comment\", p.salesman_login as salesmanLogin  \n" +
-            "from azamat.profile p, azamat.device d, azamat.month_credit mc\n" +
+            "from public.profile p, public.device d, public.month_credit mc\n" +
             "where p.id = d.profile_id\n" +
             "and d.id =mc.device_id\n" +
             "and mc.status_type ='EXPIRED'\n" +
@@ -24,7 +24,7 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
 
     @Query(value = "SELECT p.id, mc.credit_id as creditId, p.full_name as fullName, p.phone as phone, d.device_model as deviceModel, d.device_price as devicePrice, \n" +
             "            c.zero_payment as zeroPayment\n" +
-            "            FROM azamat.profile p, azamat.device d, azamat.credit c, azamat.month_credit mc\n" +
+            "            FROM public.profile p, public.device d, public.credit c, public.month_credit mc\n" +
             "            where p.id=d.profile_id\n" +
             "            and c.device_id=d.id\n" +
             "            and mc.credit_id=c.id and p.deleted is not true " +
@@ -35,21 +35,21 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
 
     @Query(value = "select p.id as profileId, d.id as deviceId,  p.full_name as fullName, p.phone, d.device_model as deviceModel, \n" +
             "d.device_price as devicePrice, d.zero_payment as zeroPayment, d.payment_type as paymentType, d.status_type as statusType, p.registration_date as registrationDate, p.salesman_login as salesmanLogin \n" +
-            "from azamat.profile p, azamat.device d\n" +
+            "from public.profile p, public.device d\n" +
             "where p.id = d.profile_id and p.deleted is not true\n" +
             "and p.registration_date between :start and :end " +
             "order by p.registration_date desc", nativeQuery = true)
     List<MainDashRepoDto> dashBoardProfile(@Param("start") LocalDateTime start,
                                            @Param("end") LocalDateTime end);
 
-    @Query(value = "SELECT * from azamat.profile where registration_date between :start and :end " +
+    @Query(value = "SELECT * from public.profile where registration_date between :start and :end " +
             "order by id desc", nativeQuery = true)
     List<ProfileDb> findAllByRegistrationDateBetween(@Param("start") LocalDateTime start,
                                                      @Param("end") LocalDateTime end);
 
     @Query(value = "select p.id as profileId, d.id as deviceId,  p.full_name as fullName, p.phone, d.device_model as deviceModel, \n" +
             "d.device_price as devicePrice, d.status_type as statusType, p.registration_date as registrationDate, p.salesman_login as salesmanLogin \n" +
-            "from azamat.profile p, azamat.device d\n" +
+            "from public.profile p, public.device d\n" +
             "where p.id = d.profile_id\n" +
             "and p.deleted is not true\n" +
             "and p.full_name ILIKE %:fullName%\n" +
@@ -59,14 +59,14 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
     @Query(value = "select p.id as profileId, d.id as deviceId,  p.full_name as fullName, p.phone, d.device_model as deviceModel,\n" +
             "d.device_price as devicePrice, d.zero_payment as zeroPayment, d.payment_type as paymentType, d.status_type as statusType, \n" +
             "p.registration_date as registrationDate, p.salesman_login as salesmanLogin\n" +
-            "from azamat.profile p, azamat.device d\n" +
+            "from public.profile p, public.device d\n" +
             "where p.id = d.profile_id\n" +
             "and d.device_imei ilike %:fullName%", nativeQuery = true)
     List<MainDashRepoDto> findByDeviceImei(@Param("fullName") String fullName);
 
     @Query(value = "select p.id, p.full_name as fullName, p.passport_inn as passportInn, d.device_imei as deviceImei, " +
             "c.status_type as statusType, c.registration_date as registrationDate, c.salesman_login as salesmanLogin  \n" +
-            "from azamat.profile p, azamat.credit c, azamat.device d \n" +
+            "from public.profile p, public.credit c, public.device d \n" +
             "where p.id=d.profile_id and p.deleted is not true and c.device_id=d.id\n" +
             "and p.passport_inn ILIKE %:passportInn% " +
             "order by c.registration_date desc", nativeQuery = true)
@@ -74,7 +74,7 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
 
     @Query(value = "select p.id, p.full_name as fullName, p.passport_inn as passportInn, d.device_imei as deviceImei, " +
             "c.status_type as statusType, c.registration_date as registrationDate, c.salesman_login as salesmanLogin  \n" +
-            "from azamat.profile p, azamat.credit c, azamat.device d \n" +
+            "from public.profile p, public.credit c, public.device d \n" +
             "where p.id=d.profile_id and p.deleted is true " +
             "and c.device_id=d.id\n" +
             "and p.full_name ILIKE %:fullName% " +
@@ -83,7 +83,7 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
 
     @Query(value = "select p.id, p.full_name as fullName, p.passport_inn as passportInn, d.device_imei as deviceImei, " +
             "c.status_type as statusType, c.registration_date as registrationDate, c.salesman_login as salesmanLogin  \n" +
-            "from azamat.profile p, azamat.credit c, azamat.device d \n" +
+            "from public.profile p, public.credit c, public.device d \n" +
             "where p.id=d.profile_id and p.deleted is true " +
             "and c.device_id=d.id\n" +
             "and c.registration_date between :start and :end " +
@@ -94,7 +94,7 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
 
     @Query(value = "select d.id as deviceId, p.full_name as fullName, d.zero_payment as zeroPayment, d.payment_type as paymentType, \n" +
             "p.registration_date as registrationDate, p.salesman_login as salesmanLogin  \n" +
-            "from azamat.profile p, azamat.device d  \n" +
+            "from public.profile p, public.device d  \n" +
             "where p.id = d.profile_id\n" +
             "and d.profile_id = p.id\n" +
             "and p.registration_date between :start and :end " +
@@ -109,7 +109,7 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
 
     @Query(value = "select d.id as deviceId, p.full_name as fullName, r.count_month as countMonth,  r.debt_report as debtReport, \n" +
             "r.payment_type as paymentType, r.registration_date as registrationDate, r.salesman_login as salesmanLogin  \n" +
-            "from azamat.report r, azamat.profile p, azamat.device d  \n" +
+            "from public.report r, public.profile p, public.device d  \n" +
             "where p.id = d.profile_id \n" +
             "and r.device_id = d.id\n" +
             "and r.registration_date between :start and :end " +

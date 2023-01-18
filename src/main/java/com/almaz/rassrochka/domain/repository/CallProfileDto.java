@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public interface CallProfileDto {
 
     Long getMonthId();
+    Long getProfileId();
     Long getDeviceId();
     String getFullName();
     String getPhone();

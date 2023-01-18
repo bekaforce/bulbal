@@ -15,9 +15,11 @@ import java.util.Optional;
 @Service
 public class DeviceServiceImpl implements DeviceService {
     private final DeviceDbRepo deviceDbRepo;
+
     public DeviceServiceImpl(DeviceDbRepo deviceDbRepo) {
         this.deviceDbRepo = deviceDbRepo;
     }
+
 
     @Override
     public DeviceDb addDevice(DeviceDto deviceDto) {

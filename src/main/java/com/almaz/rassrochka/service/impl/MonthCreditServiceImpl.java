@@ -56,7 +56,7 @@ public class MonthCreditServiceImpl implements MonthCreditService {
             ReportingDb reporting = new ReportingDb();
             reporting.setDeviceId(monthCreditDbRepo.getReferenceById(monthCreditDto.getId()).getDeviceId());
             reporting.setCountMonth(monthCreditDbRepo.getReferenceById(monthCreditDto.getId()).getCountMonth());
-            reporting.setPaymentType(monthCreditDbRepo.getReferenceById(monthCreditDto.getId()).getPaymentType());
+            reporting.setPaymentType(monthCreditDto.getPaymentType());
             if (monthCreditDto.getDebtReport()!=null) {
                 reporting.setDebtReport(monthCreditDto.getDebtReport());
             }
