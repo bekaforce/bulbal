@@ -33,7 +33,7 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
             "            order by mc.credit_id asc", nativeQuery = true)
     List<DistinctCallProfileRepoDto> distinctCallProfile();
 
-    @Query(value = "select p.id as profileId, d.id as deviceId,  p.full_name as fullName, p.phone, d.device_model as deviceModel, \n" +
+    @Query(value = "select p.id as profileId, d.id as deviceId, p.profile_number as profileNumber, p.full_name as fullName, p.phone, d.device_model as deviceModel, \n" +
             "d.device_price as devicePrice, d.zero_payment as zeroPayment, d.payment_type as paymentType, d.status_type as statusType, p.registration_date as registrationDate, p.salesman_login as salesmanLogin \n" +
             "from public.profile p, public.device d\n" +
             "where p.id = d.profile_id and p.deleted is not true\n" +
@@ -47,7 +47,7 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
     List<ProfileDb> findAllByRegistrationDateBetween(@Param("start") LocalDateTime start,
                                                      @Param("end") LocalDateTime end);
 
-    @Query(value = "select p.id as profileId, d.id as deviceId,  p.full_name as fullName, p.phone, d.device_model as deviceModel, \n" +
+    @Query(value = "select p.id as profileId, d.id as deviceId, p.profile_number as profileNumber, p.full_name as fullName, p.phone, d.device_model as deviceModel, \n" +
             "d.device_price as devicePrice, d.status_type as statusType, p.registration_date as registrationDate, p.salesman_login as salesmanLogin \n" +
             "from public.profile p, public.device d\n" +
             "where p.id = d.profile_id\n" +
@@ -56,13 +56,13 @@ public interface ProfileDbRepo extends JpaRepository<ProfileDb, Long> {
             "order by p.registration_date desc", nativeQuery = true)
     List<MainDashRepoDto> findByFullName(@Param("fullName") String fullName);
 
-    @Query(value = "select p.id as profileId, d.id as deviceId,  p.full_name as fullName, p.phone, d.device_model as deviceModel,\n" +
+    @Query(value = "select p.id as profileId, d.id as deviceId, p.profile_number as profileNumber, p.full_name as fullName, p.phone, d.device_model as deviceModel,\n" +
             "d.device_price as devicePrice, d.zero_payment as zeroPayment, d.payment_type as paymentType, d.status_type as statusType, \n" +
             "p.registration_date as registrationDate, p.salesman_login as salesmanLogin\n" +
             "from public.profile p, public.device d\n" +
             "where p.id = d.profile_id\n" +
-            "and d.device_imei ilike %:fullName%", nativeQuery = true)
-    List<MainDashRepoDto> findByDeviceImei(@Param("fullName") String fullName);
+            "and p.profile_number ilike %:fullName%", nativeQuery = true)
+    List<MainDashRepoDto> findByProfileNumber(@Param("fullName") String fullName);
 
     @Query(value = "select p.id, p.full_name as fullName, p.passport_inn as passportInn, d.device_imei as deviceImei, " +
             "c.status_type as statusType, c.registration_date as registrationDate, c.salesman_login as salesmanLogin  \n" +

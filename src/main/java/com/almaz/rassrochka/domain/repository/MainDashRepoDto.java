@@ -8,6 +8,7 @@ public interface MainDashRepoDto {
     Long getProfileId();
     Long getDeviceId();
     String getFullName();
+    String getProfileNumber();
     String getPhone();
     String getDeviceModel();
     Long getDevicePrice();

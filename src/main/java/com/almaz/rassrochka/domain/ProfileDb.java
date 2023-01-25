@@ -31,6 +31,11 @@ public class ProfileDb {
     @Column(name = "phone", length = 25)
     private String phone;
 
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "profile_number", length = 10)
+    private String profileNumber;
+
     @Size(min = 7, max = 25)
     @Column(name = "phone_second", length = 25)
     private String phoneSecond;

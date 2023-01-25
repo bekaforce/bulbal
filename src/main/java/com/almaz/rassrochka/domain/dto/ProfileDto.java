@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class ProfileDto {
     private Long id;
     private String fullName;
+    private String profileNumber;
     private String phone;
     private String phoneSecond;
     private Boolean delete;

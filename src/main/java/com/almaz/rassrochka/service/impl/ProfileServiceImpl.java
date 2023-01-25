@@ -49,6 +49,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     private ProfileDb getProfileDb(ProfileDto profileDto, ProfileDb profileDb) {
         profileDb.setFullName(profileDto.getFullName());
+        profileDb.setProfileNumber(profileDto.getProfileNumber());
         profileDb.setPhone(profileDto.getPhone());
         profileDb.setPhoneSecond(profileDto.getPhoneSecond());
         profileDb.setDeleted(profileDto.getDelete());
@@ -93,7 +94,7 @@ public class ProfileServiceImpl implements ProfileService {
     public List<MainDashRepoDto> findProfileByFullName(String fullName) {
 
         if (fullName.matches("[0-9]+")){
-            return profileDbRepo.findByDeviceImei(fullName);
+            return profileDbRepo.findByProfileNumber(fullName);
         }
         else
             return profileDbRepo.findByFullName(fullName);
@@ -101,7 +102,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public List<MainDashRepoDto> findProfileByDeviceImei(String deviceImei) {
-        return profileDbRepo.findByDeviceImei(deviceImei);
+        return profileDbRepo.findByProfileNumber(deviceImei);
     }
 
 
