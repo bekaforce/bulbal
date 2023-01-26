@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://psg/sks_recruiting
+    username: postgres
+    password: 5Rag^ycn
+    platform: postgres
+  jpa:
+    generate-ddl: true
+    database: POSTGRESQL
