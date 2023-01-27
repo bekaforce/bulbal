@@ -28,7 +28,8 @@ public class TypeOfHouseServiceImpl implements TypeOfHouseService {
     public TypeOfHouse update(GetNameDto getNameDto, Long id) {
         TypeOfHouse typeOfHouse = findById(id);
         if (typeOfHouse != null){
-            
+            typeOfHouse.setName(getNameDto.getName());
+            return typeOfHouseRepo.save(typeOfHouse);
         }
         return null;
     }
@@ -40,11 +41,16 @@ public class TypeOfHouseServiceImpl implements TypeOfHouseService {
 
     @Override
     public boolean deleteById(Long id) {
+        TypeOfHouse typeOfHouse = findById(id);
+        if (typeOfHouse != null){
+            typeOfHouseRepo.delete(typeOfHouse);
+            return true;
+        }
         return false;
     }
 
     @Override
     public List<TypeOfHouse> all() {
-        return null;
+        return typeOfHouseRepo.findAll();
     }
 }

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://psg/sks_recruiting
+    url: jdbc:postgresql://localhost:5432/sweatter
     username: postgres
     password: 5Rag^ycn
     platform: postgres

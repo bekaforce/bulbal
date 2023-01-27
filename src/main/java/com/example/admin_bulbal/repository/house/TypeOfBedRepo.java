@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TypeOfBedRepo extends JpaRepository<TypeOfBed, Long> {
-
+    TypeOfBed findTypeOfBedById(Long id);
 }
