@@ -16,7 +16,7 @@ spring:
 security:
   jwt:
     token:
-      secret-key: rassrochkaApp
+      secret-key: bulbalApp
       expire-length: 14400000
 
 
