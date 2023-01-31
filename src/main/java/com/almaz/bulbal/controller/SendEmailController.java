@@ -2,13 +2,15 @@ package com.almaz.bulbal.controller;
 
 import com.almaz.bulbal.dto.email.EmailDetails;
 import com.almaz.bulbal.service.email.EmailService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 
+import static com.almaz.bulbal.endpoints.Endpoints.SEND_MAIL;
+
 @RestController
+@CrossOrigin
+@RequestMapping(value = SEND_MAIL)
 public class SendEmailController {
 
     private final EmailService emailService;
@@ -17,7 +19,7 @@ public class SendEmailController {
         this.emailService = emailService;
     }
 
-    @PostMapping("/sendMail")
+    @PostMapping("/send")
     public String sendMail(@RequestBody EmailDetails details) throws MessagingException {
         return emailService.sendSimpleMail(details);
     }
