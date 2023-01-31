@@ -51,18 +51,18 @@
     <table>
         <tr>
             <td style="padding: 0px 20px 10px 30px">
-                <p class="text-title"><!--/*@thymesVar id="introduction" type="templates"*/--><span th:text = "${introduction}"></span></p>
+                <p class="text-title"><!--/*@thymesVar id="introduction" type="templates"*/--><span th:text = "${name}"> userName</span></p>
             </td>
 
         <tr>
             <td colspan = "2" style = "padding: 0px 20px 10px 30px">
-                <p class="text-subtitle"><!--/*@thymesVar id="body" type="templates"*/--><span th:text="${body}"></span></p>
+                <p class="text-subtitle"><!--/*@thymesVar id="body" type="templates"*/--><span th:text="${location}"></span></p>
             </td>
         </tr>
         <tr>
             <td>
                 <!--/*@thymesVar id="login" type="templates"*/-->
-                <a class="button" th:href="${login}">Перейти</a>
+                <a class="button" th:href="${sign}">Перейти</a>
             </td>
         </tr>
     </table>
