@@ -1,9 +1,9 @@
-package com.almaz.bulbal.service.house.impl;
+package com.example.admin_bulbal.service.house.impl;
 
-import com.almaz.bulbal.dto.project.GetMapDto;
-import com.almaz.bulbal.model.house.TypeOfBed;
-import com.almaz.bulbal.repository.house.TypeOfBedRepo;
-import com.almaz.bulbal.service.house.TypeOfBedService;
+import com.example.admin_bulbal.dto.project.GetMapDto;
+import com.example.admin_bulbal.model.house.TypeOfBed;
+import com.example.admin_bulbal.repository.house.TypeOfBedRepo;
+import com.example.admin_bulbal.service.house.TypeOfBedService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class TypeOfBedServiceImpl implements TypeOfBedService {
     public TypeOfBed save(GetMapDto getMapDto) {
         TypeOfBed typeOfBed = new TypeOfBed();
         typeOfBed.setName(getMapDto.getName());
-        typeOfBed.setName(getMapDto.getValue());
+        typeOfBed.setValue(getMapDto.getValue());
         return typeOfBedRepo.save(typeOfBed);
     }
 
