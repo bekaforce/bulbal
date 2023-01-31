@@ -4,7 +4,6 @@ import com.almaz.bulbal.security.domain.User;
 import com.almaz.bulbal.security.dto.AuthenticationRequestDto;
 import com.almaz.bulbal.security.jwt.JwtTokenProvider;
 import com.almaz.bulbal.security.service.UserService;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,7 +31,7 @@ public class AuthenticationController {
         this.userService = userService;
     }
 
-    @ApiOperation(value = "Авторизация", notes = "Авторизация")
+
     @PostMapping("/auth")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequestDto requestDto){
         try {
