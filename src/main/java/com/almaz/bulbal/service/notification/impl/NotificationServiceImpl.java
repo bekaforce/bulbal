@@ -47,7 +47,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public List<Notification> all(Long id) {
+    public List<Notification> all() {
         return notificationRepo.findAll();
     }
 

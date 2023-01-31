@@ -1,12 +1,13 @@
-package com.example.admin_bulbal.service.house.impl;
+package com.almaz.bulbal.service.house.impl;
 
-import com.example.admin_bulbal.dto.project.GetNameDto;
-import com.example.admin_bulbal.model.house.TypeOfHouse;
-import com.example.admin_bulbal.repository.house.TypeOfHouseRepo;
-import com.example.admin_bulbal.service.house.TypeOfHouseService;
+import com.almaz.bulbal.dto.project.GetNameDto;
+import com.almaz.bulbal.model.house.TypeOfHouse;
+import com.almaz.bulbal.repository.house.TypeOfHouseRepo;
+import com.almaz.bulbal.service.house.TypeOfHouseService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 @Service
 public class TypeOfHouseServiceImpl implements TypeOfHouseService {

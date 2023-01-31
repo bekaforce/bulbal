@@ -1,9 +1,9 @@
-package com.example.admin_bulbal.controller.location;
+package com.almaz.bulbal.controller.location;
 
-import com.example.admin_bulbal.controller.Url;
-import com.example.admin_bulbal.dto.project.GetNameDto;
-import com.example.admin_bulbal.model.location.Region;
-import com.example.admin_bulbal.service.location.impl.RegionServiceImpl;
+import com.almaz.bulbal.controller.Url;
+import com.almaz.bulbal.dto.project.GetNameDto;
+import com.almaz.bulbal.model.location.Region;
+import com.almaz.bulbal.service.location.impl.RegionServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

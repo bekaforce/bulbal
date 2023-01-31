@@ -33,7 +33,7 @@ public class LocalityServiceImpl implements LocalityService {
     public Locality update(GetLocalityDto getLocalityDto, Long id) {
         Locality locality = findById(id);
         if (locality != null){
-            Region region = regionService.findById(id);
+            Region region = regionService.findById(getLocalityDto.getRegionId());
             return setLocality(locality, region, getLocalityDto);
         }
         return null;

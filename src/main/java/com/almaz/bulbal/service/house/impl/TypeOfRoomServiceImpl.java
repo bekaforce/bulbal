@@ -1,9 +1,9 @@
-package com.example.admin_bulbal.service.house.impl;
+package com.almaz.bulbal.service.house.impl;
 
-import com.example.admin_bulbal.dto.project.GetNameDto;
-import com.example.admin_bulbal.model.house.TypeOfRoom;
-import com.example.admin_bulbal.repository.house.TypeOfRoomRepo;
-import com.example.admin_bulbal.service.house.TypeOfRoomService;
+import com.almaz.bulbal.dto.project.GetNameDto;
+import com.almaz.bulbal.model.house.TypeOfRoom;
+import com.almaz.bulbal.repository.house.TypeOfRoomRepo;
+import com.almaz.bulbal.service.house.TypeOfRoomService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.admin_bulbal.controller;
+package com.almaz.bulbal.controller;
 
 
 public class Url {

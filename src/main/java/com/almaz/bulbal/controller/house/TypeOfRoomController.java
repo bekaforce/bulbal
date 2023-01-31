@@ -1,9 +1,9 @@
-package com.example.admin_bulbal.controller.house;
+package com.almaz.bulbal.controller.house;
 
-import com.example.admin_bulbal.controller.Url;
-import com.example.admin_bulbal.dto.project.GetNameDto;
-import com.example.admin_bulbal.model.house.TypeOfRoom;
-import com.example.admin_bulbal.service.house.impl.TypeOfRoomServiceImpl;
+import com.almaz.bulbal.controller.Url;
+import com.almaz.bulbal.dto.project.GetNameDto;
+import com.almaz.bulbal.model.house.TypeOfRoom;
+import com.almaz.bulbal.service.house.impl.TypeOfRoomServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

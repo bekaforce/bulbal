@@ -10,6 +10,6 @@ public interface NotificationService {
     Notification update(GetNotificationDto getNotificationDto, Long id);
     Notification findById(Long id);
     boolean deleteById(Long id);
-    List<Notification> all(Long id);
+    List<Notification> all();
     Notification setNotification(Notification notification, GetNotificationDto getNotificationDto);
 }
