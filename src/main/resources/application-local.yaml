@@ -7,12 +7,26 @@ spring:
     url: jdbc:postgresql://172.28.141.23:5432/sweatter
     username: beenavigator
     password: beenavigator123
-  jpa:
-    generate-ddl: true
-
-
+#  jpa:
+#    generate-ddl: true
   main:
     allow-circular-references: true
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    port: 587
+    username: atemirkanov89@gmail.com
+    password: pqdleunusseixhtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+      protocol: smtp
+      test-connection: false
+  thymeleaf:
+    check-template-location: true
 
 security:
   jwt:
@@ -22,8 +36,3 @@ security:
 
 
 
-#    docker
-#    username: beenavigator
-#    password: beenav12345
-#  jpa:
-#    generate-ddl: true
