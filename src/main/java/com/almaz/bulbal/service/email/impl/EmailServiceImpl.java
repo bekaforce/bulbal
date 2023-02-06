@@ -44,8 +44,8 @@ public class EmailServiceImpl implements EmailService {
             helper.setFrom("bulbal@gmail.com");
             helper.setTo(details.getEmail());
             helper.setSubject("Registration");
-            String html = springTemplateEngine.process("welcome-email", context);
             context.setVariables(model);
+            String html = springTemplateEngine.process("welcome-email", context);
             helper.setText(html, true);
 
             javaMailSender.send(message);
