@@ -9,6 +9,18 @@ spring:
     password: beenavigator123
 #  jpa:
 #    generate-ddl: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 386058975571-iq9eh4ftnae9fij25fqtnc4kkkif3j3c.apps.googleusercontent.com
+            client-secret: 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
+            scope: openid,profile,email
+#      resourceserver:
+#        jwt:
+#          issuer-uri: https://accounts.google.com
+#          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
   main:
     allow-circular-references: true
   mail:
