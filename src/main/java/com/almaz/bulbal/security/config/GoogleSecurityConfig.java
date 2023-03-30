@@ -16,7 +16,7 @@ public class GoogleSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .anyRequest()
-                .authenticated()
+                .permitAll()
                 .and()
                 .oauth2Login();
 //        http.authorizeRequests()
