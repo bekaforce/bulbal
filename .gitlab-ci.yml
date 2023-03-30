@@ -1,0 +1,71 @@
+stages:
+  - build
+  - test
+  - release
+  - publish
+
+image: maven:latest
+
+build application:
+  stage: build
+  before_script:
+    - whoami
+  script:
+    - echo 'mvn clean install'
+    - mvn clean install
+    - echo 'success'
+  only:
+    - bulbal
+  tags:
+    - Shell
+
+test1:
+  stage: test
+  script:
+    - echo 'this is test_1'
+  tags:
+    - Shell
+
+test2:
+  stage: test
+  script:
+    - echo 'this is test_2'
+
+release:
+  stage: release
+  script: mvn clean package
+  artifacts:
+    paths:
+      - /home/gitlab-runner/builds/kE7G8GRy/0/beenavigator/azadash/target/rassrochka-0.0.1-SNAPSHOT.jar
+  only:
+    - bulbal
+  tags:
+    - Shell
+
+publish to dev:
+  stage: publish
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - echo $CI_PIPELINE_ID
+    - docker build --rm -t $CI_REGISTRY_IMAGE:$(echo $CI_PIPELINE_ID) .
+    - docker push $CI_REGISTRY_IMAGE:$(echo $CI_PIPELINE_ID)
+  #    - docker image prune -a -f
+  tags:
+    - Shell
+
+publish to prod:
+  stage: publish
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$(echo $CI_PIPELINE_ID)
+    - docker rm -f bulbal
+    - docker run -e TZ=Asia/Bishkek -it -d --name bulbal -p 8888:8080 $CI_REGISTRY_IMAGE:$(echo $CI_PIPELINE_ID)
+    - echo 'publish to dev'
+    - docker image prune -a -f
+  only:
+    - bulbal
+  when: manual
+  tags:
+    - sks
