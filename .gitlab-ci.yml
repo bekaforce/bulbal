@@ -36,7 +36,7 @@ release:
   script: mvn clean package
   artifacts:
     paths:
-      - /home/gitlab-runner/builds/kE7G8GRy/0/beenavigator/azadash/target/rassrochka-0.0.1-SNAPSHOT.jar
+      - /home/gitlab-runner/builds/kE7G8GRy/0/beenavigator/azadash/target/admin_bulbal-0.0.1-SNAPSHOT.jar
   only:
     - bulbal
   tags:

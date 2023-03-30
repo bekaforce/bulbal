@@ -1,4 +1,4 @@
 FROM openjdk:11
-VOLUME /rassrochka
-COPY target/rassrochka-*.jar /app/app.jar
+VOLUME /admin_bulbal
+COPY target/admin_bulbal-*.jar /app/app.jar
 CMD ["java", "-jar", "/app/app.jar"]
