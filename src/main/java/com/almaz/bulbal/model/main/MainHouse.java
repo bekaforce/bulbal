@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -51,6 +52,8 @@ public class MainHouse {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "mainHouse_id", referencedColumnName = "id")
     private List<Room> rooms;
+
+    private LocalDateTime createDate;
 
     public MainHouse() {
 

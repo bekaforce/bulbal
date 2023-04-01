@@ -4,6 +4,7 @@ import com.almaz.bulbal.model.main.Convenience;
 import com.almaz.bulbal.model.main.Room;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -18,5 +19,5 @@ public class MainHouseDto {
     private Integer priceForOnePlace;
     private List<Convenience> conveniences;
     private List<Room> rooms;
-//    private String conveniences;
+    private LocalDateTime createDate;
 }

@@ -7,6 +7,7 @@ import com.almaz.bulbal.service.main.MainHouseService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +51,7 @@ public class MainHouseServiceImpl implements MainHouseService {
         mainHouse.setRegion(mainHouseDto.getRegion());
         mainHouse.setPriceForOnePlace(mainHouseDto.getPriceForOnePlace());
         mainHouse.setConveniences(mainHouseDto.getConveniences());
+        mainHouse.setCreateDate(LocalDateTime.now());
         mainHouse.setRooms(mainHouseDto.getRooms());
 
     }
