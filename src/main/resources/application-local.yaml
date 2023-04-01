@@ -47,7 +47,10 @@ security:
       expire-length: 14400000
 
 server-config:
-  upload-path: '${user.dir}/uploads'
+  upload-path: '/var/lib/docker/volumes/bulbal/_data'
 
+
+#/var/lib/docker/volumes/bulbal/_data
+#'${user.dir}/uploads'
 
 
