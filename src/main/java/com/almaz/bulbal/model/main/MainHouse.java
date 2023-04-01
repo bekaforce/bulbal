@@ -54,6 +54,10 @@ public class MainHouse {
     @JoinColumn(name = "mainHouse_id", referencedColumnName = "id")
     private List<Convenience> conveniences;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mainHouse_id", referencedColumnName = "id")
+    private List<Room> rooms;
+
     public MainHouse() {
 
     }

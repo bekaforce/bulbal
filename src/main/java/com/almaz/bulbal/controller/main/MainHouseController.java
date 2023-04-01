@@ -5,6 +5,8 @@ import com.almaz.bulbal.model.main.MainHouse;
 import com.almaz.bulbal.service.main.MainHouseService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.almaz.bulbal.endpoints.Endpoints.MAIN_HOUSE;
 
 @RestController
@@ -20,5 +22,10 @@ public class MainHouseController {
     @PostMapping(value = "/saveMainHouse")
     public MainHouse saveMainHouse (@RequestBody MainHouseDto mainHouseDto){
         return mainHouseService.saveHouse(mainHouseDto);
+    }
+
+    @GetMapping(value = "/all")
+    public List<MainHouse> all (){
+        return mainHouseService.all();
     }
 }
