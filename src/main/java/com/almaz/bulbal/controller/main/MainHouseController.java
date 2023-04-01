@@ -6,6 +6,7 @@ import com.almaz.bulbal.service.main.MainHouseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.almaz.bulbal.endpoints.Endpoints.MAIN_HOUSE;
 
@@ -28,4 +29,11 @@ public class MainHouseController {
     public List<MainHouse> all (){
         return mainHouseService.all();
     }
+
+    @PutMapping(value = "/editMainHouse")
+    public Optional<MainHouse> editHouse (@RequestBody MainHouseDto mainHouseDto){
+        return mainHouseService.editHouse(mainHouseDto);
+    }
+
+
 }
