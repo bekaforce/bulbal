@@ -35,12 +35,6 @@ public class MainHouse {
     @Column(name = "locality_name", nullable = false)
     private String locality;
 
-    @Column(name = "type_of_room", nullable = false)
-    private String typeOfRoom;
-
-    @Column(name = "type_of_bed", nullable = false)
-    private String typeOfBed;
-
     @Column(name = "title_of_house", nullable = false)
     private String titleOfHouse;
 
@@ -57,6 +51,9 @@ public class MainHouse {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "mainHouse_id", referencedColumnName = "id")
     private List<Room> rooms;
+
+    @OneToMany(mappedBy = "mainHouse", cascade = CascadeType.REMOVE)
+    private List<Image> images;
 
     public MainHouse() {
 

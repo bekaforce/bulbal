@@ -14,4 +14,5 @@ public class Url {
     public final static String REGION = "/region";
     public final static String NOTIFICATION = "/notification";
     public final static String ADVANTAGE = "/advantage";
+    public final static String IMAGE = "/image";
 }

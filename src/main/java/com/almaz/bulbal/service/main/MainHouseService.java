@@ -9,4 +9,5 @@ public interface MainHouseService {
 
     MainHouse saveHouse(MainHouseDto mainHouseDto);
     List<MainHouse> all();
+    MainHouse mainHouseById(Long id);
 }

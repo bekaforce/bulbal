@@ -28,8 +28,6 @@ public class MainHouseServiceImpl implements MainHouseService {
         mainHouse1.setLocality(mainHouseDto.getLocality());
         mainHouse1.setRegion(mainHouseDto.getRegion());
         mainHouse1.setPriceForOnePlace(mainHouseDto.getPriceForOnePlace());
-        mainHouse1.setTypeOfRoom(mainHouseDto.getTypeOfRoom());
-        mainHouse1.setTypeOfBed(mainHouseDto.getTypeOfBed());
         mainHouse1.setConveniences(mainHouseDto.getConveniences());
         mainHouse1.setRooms(mainHouseDto.getRooms());
         return mainHouseRepo.save(mainHouse1);
@@ -38,5 +36,10 @@ public class MainHouseServiceImpl implements MainHouseService {
     @Override
     public List<MainHouse> all() {
         return mainHouseRepo.findAll();
+    }
+
+    @Override
+    public MainHouse mainHouseById(Long id) {
+        return mainHouseRepo.findMainHouseById(id);
     }
 }
