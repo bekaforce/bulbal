@@ -1,5 +1,6 @@
 package com.almaz.bulbal.model.main;
 
+import com.almaz.bulbal.security.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,8 +25,8 @@ public class MainHouse {
     @Column(name = "type_of_house", nullable = false)
     private String typeOfHouse;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonProperty("owner_id")
+    @Column(name = "owner_id")
     private Long ownerId;
 
     @Column(name = "region", nullable = false)
@@ -49,7 +50,6 @@ public class MainHouse {
     @Column(name = "price_for_one_place", nullable = false)
     private Integer priceForOnePlace;
 
-    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "mainHouse_id", referencedColumnName = "id")
     private List<Convenience> conveniences;

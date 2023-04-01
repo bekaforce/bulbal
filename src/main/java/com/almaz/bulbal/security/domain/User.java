@@ -1,6 +1,7 @@
 package com.almaz.bulbal.security.domain;
 
 import com.almaz.bulbal.enums.Status;
+import com.almaz.bulbal.model.main.MainHouse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -30,6 +31,10 @@ public class User {
     private Status status;
     private String phoneNumber;
     private LocalDateTime date;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private List<MainHouse> mainHouses;
 
 
 }
