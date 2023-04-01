@@ -1,24 +1,32 @@
 package com.almaz.bulbal.model.main;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@AllArgsConstructor
 @Table(name = "convenience")
 public class Convenience {
     @Id
+    @JsonIgnore
+    @JsonProperty("id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @SequenceGenerator(name = "convenience_seq", initialValue = 1, allocationSize = 1, sequenceName = "convenience_id_seq")
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "convenience_name", nullable = false)
     private String convenienceName;
 
-    @ManyToOne
-    @JoinColumn(name = "mainHouse_id")
     @JsonIgnore
-    private MainHouse mainHouse;
+    @Column(name = "mainHouse_id")
+    private Long mainHouseId;
+
+    public Convenience() {
+
+    }
 }

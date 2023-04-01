@@ -1,6 +1,9 @@
 package com.almaz.bulbal.dto.main;
 
+import com.almaz.bulbal.model.main.Convenience;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class MainHouseDto {
@@ -14,6 +17,6 @@ public class MainHouseDto {
     private String titleOfHouse;
     private String fullDescriptionOfHouse;
     private Integer priceForOnePlace;
-//    private List<Convenience> conveniences;
-    private String conveniences;
+    private List<Convenience> conveniences;
+//    private String conveniences;
 }

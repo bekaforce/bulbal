@@ -1,5 +1,9 @@
 package com.almaz.bulbal.model.main;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,11 +11,14 @@ import java.util.List;
 
 @Data
 @Entity
+@AllArgsConstructor
 @Table(name = "main_house")
 public class MainHouse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @JsonIgnore
+    @JsonProperty("id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "type_of_house", nullable = false)
@@ -41,10 +48,14 @@ public class MainHouse {
 
     @Column(name = "price_for_one_place", nullable = false)
     private Integer priceForOnePlace;
-//
-//    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
-//    @JoinColumn(name = "mainHouse_id")
-//    private List<Convenience> conveniences;
 
-    private String conveniences;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mainHouse_id", referencedColumnName = "id")
+    private List<Convenience> conveniences;
+
+    public MainHouse() {
+
+    }
+
 }
