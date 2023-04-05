@@ -31,6 +31,9 @@ public class Room {
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private List<Bed> beds;
 
+    @Column(name = "price")
+    private Long price;
+
     public Room() {
 
     }

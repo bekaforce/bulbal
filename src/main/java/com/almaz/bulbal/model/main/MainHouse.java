@@ -42,9 +42,6 @@ public class MainHouse {
     @Column(name = "full_description_of_house", nullable = false)
     private String fullDescriptionOfHouse;
 
-    @Column(name = "price_for_one_place", nullable = false)
-    private Integer priceForOnePlace;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "mainHouse_id", referencedColumnName = "id")
     private List<Convenience> conveniences;
@@ -56,6 +53,9 @@ public class MainHouse {
     @OneToMany(mappedBy = "mainHouse", cascade = CascadeType.REMOVE)
     private List<Image> images;
     private LocalDateTime createDate;
+
+    @Column(name = "price")
+    private Long price;
 
     public MainHouse() {
 

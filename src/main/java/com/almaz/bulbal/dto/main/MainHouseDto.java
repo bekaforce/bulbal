@@ -16,8 +16,8 @@ public class MainHouseDto {
     private String typeOfHouse;
     private String titleOfHouse;
     private String fullDescriptionOfHouse;
-    private Integer priceForOnePlace;
     private List<Convenience> conveniences;
     private List<Room> rooms;
     private LocalDateTime createDate;
+    private Long price;
 }

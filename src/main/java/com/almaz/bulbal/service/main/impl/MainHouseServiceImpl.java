@@ -49,11 +49,10 @@ public class MainHouseServiceImpl implements MainHouseService {
         mainHouse.setOwnerId(mainHouseDto.getOwnerId());
         mainHouse.setLocality(mainHouseDto.getLocality());
         mainHouse.setRegion(mainHouseDto.getRegion());
-        mainHouse.setPriceForOnePlace(mainHouseDto.getPriceForOnePlace());
+        mainHouse.setPrice(mainHouseDto.getPrice());
         mainHouse.setConveniences(mainHouseDto.getConveniences());
         mainHouse.setCreateDate(LocalDateTime.now());
         mainHouse.setRooms(mainHouseDto.getRooms());
-
     }
 
     @Override
