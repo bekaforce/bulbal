@@ -6,8 +6,12 @@ import com.almaz.bulbal.model.house.Advantage;
 import com.almaz.bulbal.service.house.impl.AdvantageServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -48,5 +52,18 @@ public class AdvantageController {
     public ResponseEntity<?> all(){
         List<Advantage> response = advantageService.all();
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/upload")
+    public void uploadIcon(@RequestParam("multipartFile") MultipartFile multipartFile,
+                                        @RequestParam("name")String name,
+                                        @Validated HttpServletResponse response) throws IOException {
+        if (multipartFile != null) {
+            response.setHeader("Content-Disposition", "Success. Upload file");
+        } else {
+            response.setStatus(HttpStatus.NO_CONTENT.value());
+        }
+        advantageService.saveIcon(multipartFile, name);
+
     }
 }
