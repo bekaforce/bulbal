@@ -7,6 +7,15 @@ public class Endpoints {
     public static final String SEND_MAIL = API + V1 + "/send-mail";
     public static final String MAIN_HOUSE = API + V1 + "/main-house";
 
+    public final static String ADMIN = API + V1 + "/admin";
+    public final static String ADVANTAGE = ADMIN + "/advantage";
+    public final static String TYPEOFHOUSE = ADMIN + "/typeOfHouse";
+    public final static String TYPEOFROOM = ADMIN + "/typeOfRoom";
+    public final static String TYPEOFBED = ADMIN + "/typeOfBed";
+    public final static String LOCALITY = API + V1 + "/locality";
+    public final static String REGION = API + V1 + "/region";
+    public final static String NOTIFICATION = ADMIN + "/notification";
+    public final static String IMAGES = API + V1 + "/images";
 
     public static final String SWAGGER = "swagger-ui.html";
     public static final String SWAGGER_URL = "/" + SWAGGER + "/**";

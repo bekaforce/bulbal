@@ -1,7 +1,6 @@
 package com.almaz.bulbal.controller.house;
 
 
-import com.almaz.bulbal.controller.Url;
 import com.almaz.bulbal.dto.project.GetNameDto;
 import com.almaz.bulbal.model.house.TypeOfHouse;
 import com.almaz.bulbal.service.house.impl.TypeOfHouseServiceImpl;
@@ -11,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.almaz.bulbal.endpoints.Endpoints.TYPEOFHOUSE;
+
 @RestController
 @CrossOrigin
-@RequestMapping(value = Url.ADMIN_API + Url.TYPEOFHOUSE)
+@RequestMapping(value = TYPEOFHOUSE)
 public class TypeOfHouseController {
     private final TypeOfHouseServiceImpl typeOfHouseService;
 
@@ -21,7 +22,7 @@ public class TypeOfHouseController {
         this.typeOfHouseService = typeOfHouseService;
     }
 
-    @DeleteMapping(Url.DELETE + "/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){
         boolean response = typeOfHouseService.deleteById(id);
         return response
@@ -29,7 +30,7 @@ public class TypeOfHouseController {
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(Url.SAVE)
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody GetNameDto getNameDto){
         TypeOfHouse response = typeOfHouseService.save(getNameDto);
         return response != null
@@ -37,7 +38,7 @@ public class TypeOfHouseController {
                 : new ResponseEntity<>("Try Again", HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(Url.UPDATE + "/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@RequestBody GetNameDto getNameDto, @PathVariable(value = "id") Long id){
         TypeOfHouse response = typeOfHouseService.update(getNameDto, id);
         return response != null
@@ -45,7 +46,7 @@ public class TypeOfHouseController {
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(Url.ALL)
+    @GetMapping("/all")
     public ResponseEntity<?> all(){
         List<TypeOfHouse> response = typeOfHouseService.all();
         return new ResponseEntity<>(response, HttpStatus.OK);

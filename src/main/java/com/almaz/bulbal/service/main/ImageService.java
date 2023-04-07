@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 
 public interface ImageService {
@@ -13,5 +14,7 @@ public interface ImageService {
     File findFileByFileName(String fileName);
 
     Image imageById(Long id);
+
+    List<Image> findAllByHouseId(Long id);
 
 }

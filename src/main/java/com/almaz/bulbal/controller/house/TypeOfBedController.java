@@ -1,7 +1,6 @@
 package com.almaz.bulbal.controller.house;
 
 
-import com.almaz.bulbal.controller.Url;
 import com.almaz.bulbal.dto.project.GetMapDto;
 import com.almaz.bulbal.model.house.TypeOfBed;
 import com.almaz.bulbal.service.house.impl.TypeOfBedServiceImpl;
@@ -11,10 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.almaz.bulbal.endpoints.Endpoints.TYPEOFBED;
+
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = Url.ADMIN_API + Url.TYPEOFBED)
+@RequestMapping(value = TYPEOFBED)
 public class TypeOfBedController {
     private final TypeOfBedServiceImpl typeOfBedService;
 
@@ -22,7 +23,7 @@ public class TypeOfBedController {
         this.typeOfBedService = typeOfBedService;
     }
 
-    @DeleteMapping(Url.DELETE + "/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){
         boolean response = typeOfBedService.deleteById(id);
         return response
@@ -30,7 +31,7 @@ public class TypeOfBedController {
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(Url.SAVE)
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody GetMapDto getMapDto){
         TypeOfBed response = typeOfBedService.save(getMapDto);
         return response != null
@@ -38,7 +39,7 @@ public class TypeOfBedController {
                 : new ResponseEntity<>("Try Again", HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(Url.UPDATE + "/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@RequestBody GetMapDto getMapDto, @PathVariable(value = "id") Long id){
         TypeOfBed response = typeOfBedService.update(getMapDto, id);
         return response != null
@@ -46,7 +47,7 @@ public class TypeOfBedController {
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(Url.ALL)
+    @GetMapping("/all")
     public ResponseEntity<?> all(){
         List<TypeOfBed> response = typeOfBedService.all();
         return new ResponseEntity<>(response, HttpStatus.OK);

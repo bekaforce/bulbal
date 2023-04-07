@@ -1,6 +1,5 @@
 package com.almaz.bulbal.controller.notification;
 
-import com.almaz.bulbal.controller.Url;
 import com.almaz.bulbal.dto.notification.GetNotificationDto;
 import com.almaz.bulbal.model.notification.Notification;
 import com.almaz.bulbal.service.notification.impl.NotificationServiceImpl;
@@ -10,9 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.almaz.bulbal.endpoints.Endpoints.NOTIFICATION;
+
 @RestController
 @CrossOrigin
-@RequestMapping(value = Url.ADMIN_API + Url.NOTIFICATION)
+@RequestMapping(value = NOTIFICATION)
 public class NotificationController {
     private final NotificationServiceImpl notificationService;
 
@@ -20,7 +21,7 @@ public class NotificationController {
         this.notificationService = notificationService;
     }
 
-    @DeleteMapping(Url.DELETE + "/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){
         boolean response = notificationService.deleteById(id);
         return response
@@ -28,7 +29,7 @@ public class NotificationController {
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(Url.SAVE)
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody GetNotificationDto getNotificationDto){
         Notification response = notificationService.save(getNotificationDto);
         return response != null
@@ -36,7 +37,7 @@ public class NotificationController {
                 : new ResponseEntity<>("Try Again", HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(Url.UPDATE + "/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@RequestBody GetNotificationDto getNotificationDto, @PathVariable(value = "id") Long id){
         Notification response = notificationService.update(getNotificationDto, id);
         return response != null
@@ -44,7 +45,7 @@ public class NotificationController {
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(Url.ALL)
+    @GetMapping("/all")
     public ResponseEntity<?> all(){
         List<Notification> response = notificationService.all();
         return new ResponseEntity<>(response, HttpStatus.OK);

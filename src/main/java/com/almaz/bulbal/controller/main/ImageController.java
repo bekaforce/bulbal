@@ -1,5 +1,6 @@
 package com.almaz.bulbal.controller.main;
 
+import com.almaz.bulbal.model.main.Image;
 import com.almaz.bulbal.service.main.impl.ImageServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,11 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
-import static com.almaz.bulbal.controller.Url.IMAGE;
+import static com.almaz.bulbal.endpoints.Endpoints.IMAGES;
+
 
 @RestController
-@RequestMapping(value = IMAGE)
+@RequestMapping(value = IMAGES)
 @CrossOrigin
 public class ImageController {
     private final ImageServiceImpl imageService;
@@ -34,6 +37,12 @@ public class ImageController {
         return response
                 ? new ResponseEntity<>("File was deleted by id: " + id, HttpStatus.OK)
                 : new ResponseEntity<>("Not found", HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/findAllByHouseId")
+    public List<Image> findAllByMainHouseId(@RequestBody Long id) {
+
+        return imageService.findAllByHouseId(id);
     }
 
 

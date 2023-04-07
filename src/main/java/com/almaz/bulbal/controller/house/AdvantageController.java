@@ -1,6 +1,5 @@
 package com.almaz.bulbal.controller.house;
 
-import com.almaz.bulbal.controller.Url;
 import com.almaz.bulbal.dto.project.GetNameDto;
 import com.almaz.bulbal.model.house.Advantage;
 import com.almaz.bulbal.service.house.impl.AdvantageServiceImpl;
@@ -14,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static com.almaz.bulbal.endpoints.Endpoints.ADVANTAGE;
+
 @RestController
 @CrossOrigin
-@RequestMapping(value = Url.ADMIN_API + Url.ADVANTAGE)
+@RequestMapping(value = ADVANTAGE)
 public class AdvantageController {
     private final AdvantageServiceImpl advantageService;
 
@@ -24,7 +25,7 @@ public class AdvantageController {
         this.advantageService = advantageService;
     }
 
-    @DeleteMapping(Url.DELETE + "/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){
         boolean response = advantageService.delete(id);
         return response
@@ -32,7 +33,7 @@ public class AdvantageController {
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(Url.SAVE)
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody GetNameDto getNameDto){
         Advantage response = advantageService.save(getNameDto);
         return response != null
@@ -40,7 +41,7 @@ public class AdvantageController {
                 : new ResponseEntity<>("Try Again", HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(Url.UPDATE + "/{id}")
+    @PutMapping( "/update/{id}")
     public ResponseEntity<?> update(@RequestBody GetNameDto getNameDto, @PathVariable(value = "id") Long id){
         Advantage response = advantageService.update(id, getNameDto);
         return response != null
@@ -48,7 +49,7 @@ public class AdvantageController {
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(Url.ALL)
+    @GetMapping("/all")
     public ResponseEntity<?> all(){
         List<Advantage> response = advantageService.all();
         return new ResponseEntity<>(response, HttpStatus.OK);

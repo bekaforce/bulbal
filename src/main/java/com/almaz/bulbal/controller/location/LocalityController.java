@@ -1,6 +1,5 @@
 package com.almaz.bulbal.controller.location;
 
-import com.almaz.bulbal.controller.Url;
 import com.almaz.bulbal.dto.location.GetLocalityDto;
 import com.almaz.bulbal.model.location.Locality;
 import com.almaz.bulbal.service.location.impl.LocalityServiceImpl;
@@ -10,9 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.almaz.bulbal.endpoints.Endpoints.LOCALITY;
+
 @RestController
 @CrossOrigin
-@RequestMapping(value = Url.ADMIN_API + Url.LOCALITY)
+@RequestMapping(value = LOCALITY)
 public class LocalityController {
     private final LocalityServiceImpl localityService;
 
@@ -20,7 +21,7 @@ public class LocalityController {
         this.localityService = localityService;
     }
 
-    @DeleteMapping(Url.DELETE + "/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){
         boolean response = localityService.deleteById(id);
         return response
@@ -28,7 +29,7 @@ public class LocalityController {
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(Url.SAVE)
+    @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody GetLocalityDto getLocalityDto){
         Locality response = localityService.save(getLocalityDto);
         return response != null
@@ -36,7 +37,7 @@ public class LocalityController {
                 : new ResponseEntity<>("Try Again", HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(Url.UPDATE + "/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@RequestBody GetLocalityDto getLocalityDto, @PathVariable(value = "id") Long id){
         Locality response = localityService.update(getLocalityDto, id);
         return response != null
@@ -44,7 +45,7 @@ public class LocalityController {
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(Url.ALL + "/{region_id}")
+    @GetMapping("/all/{region_id}")
     public ResponseEntity<?> all(@PathVariable(value = "region_id") Long region_id){
         List<Locality> response = localityService.allByRegionId(region_id);
         return new ResponseEntity<>(response, HttpStatus.OK);
