@@ -57,14 +57,14 @@ public class AdvantageController {
 
     @PostMapping("/upload")
     public void uploadIcon(@RequestParam("multipartFile") MultipartFile multipartFile,
-                                        @RequestParam("name")String name,
+                                        @RequestParam("convenienceName")String convenienceName,
                                         @Validated HttpServletResponse response) throws IOException {
         if (multipartFile != null) {
             response.setHeader("Content-Disposition", "Success. Upload file");
         } else {
             response.setStatus(HttpStatus.NO_CONTENT.value());
         }
-        advantageService.saveIcon(multipartFile, name);
+        advantageService.saveIcon(multipartFile, convenienceName);
 
     }
 }

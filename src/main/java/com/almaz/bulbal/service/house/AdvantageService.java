@@ -17,6 +17,6 @@ public interface AdvantageService {
     List<Advantage> all();
 
     Advantage advantageById(Long id);
-    void saveIcon(MultipartFile multipartFile, String name) throws IOException;
+    void saveIcon(MultipartFile multipartFile, String convenienceName) throws IOException;
 
 }

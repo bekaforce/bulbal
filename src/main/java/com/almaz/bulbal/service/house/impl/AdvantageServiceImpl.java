@@ -34,7 +34,7 @@ public class AdvantageServiceImpl implements AdvantageService {
     public Advantage update(Long id, GetNameDto getNameDto) {
         Advantage advantage = advantageById(id);
         if (advantage != null) {
-            advantage.setName(getNameDto.getName());
+            advantage.setConvenienceName(getNameDto.getName());
             return advantageRepo.save(advantage);
         }
         return null;
@@ -76,7 +76,7 @@ public class AdvantageServiceImpl implements AdvantageService {
     }
 
     @Override
-    public void saveIcon(MultipartFile multipartFile, String name) throws IOException {
+    public void saveIcon(MultipartFile multipartFile, String convenienceName) throws IOException {
         if (multipartFile != null) {
             File upload = new File(UPLOADED_FOLDER+"/icon");
 
@@ -91,7 +91,7 @@ public class AdvantageServiceImpl implements AdvantageService {
 
             multipartFile.transferTo(new File(UPLOADED_FOLDER+"/icon" + "/" + resultFileName));
             Advantage advantage = new Advantage();
-            advantage.setName(name);
+            advantage.setConvenienceName(convenienceName);
             advantage.setIcon(resultFileName);
             advantageRepo.save(advantage);
         }

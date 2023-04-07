@@ -12,12 +12,12 @@ public class Advantage {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "advantage_seq")
     @SequenceGenerator(name = "advantage_seq", initialValue = 1, allocationSize = 1, sequenceName = "advantage_id_seq")
     private Long id;
-    private String name;
+    private String convenienceName;
     private String icon;
     private Boolean selected;
 
     public Advantage(String name) {
-        this.name = name;
+        this.convenienceName = name;
     }
 
     public Advantage() {
