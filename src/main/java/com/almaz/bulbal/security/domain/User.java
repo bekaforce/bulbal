@@ -30,6 +30,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Status status;
     private Integer otp;
+    private String personalPass;
     private String phoneNumber;
     private LocalDateTime date;
 

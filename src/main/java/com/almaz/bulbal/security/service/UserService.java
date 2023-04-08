@@ -1,8 +1,10 @@
 package com.almaz.bulbal.security.service;
 
+import com.almaz.bulbal.dto.email.EmailDetails;
 import com.almaz.bulbal.security.domain.User;
 import com.almaz.bulbal.security.dto.UserDto;
 
+import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,5 +17,7 @@ public interface UserService {
     Optional<User> editUserName(Long id, UserDto userDto);
 
     List<Object> getAllUserName();
+
+    String sendSimpleMail(EmailDetails details) throws MessagingException;
 }
 

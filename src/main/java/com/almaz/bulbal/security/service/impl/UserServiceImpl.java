@@ -1,5 +1,6 @@
 package com.almaz.bulbal.security.service.impl;
 
+import com.almaz.bulbal.dto.email.EmailDetails;
 import com.almaz.bulbal.enums.Status;
 import com.almaz.bulbal.security.domain.Role;
 import com.almaz.bulbal.security.domain.User;
@@ -7,14 +8,19 @@ import com.almaz.bulbal.security.domain.repo.UserRepo;
 import com.almaz.bulbal.security.dto.UserDto;
 import com.almaz.bulbal.security.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -23,13 +29,18 @@ public class UserServiceImpl implements UserService {
     private final RoleServiceImpl roleService;
     private final BCryptPasswordEncoder passwordEncoder;
 
+    private final JavaMailSender javaMailSender;
+    private final SpringTemplateEngine springTemplateEngine;
+
     public UserServiceImpl(UserRepo userRepo, RoleServiceImpl roleService,
-                           BCryptPasswordEncoder passwordEncoder) {
+                           BCryptPasswordEncoder passwordEncoder, JavaMailSender javaMailSender, SpringTemplateEngine springTemplateEngine) {
         this.userRepo = userRepo;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
+        this.javaMailSender = javaMailSender;
+        this.springTemplateEngine = springTemplateEngine;
     }
-
+    String pass = String.valueOf(generateDigits());
 
     @Override
     public User register(UserDto userDto) {
@@ -83,6 +94,42 @@ public class UserServiceImpl implements UserService {
 
         return userRepo.findUserName();
     }
+    @Override
+    public String sendSimpleMail(EmailDetails details) {
+        try {
 
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+            Context context = new Context();
+            Map<String, Object> model = new HashMap<>();
+
+//            model.put("userName", details.getUserName());
+            model.put("location", pass);
+            model.put("sign", "Java Developer");
+            helper.setFrom("bulbal@gmail.com");
+            helper.setTo(details.getEmail());
+            helper.setSubject("Registration");
+            context.setVariables(model);
+            String html = springTemplateEngine.process("welcome-email", context);
+            helper.setText(html, true);
+            register(UserDto.builder()
+                    .username(details.getEmail())
+                    .password(pass)
+                    .otp(pass)
+                    .personalPass(details.getPassword())
+                    .build());
+
+            javaMailSender.send(message);
+            return "Mail Sent Successfully...";
+        } catch (MessagingException e) {
+            return "Error while sending mail!!!";
+        }
+    }
+    public int generateDigits() {
+        int min = 1000;
+        int max = 9999;
+        return (int) (Math.random() * (max - min + 1) + min);
+
+    }
 }
 

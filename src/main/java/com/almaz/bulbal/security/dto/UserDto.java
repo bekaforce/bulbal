@@ -12,6 +12,7 @@ public class UserDto {
     private String phoneNumber;
     private String password;
     private String otp;
+    private String personalPass;
 
 }
 

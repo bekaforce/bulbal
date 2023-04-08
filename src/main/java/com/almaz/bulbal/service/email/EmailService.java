@@ -6,5 +6,4 @@ import javax.mail.MessagingException;
 
 public interface EmailService {
 
-    String sendSimpleMail(EmailDetails details) throws MessagingException;
 }
