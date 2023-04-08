@@ -5,8 +5,7 @@ public class Endpoints {
     private static final String V1 = "/v1";
     public static final String LOGIN = API + V1 + "/login";
     public static final String SEND_MAIL = API + V1 + "/send-mail";
-    public static final String MAIN_HOUSE = API + V1 + "/main-house";
-
+    public static final String ACCOMMODATION = API + V1 + "/accommodation";
     public final static String ADMIN = API + V1 + "/admin";
     public final static String ADVANTAGE = ADMIN + "/advantage";
     public final static String TYPEOFHOUSE = ADMIN + "/typeOfHouse";

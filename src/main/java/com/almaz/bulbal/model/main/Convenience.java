@@ -23,8 +23,8 @@ public class Convenience {
     private String convenienceName;
 
     @JsonIgnore
-    @Column(name = "mainHouse_id")
-    private Long mainHouseId;
+    @Column(name = "accommodation_id")
+    private Long accommodationId;
 
     public Convenience() {
 

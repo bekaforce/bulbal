@@ -26,8 +26,8 @@ public class Bed {
     private Long size;
 
     @JsonIgnore
-    @Column(name = "room_id")
-    private Long roomId;
+    @Column(name = "accommodation_id")
+    private Long accommodationId;
 
     @Column(name = "price")
     private Long price;
