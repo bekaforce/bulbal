@@ -44,17 +44,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(UserDto userDto) {
-        User user = userRepo.findByUsername(userDto.getUsername());
+        User user = userRepo.findByUsername(userDto.getEmail());
         if (user != null){
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         }
         else {
             user = new User();
-            user.setUsername(userDto.getUsername());
-            Role roleUser = roleService.findByName("ROLE_ADMIN");
+            user.setUsername(userDto.getEmail());
+            Role roleUser = roleService.findByName("ROLE_USER");
             List<Role> userRoles = new ArrayList<>();
             userRoles.add(roleUser);
             user.setRoles(userRoles);
+            user.setOtp(userDto.getOtp());
+            user.setPersonalPass(userDto.getPersonalPass());
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             user.setStatus(Status.ACTIVE);
         }
@@ -78,7 +80,7 @@ public class UserServiceImpl implements UserService {
         return userRepo.findById(id)
                 .map(us ->{
                     us.setPassword(passwordEncoder.encode(userDto.getPassword()));
-                    us.setUsername(userDto.getUsername());
+                    us.setUsername(userDto.getEmail());
                     us.setPhoneNumber(userDto.getPhoneNumber());
                     us.setDate(LocalDateTime.now());
                     us.setAdminLogin(SecurityContextHolder
@@ -113,12 +115,11 @@ public class UserServiceImpl implements UserService {
             String html = springTemplateEngine.process("welcome-email", context);
             helper.setText(html, true);
             register(UserDto.builder()
-                    .username(details.getEmail())
+                    .email(details.getEmail())
                     .password(pass)
                     .otp(pass)
                     .personalPass(details.getPassword())
                     .build());
-
             javaMailSender.send(message);
             return "Mail Sent Successfully...";
         } catch (MessagingException e) {
@@ -129,6 +130,23 @@ public class UserServiceImpl implements UserService {
         int min = 1000;
         int max = 9999;
         return (int) (Math.random() * (max - min + 1) + min);
+
+    }
+
+    public Boolean checkOtpPassword(UserDto userDto){
+        String email = userDto.getEmail();
+        if (userDto.getOtp().equals(userRepo.getOtpByEmail(email))){
+            userRepo.findById(userRepo.getIdByUserName(email))
+                    .map(user -> {
+                        user.setPassword(passwordEncoder.encode(userRepo.getPersonalPass(email)));
+                        user.setDate(LocalDateTime.now());
+                        return userRepo.save(user);
+                    });
+            return true;
+        }
+        else {
+            return false;
+        }
 
     }
 }

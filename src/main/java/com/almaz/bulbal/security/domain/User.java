@@ -29,7 +29,7 @@ public class User {
     private List<Role> roles;
     @Enumerated(EnumType.STRING)
     private Status status;
-    private Integer otp;
+    private String otp;
     private String personalPass;
     private String phoneNumber;
     private LocalDateTime date;
