@@ -55,6 +55,9 @@ public class Accommodation {
     @Column(name = "price")
     private Long price;
 
+    @Column(name = "pricePerBed")
+    private Long pricePerBed;
+
     public Accommodation() {
 
     }

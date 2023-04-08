@@ -43,7 +43,7 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     private void getAccommodation(AccommodationDto accommodationDto, Accommodation accommodation){
-        accommodation.setFullDescriptionOfAccommodation(accommodationDto.getFullDescriptionOfHouse());
+        accommodation.setFullDescriptionOfAccommodation(accommodationDto.getFullDescriptionOfAccommodation());
         accommodation.setTitleOfAccommodation(accommodationDto.getTypeOfAccommodation());
         accommodation.setTypeOfAccommodation(accommodationDto.getTypeOfAccommodation());
         accommodation.setOwnerId(accommodationDto.getOwnerId());

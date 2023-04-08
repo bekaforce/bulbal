@@ -8,7 +8,7 @@ public class Endpoints {
     public static final String ACCOMMODATION = API + V1 + "/accommodation";
     public final static String ADMIN = API + V1 + "/admin";
     public final static String ADVANTAGE = ADMIN + "/advantage";
-    public final static String TYPEOFHOUSE = ADMIN + "/typeOfHouse";
+    public final static String TYPEOFACCOMMODATION = ADMIN + "/typeOfAccommodation";
     public final static String TYPEOFROOM = ADMIN + "/typeOfRoom";
     public final static String TYPEOFBED = ADMIN + "/typeOfBed";
     public final static String LOCALITY = API + V1 + "/locality";

@@ -14,7 +14,7 @@ public class AccommodationDto {
     private String locality;
     private String typeOfAccommodation;
     private String titleOfAccommodation;
-    private String fullDescriptionOfHouse;
+    private String fullDescriptionOfAccommodation;
     private List<Convenience> conveniences;
     private List<Bed> beds;
     private Long price;

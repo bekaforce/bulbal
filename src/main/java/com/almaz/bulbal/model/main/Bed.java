@@ -29,9 +29,6 @@ public class Bed {
     @Column(name = "accommodation_id")
     private Long accommodationId;
 
-    @Column(name = "price")
-    private Long price;
-
     public Bed() {
 
     }
