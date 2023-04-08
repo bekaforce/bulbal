@@ -13,5 +13,5 @@ public class TypeOfBed {
     @SequenceGenerator(name = "typeOfBed_seq", initialValue = 1, allocationSize = 1, sequenceName = "typeOfBed_id_seq")
     private Long id;
     private String name;
-    private Long value;
+//    private Long value;
 }

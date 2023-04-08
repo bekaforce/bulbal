@@ -33,14 +33,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(UserDto userDto) {
-        User user = userRepo.findByUsername(userDto.getName());
+        User user = userRepo.findByUsername(userDto.getUsername());
         if (user != null){
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         }
         else {
             user = new User();
-            user.setUsername(userDto.getName());
-            Role roleUser = roleService.findByName("ROLE_USER");
+            user.setUsername(userDto.getUsername());
+            Role roleUser = roleService.findByName("ROLE_ADMIN");
             List<Role> userRoles = new ArrayList<>();
             userRoles.add(roleUser);
             user.setRoles(userRoles);
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
         return userRepo.findById(id)
                 .map(us ->{
                     us.setPassword(passwordEncoder.encode(userDto.getPassword()));
-                    us.setUsername(userDto.getName());
+                    us.setUsername(userDto.getUsername());
                     us.setPhoneNumber(userDto.getPhoneNumber());
                     us.setDate(LocalDateTime.now());
                     us.setAdminLogin(SecurityContextHolder

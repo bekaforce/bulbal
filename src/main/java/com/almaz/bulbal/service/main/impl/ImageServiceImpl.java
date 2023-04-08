@@ -31,7 +31,7 @@ public class ImageServiceImpl implements ImageService {
         if (multipartFile != null && !multipartFile.toString().equals("")){
             File uploadDir = new File(UPLOADED_FOLDER);
             String uuidFile = UUID.randomUUID().toString();
-            String fileName = uuidFile + multipartFile.getOriginalFilename();
+            String fileName = uuidFile +"_-_"+ multipartFile.getOriginalFilename();
             multipartFile.transferTo(new File(uploadDir + "/" + fileName));
             MainHouse mainHouse = mainHouseService.mainHouseById(mainHouse_id);
             Image image = new Image(fileName, mainHouse);

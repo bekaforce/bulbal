@@ -12,6 +12,5 @@ public class EmailDetails {
 
     private String email;
     private String password;
-    private String userName;
 
 }

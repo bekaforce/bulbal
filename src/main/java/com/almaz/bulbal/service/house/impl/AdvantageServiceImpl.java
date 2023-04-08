@@ -87,7 +87,7 @@ public class AdvantageServiceImpl implements AdvantageService {
         if (multipartFile != null) {
 
             String uuidFile = UUID.randomUUID().toString();
-            String resultFileName = uuidFile + multipartFile.getOriginalFilename();
+            String resultFileName = uuidFile +"_-_"+ multipartFile.getOriginalFilename();
 
             multipartFile.transferTo(new File(UPLOADED_FOLDER+"/icon" + "/" + resultFileName));
             Advantage advantage = new Advantage();
