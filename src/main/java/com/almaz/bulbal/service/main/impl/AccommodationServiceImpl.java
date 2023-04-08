@@ -81,7 +81,7 @@ public class AccommodationServiceImpl implements AccommodationService {
 
     private void editAccommodation(AccommodationDto accommodationDto, Accommodation accommodation){
         accommodation.setFullDescriptionOfAccommodation(accommodationDto.getFullDescriptionOfAccommodation());
-        accommodation.setTitleOfAccommodation(accommodationDto.getTypeOfAccommodation());
+        accommodation.setTitleOfAccommodation(accommodationDto.getTitleOfAccommodation());
         accommodation.setTypeOfAccommodation(accommodationDto.getTypeOfAccommodation());
         accommodation.setOwnerId(accommodationDto.getOwnerId());
         accommodation.setLocality(accommodationDto.getLocality());
