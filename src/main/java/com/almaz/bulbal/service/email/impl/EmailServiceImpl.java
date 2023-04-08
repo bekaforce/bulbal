@@ -23,12 +23,10 @@ import java.util.Map;
 public class EmailServiceImpl implements EmailService {
 
     private final JavaMailSender javaMailSender;
-    private final UserServiceImpl userService;
     private final SpringTemplateEngine springTemplateEngine;
 
-    public EmailServiceImpl(JavaMailSender javaMailSender, UserServiceImpl userService, SpringTemplateEngine springTemplateEngine) {
+    public EmailServiceImpl(JavaMailSender javaMailSender, SpringTemplateEngine springTemplateEngine) {
         this.javaMailSender = javaMailSender;
-        this.userService = userService;
         this.springTemplateEngine = springTemplateEngine;
     }
 
@@ -51,13 +49,13 @@ public class EmailServiceImpl implements EmailService {
             context.setVariables(model);
             String html = springTemplateEngine.process("welcome-email", context);
             helper.setText(html, true);
-            userService.register(UserDto.builder()
-
-//                            .phoneNumber(details.getUserName())
-                            .password("12345")
-                            .otp(pass)
-                            .username(details.getEmail())
-                    .build());
+//            userService.register(UserDto.builder()
+//
+////                            .phoneNumber(details.getUserName())
+//                            .password("12345")
+//                            .otp(pass)
+//                            .username(details.getEmail())
+//                    .build());
 
             javaMailSender.send(message);
             return "Mail Sent Successfully...";
