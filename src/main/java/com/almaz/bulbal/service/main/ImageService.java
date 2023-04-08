@@ -9,12 +9,12 @@ import java.util.List;
 
 
 public interface ImageService {
-    boolean upload(MultipartFile multipartFile, Long mainHouse_id) throws IOException;
+    boolean upload(MultipartFile multipartFile, Long accommodation_id) throws IOException;
     boolean delete(Long id);
     File findFileByFileName(String fileName);
 
     Image imageById(Long id);
 
-    List<Image> findAllByHouseId(Long id);
+    List<Image> findAllByAccommodationId(Long id);
 
 }

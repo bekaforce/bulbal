@@ -1,8 +1,6 @@
 package com.almaz.bulbal.model.main;
 
-import com.almaz.bulbal.security.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +12,8 @@ import java.util.List;
 @Data
 @Entity
 @AllArgsConstructor
-@Table(name = "main_house")
-public class MainHouse {
+@Table(name = "accommodation")
+public class Accommodation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
@@ -23,8 +21,8 @@ public class MainHouse {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "type_of_house", nullable = false)
-    private String typeOfHouse;
+    @Column(name = "type_of_accommodation", nullable = false)
+    private String typeOfAccommodation;
 
     @JsonProperty("owner_id")
     @Column(name = "owner_id")
@@ -36,28 +34,28 @@ public class MainHouse {
     @Column(name = "locality_name", nullable = false)
     private String locality;
 
-    @Column(name = "title_of_house", nullable = false)
-    private String titleOfHouse;
+    @Column(name = "title_of_accommodation", nullable = false)
+    private String titleOfAccommodation;
 
-    @Column(name = "full_description_of_house", nullable = false)
-    private String fullDescriptionOfHouse;
+    @Column(name = "full_description_of_accommodation", nullable = false)
+    private String fullDescriptionOfAccommodation;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mainHouse_id", referencedColumnName = "id")
+    @JoinColumn(name = "accommodation_id", referencedColumnName = "id")
     private List<Convenience> conveniences;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mainHouse_id", referencedColumnName = "id")
-    private List<Room> rooms;
+    @JoinColumn(name = "accommodation_id", referencedColumnName = "id")
+    private List<Bed> beds;
 
-    @OneToMany(mappedBy = "mainHouse", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.REMOVE)
     private List<Image> images;
     private LocalDateTime createDate;
 
     @Column(name = "price")
     private Long price;
 
-    public MainHouse() {
+    public Accommodation() {
 
     }
 

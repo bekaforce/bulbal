@@ -24,12 +24,12 @@ public class Image {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "mainHouse_id", referencedColumnName = "id")
-    private MainHouse mainHouse;
+    @JoinColumn(name = "accommodation_id", referencedColumnName = "id")
+    private Accommodation accommodation;
 
-    public Image(String fileName, MainHouse mainHouse) {
+    public Image(String fileName, Accommodation accommodation) {
         this.fileName = fileName;
-        this.mainHouse = mainHouse;
+        this.accommodation = accommodation;
     }
 
     public Image() {

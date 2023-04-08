@@ -23,9 +23,9 @@ public class ImageController {
         this.imageService = imageService;
     }
 
-    @PostMapping("/upload/{mainHouse_id}")
-    public ResponseEntity<?> upload(@RequestParam("multipartFile") MultipartFile multipartFile, @PathVariable(name = "mainHouse_id") Long mainHouse_id) throws IOException {
-        boolean response = imageService.upload(multipartFile, mainHouse_id);
+    @PostMapping("/upload/{accommodation_id}")
+    public ResponseEntity<?> upload(@RequestParam("multipartFile") MultipartFile multipartFile, @PathVariable(name = "accommodation_id") Long accommodation_id) throws IOException {
+        boolean response = imageService.upload(multipartFile, accommodation_id);
         return response
                 ? new ResponseEntity<>("File was uploaded successfully", HttpStatus.OK)
                 : new ResponseEntity<>("File hasn't got any file or couldn't upload it", HttpStatus.BAD_REQUEST);
@@ -39,10 +39,10 @@ public class ImageController {
                 : new ResponseEntity<>("Not found", HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/findAllByHouseId")
-    public List<Image> findAllByMainHouseId(@RequestBody Long id) {
+    @PostMapping("/findAllByAccommodationId")
+    public List<Image> findAllByAccommodationId(@RequestBody Long id) {
 
-        return imageService.findAllByHouseId(id);
+        return imageService.findAllByAccommodationId(id);
     }
 
 

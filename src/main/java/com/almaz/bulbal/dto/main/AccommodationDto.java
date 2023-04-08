@@ -1,21 +1,21 @@
 package com.almaz.bulbal.dto.main;
 
+import com.almaz.bulbal.model.main.Bed;
 import com.almaz.bulbal.model.main.Convenience;
-import com.almaz.bulbal.model.main.Room;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class MainHouseDto {
+public class AccommodationDto {
     private Long id;
     private Long ownerId;
     private String region;
     private String locality;
-    private String typeOfHouse;
-    private String titleOfHouse;
+    private String typeOfAccommodation;
+    private String titleOfAccommodation;
     private String fullDescriptionOfHouse;
     private List<Convenience> conveniences;
-    private List<Room> rooms;
+    private List<Bed> beds;
     private Long price;
 }

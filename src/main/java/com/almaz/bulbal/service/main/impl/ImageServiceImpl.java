@@ -2,7 +2,7 @@ package com.almaz.bulbal.service.main.impl;
 
 
 import com.almaz.bulbal.model.main.Image;
-import com.almaz.bulbal.model.main.MainHouse;
+import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.repository.main.ImageRepo;
 import com.almaz.bulbal.service.main.ImageService;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,24 +17,24 @@ import java.util.UUID;
 @Service
 public class ImageServiceImpl implements ImageService {
     private final ImageRepo imageRepo;
-    private final MainHouseServiceImpl mainHouseService;
+    private final AccommodationServiceImpl accommodationService;
     @Value("${server-config.upload-path}")
     private String UPLOADED_FOLDER;
 
-    public ImageServiceImpl(ImageRepo imageRepo, MainHouseServiceImpl mainHouseService) {
+    public ImageServiceImpl(ImageRepo imageRepo, AccommodationServiceImpl accommodationService) {
         this.imageRepo = imageRepo;
-        this.mainHouseService = mainHouseService;
+        this.accommodationService = accommodationService;
     }
 
     @Override
-    public boolean upload(MultipartFile multipartFile, Long mainHouse_id) throws IOException {
+    public boolean upload(MultipartFile multipartFile, Long accommodation_id) throws IOException {
         if (multipartFile != null && !multipartFile.toString().equals("")){
             File uploadDir = new File(UPLOADED_FOLDER);
             String uuidFile = UUID.randomUUID().toString();
             String fileName = uuidFile +"_-_"+ multipartFile.getOriginalFilename();
             multipartFile.transferTo(new File(uploadDir + "/" + fileName));
-            MainHouse mainHouse = mainHouseService.mainHouseById(mainHouse_id);
-            Image image = new Image(fileName, mainHouse);
+            Accommodation accommodation = accommodationService.accommodationById(accommodation_id);
+            Image image = new Image(fileName, accommodation);
             imageRepo.save(image);
             return true;
         }
@@ -72,7 +72,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public List<Image> findAllByHouseId(Long id) {
-        return imageRepo.findAllByMainHouse_Id(id);
+    public List<Image> findAllByAccommodationId(Long id) {
+        return imageRepo.findAllByAccommodation_Id(id);
     }
 }
