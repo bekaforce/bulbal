@@ -22,6 +22,8 @@ public class Image {
     @Column(name = "fileName", nullable = false)
     private String fileName;
 
+    private Boolean main;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "accommodation_id", referencedColumnName = "id")
@@ -31,6 +33,7 @@ public class Image {
         this.fileName = fileName;
         this.accommodation = accommodation;
     }
+
 
     public Image() {
 

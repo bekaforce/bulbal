@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface ImageService {
     boolean upload(MultipartFile multipartFile, Long accommodation_id) throws IOException;
+    boolean uploadMainImage(MultipartFile multipartFile, Long accommodation_id, Boolean main) throws IOException;
     boolean delete(Long id);
     File findFileByFileName(String fileName);
 

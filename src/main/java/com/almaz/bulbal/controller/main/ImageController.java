@@ -24,7 +24,8 @@ public class ImageController {
     }
 
     @PostMapping("/upload/{accommodation_id}")
-    public ResponseEntity<?> upload(@RequestParam("multipartFile") MultipartFile multipartFile, @PathVariable(name = "accommodation_id") Long accommodation_id) throws IOException {
+    public ResponseEntity<?> upload(@RequestParam("multipartFile") MultipartFile multipartFile,
+                                    @PathVariable(name = "accommodation_id") Long accommodation_id) throws IOException {
         boolean response = imageService.upload(multipartFile, accommodation_id);
         return response
                 ? new ResponseEntity<>("File was uploaded successfully", HttpStatus.OK)
@@ -43,6 +44,16 @@ public class ImageController {
     public List<Image> findAllByAccommodationId(@RequestBody Long id) {
 
         return imageService.findAllByAccommodationId(id);
+    }
+
+    @PostMapping("/uploadMainImage/{accommodation_id}/{main}")
+    public ResponseEntity<?> uploadMainImage(@RequestParam("multipartFile") MultipartFile multipartFile,
+                                             @PathVariable(name = "accommodation_id") Long accommodation_id,
+                                             @PathVariable(name = "main") Boolean main) throws IOException {
+        boolean response = imageService.uploadMainImage(multipartFile, accommodation_id, main);
+        return response
+                ? new ResponseEntity<>("File was uploaded successfully", HttpStatus.OK)
+                : new ResponseEntity<>("File hasn't got any file or couldn't upload it", HttpStatus.BAD_REQUEST);
     }
 
 

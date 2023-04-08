@@ -33,10 +33,30 @@ public class ImageServiceImpl implements ImageService {
             String uuidFile = UUID.randomUUID().toString();
             String fileName = uuidFile +"_-_"+ multipartFile.getOriginalFilename();
             multipartFile.transferTo(new File(uploadDir + "/" + fileName));
-            Accommodation accommodation = accommodationService.accommodationById(accommodation_id);
-            Image image = new Image(fileName, accommodation);
-            imageRepo.save(image);
-            return true;
+            if (accommodationService.accommodationById(accommodation_id)!=null) {
+                Accommodation accommodation = accommodationService.accommodationById(accommodation_id);
+                Image image = new Image(fileName, accommodation);
+                imageRepo.save(image);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean uploadMainImage(MultipartFile multipartFile, Long accommodation_id, Boolean main) throws IOException {
+        if (multipartFile != null && !multipartFile.toString().equals("")){
+            File uploadDir = new File(UPLOADED_FOLDER);
+            String uuidFile = UUID.randomUUID().toString();
+            String fileName = uuidFile +"_-_"+ multipartFile.getOriginalFilename();
+            multipartFile.transferTo(new File(uploadDir + "/" + fileName));
+            if (accommodationService.accommodationById(accommodation_id)!=null) {
+                Accommodation accommodation = accommodationService.accommodationById(accommodation_id);
+                Image image = new Image(fileName, accommodation);
+                image.setMain(main);
+                imageRepo.save(image);
+                return true;
+            }
         }
         return false;
     }
