@@ -43,7 +43,7 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     private void getAccommodation(AccommodationDto accommodationDto, Accommodation accommodation){
-        accommodation.setFullDescriptionOfAccommodation(accommodationDto.getFullDescriptionOfHouse());
+        accommodation.setFullDescriptionOfAccommodation(accommodationDto.getFullDescriptionOfAccommodation());
         accommodation.setTitleOfAccommodation(accommodationDto.getTypeOfAccommodation());
         accommodation.setTypeOfAccommodation(accommodationDto.getTypeOfAccommodation());
         accommodation.setOwnerId(accommodationDto.getOwnerId());
@@ -53,6 +53,8 @@ public class AccommodationServiceImpl implements AccommodationService {
         accommodation.setConveniences(accommodationDto.getConveniences());
         accommodation.setCreateDate(LocalDateTime.now());
         accommodation.setBeds(accommodationDto.getBeds());
+        accommodation.setPricePerBed(accommodationDto.getPricePerBed());
+        accommodation.setTypeOfRoom(accommodationDto.getTypeOfRoom());
     }
 
     @Override

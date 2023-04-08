@@ -37,6 +37,9 @@ public class Accommodation {
     @Column(name = "title_of_accommodation", nullable = false)
     private String titleOfAccommodation;
 
+    @Column
+    private String typeOfRoom;
+
     @Column(name = "full_description_of_accommodation", nullable = false)
     private String fullDescriptionOfAccommodation;
 
@@ -54,6 +57,14 @@ public class Accommodation {
 
     @Column(name = "price")
     private Long price;
+
+    @Column(name = "pricePerBed")
+    private Long pricePerBed;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "accommodation_id", referencedColumnName = "id")
+    private List<Booking> bookings;
 
     public Accommodation() {
 
