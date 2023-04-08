@@ -1,13 +1,17 @@
 package com.almaz.bulbal.service.main.impl;
 
 import com.almaz.bulbal.dto.main.AccommodationDto;
+import com.almaz.bulbal.dto.main.CreateAccommodationDto;
+import com.almaz.bulbal.dto.main.CreateRoomDto;
 import com.almaz.bulbal.model.main.Accommodation;
+import com.almaz.bulbal.model.main.Bed;
 import com.almaz.bulbal.repository.main.AccommodationRepo;
 import com.almaz.bulbal.service.main.AccommodationService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,11 +25,24 @@ public class AccommodationServiceImpl implements AccommodationService {
 
     @Override
     @Transactional
-    public Accommodation saveAccommodation(AccommodationDto accommodationDto) {
+    public Accommodation saveAccommodation(CreateAccommodationDto createAccommodationDto) {
         Accommodation accommodation = new Accommodation();
-        getAccommodation(accommodationDto, accommodation);
-
+        createAccommodation(createAccommodationDto, accommodation);
         return accommodationRepo.save(accommodation);
+    }
+
+    @Override
+    public Accommodation saveRoom(CreateRoomDto createRoomDto) {
+        Accommodation accommodation = accommodationById(createRoomDto.getAccommodation_id());
+        if (accommodation != null){
+            accommodation.setTypeOfAccommodation(createRoomDto.getTypeOfAccommodation());
+            accommodation.setPrice(createRoomDto.getPrice());
+            accommodation.setPricePerBed(createRoomDto.getPricePerBed());
+            accommodation.setBeds(getBeds(createRoomDto));
+            accommodation.setCreateDate(LocalDateTime.now());
+            return accommodationRepo.save(accommodation);
+        }
+        return null;
     }
 
     @Override
@@ -34,15 +51,35 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
+    public void createAccommodation(CreateAccommodationDto createAccommodationDto, Accommodation accommodation) {
+        accommodation.setOwnerId(createAccommodationDto.getOwnerId());
+        accommodation.setRegion(createAccommodationDto.getRegion());
+        accommodation.setLocality(createAccommodationDto.getLocality());
+        accommodation.setTitleOfAccommodation(createAccommodationDto.getTitleOfAccommodation());
+        accommodation.setFullDescriptionOfAccommodation(createAccommodationDto.getFullDescriptionOfAccommodation());
+        accommodation.setConveniences(createAccommodationDto.getConveniences());
+    }
+
+    @Override
     public Optional<Accommodation> editAccommodation(AccommodationDto accommodationDto) {
         return accommodationRepo.findById(accommodationDto.getId())
                 .map(accommodation -> {
-                    getAccommodation(accommodationDto, accommodation);
+                    editAccommodation(accommodationDto, accommodation);
                     return accommodationRepo.save(accommodation);
                 });
     }
 
-    private void getAccommodation(AccommodationDto accommodationDto, Accommodation accommodation){
+    @Override
+    public List<Bed> getBeds(CreateRoomDto createRoomDto) {
+        List<Bed> beds = new ArrayList<>();
+        for (int i = 0; i < createRoomDto.getAmountOfBed(); i++){
+            Bed bed = new Bed(0L, createRoomDto.getTypeOfBed(), createRoomDto.getSizeOfBed());
+            beds.add(bed);
+        }
+        return beds;
+    }
+
+    private void editAccommodation(AccommodationDto accommodationDto, Accommodation accommodation){
         accommodation.setFullDescriptionOfAccommodation(accommodationDto.getFullDescriptionOfAccommodation());
         accommodation.setTitleOfAccommodation(accommodationDto.getTypeOfAccommodation());
         accommodation.setTypeOfAccommodation(accommodationDto.getTypeOfAccommodation());
@@ -54,7 +91,6 @@ public class AccommodationServiceImpl implements AccommodationService {
         accommodation.setCreateDate(LocalDateTime.now());
         accommodation.setBeds(accommodationDto.getBeds());
         accommodation.setPricePerBed(accommodationDto.getPricePerBed());
-        accommodation.setTypeOfRoom(accommodationDto.getTypeOfRoom());
     }
 
     @Override

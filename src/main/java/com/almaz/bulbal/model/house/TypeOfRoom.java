@@ -13,6 +13,7 @@ public class TypeOfRoom {
     @SequenceGenerator(name = "typeOfRoom_seq", initialValue = 1, allocationSize = 1, sequenceName = "typeOfRoom_id_seq")
     private Long id;
     private String name;
+    private Long size;
 
 
 }

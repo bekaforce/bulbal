@@ -21,7 +21,7 @@ public class Accommodation {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "type_of_accommodation", nullable = false)
+    @Column(name = "type_of_accommodation")
     private String typeOfAccommodation;
 
     @JsonProperty("owner_id")
@@ -36,9 +36,6 @@ public class Accommodation {
 
     @Column(name = "title_of_accommodation", nullable = false)
     private String titleOfAccommodation;
-
-    @Column
-    private String typeOfRoom;
 
     @Column(name = "full_description_of_accommodation", nullable = false)
     private String fullDescriptionOfAccommodation;
