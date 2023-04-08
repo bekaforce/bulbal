@@ -18,4 +18,5 @@ public class AccommodationDto {
     private List<Convenience> conveniences;
     private List<Bed> beds;
     private Long price;
+    private Long pricePerBed;
 }
