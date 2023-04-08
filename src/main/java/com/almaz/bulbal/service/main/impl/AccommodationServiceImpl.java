@@ -54,6 +54,7 @@ public class AccommodationServiceImpl implements AccommodationService {
         accommodation.setCreateDate(LocalDateTime.now());
         accommodation.setBeds(accommodationDto.getBeds());
         accommodation.setPricePerBed(accommodationDto.getPricePerBed());
+        accommodation.setTypeOfRoom(accommodationDto.getTypeOfRoom());
     }
 
     @Override
