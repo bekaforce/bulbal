@@ -1,6 +1,7 @@
 package com.almaz.bulbal.model.main;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,14 +21,20 @@ public class Booking {
     @JsonIgnore
     @Column(name = "bed_id")
     private Long bedId;
-    private String status;
+    @JsonProperty("user_id")
+    @Column(name = "user_id")
+    private Long userId;
+    private String bookingStatus;
+    private String paymentStatus;
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
+    private LocalDateTime bookingTime;
     private Long guests;
 
-    public Booking(Long accommodationId, String status, LocalDateTime checkIn, LocalDateTime checkOut, Long guests) {
+    public Booking(Long accommodationId, String bookingStatus, String paymentStatus, LocalDateTime checkIn, LocalDateTime checkOut, Long guests) {
         this.accommodationId = accommodationId;
-        this.status = status;
+        this.bookingStatus = bookingStatus;
+        this.paymentStatus = paymentStatus;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.guests = guests;

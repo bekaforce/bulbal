@@ -8,4 +8,5 @@ import java.time.LocalDateTime;
 public class BookingDto {
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
+    private Long userId;
 }

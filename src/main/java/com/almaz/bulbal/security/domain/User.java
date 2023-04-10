@@ -2,6 +2,7 @@ package com.almaz.bulbal.security.domain;
 
 import com.almaz.bulbal.enums.Status;
 import com.almaz.bulbal.model.main.Accommodation;
+import com.almaz.bulbal.model.main.Booking;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -37,6 +38,10 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private List<Accommodation> accommodation;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<Booking> bookings;
 
 
 }
