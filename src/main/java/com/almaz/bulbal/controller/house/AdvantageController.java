@@ -42,8 +42,10 @@ public class AdvantageController {
     }
 
     @PutMapping( "/update/{id}")
-    public ResponseEntity<?> update(@RequestBody GetNameDto getNameDto, @PathVariable(value = "id") Long id){
-        Advantage response = advantageService.update(id, getNameDto);
+    public ResponseEntity<?> update(@RequestParam("multipartFile") MultipartFile multipartFile,
+                                    @RequestParam("convenienceName")String convenienceName,
+                                    @PathVariable("id") Long id) throws IOException {
+        Advantage response = advantageService.update(multipartFile, id, convenienceName);
         return response != null
                 ? new ResponseEntity<>("Advantage was updated by id: " + id, HttpStatus.OK)
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);

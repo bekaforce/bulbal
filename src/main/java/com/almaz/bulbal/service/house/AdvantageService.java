@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface AdvantageService {
     Advantage save(GetNameDto getNameDto);
-    Advantage update(Long id, GetNameDto getNameDto);
+    Advantage update(MultipartFile multipartFile, Long id, String convenienceName) throws IOException;
     boolean delete(Long id);
     File findFileByFileName(String fileName);
     List<Advantage> all();

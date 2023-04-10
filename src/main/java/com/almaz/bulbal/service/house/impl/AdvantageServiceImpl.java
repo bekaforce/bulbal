@@ -31,13 +31,31 @@ public class AdvantageServiceImpl implements AdvantageService {
     }
 
     @Override
-    public Advantage update(Long id, GetNameDto getNameDto) {
+    public Advantage update(MultipartFile multipartFile, Long id, String convenienceName) throws IOException {
         Advantage advantage = advantageById(id);
-        if (advantage != null) {
-            advantage.setConvenienceName(getNameDto.getName());
-            return advantageRepo.save(advantage);
+        File file = findFileByFileName(advantage.getIcon());
+        if (file != null) {
+            file.delete();
+
+            if (multipartFile != null) {
+                File upload = new File(UPLOADED_FOLDER + "/icon");
+
+                if (!upload.exists()) {
+                    upload.mkdir();
+                }
+            }
+            if (multipartFile != null) {
+
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFileName = uuidFile + "_-_" + multipartFile.getOriginalFilename();
+
+                multipartFile.transferTo(new File(UPLOADED_FOLDER + "/icon" + "/" + resultFileName));
+                advantage.setConvenienceName(convenienceName);
+                advantage.setIcon(resultFileName);
+            }
         }
-        return null;
+            return advantageRepo.save(advantage);
+
     }
 
     @Override
