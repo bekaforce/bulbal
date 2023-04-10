@@ -6,6 +6,7 @@ public class Endpoints {
     public static final String LOGIN = API + V1 + "/login";
     public static final String SEND_MAIL = API + V1 + "/send-mail";
     public static final String ACCOMMODATION = API + V1 + "/accommodation";
+    public static final String MAIN_PAGE = API + V1 + "/main-page";
     public final static String ADMIN = API + V1 + "/admin";
     public final static String ADVANTAGE = ADMIN + "/advantage";
     public final static String TYPEOFACCOMMODATION = ADMIN + "/typeOfAccommodation";
