@@ -2,6 +2,7 @@ package com.almaz.bulbal.service.main.impl;
 
 import com.almaz.bulbal.dto.main.BookAccommodationDto;
 import com.almaz.bulbal.dto.main.BookBedDto;
+import com.almaz.bulbal.dto.main.ReservationDto;
 import com.almaz.bulbal.model.main.Booking;
 import com.almaz.bulbal.repository.main.BookingRepo;
 import com.almaz.bulbal.service.main.BookingService;
@@ -71,5 +72,10 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Booking bookingById(Long id) {
         return bookingRepo.findBookingById(id);
+    }
+
+    @Override
+    public List<ReservationDto> allByUserId(Long userId) {
+        return bookingRepo.findAllByUserId(userId);
     }
 }

@@ -2,6 +2,7 @@ package com.almaz.bulbal.service.main;
 
 import com.almaz.bulbal.dto.main.BookAccommodationDto;
 import com.almaz.bulbal.dto.main.BookBedDto;
+import com.almaz.bulbal.dto.main.ReservationDto;
 import com.almaz.bulbal.model.main.Booking;
 
 import java.time.LocalDateTime;
@@ -18,4 +19,6 @@ public interface BookingService {
     Booking cancel(Long id);
 
     Booking bookingById(Long id);
+
+    List<ReservationDto> allByUserId(Long userId);
 }
