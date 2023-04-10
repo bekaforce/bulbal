@@ -32,4 +32,10 @@ public class Bed {
     public Bed() {
 
     }
+
+    public Bed(Long id, String name, Long size) {
+        this.id = id;
+        this.name = name;
+        this.size = size;
+    }
 }

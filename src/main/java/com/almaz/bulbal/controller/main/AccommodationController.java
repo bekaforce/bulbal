@@ -1,6 +1,8 @@
 package com.almaz.bulbal.controller.main;
 
 import com.almaz.bulbal.dto.main.AccommodationDto;
+import com.almaz.bulbal.dto.main.CreateAccommodationDto;
+import com.almaz.bulbal.dto.main.CreateRoomDto;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.service.main.AccommodationService;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +23,15 @@ public class AccommodationController {
     }
 
     @PostMapping(value = "/saveAccommodation")
-    public Accommodation saveAccommodation (@RequestBody AccommodationDto accommodationDto){
-        return accommodationService.saveAccommodation(accommodationDto);
+    public Accommodation saveAccommodation (@RequestBody CreateAccommodationDto createAccommodationDto){
+        return accommodationService.saveAccommodation(createAccommodationDto);
     }
+
+    @PostMapping(value = "/saveRoom")
+    public Accommodation saveRoom (@RequestBody CreateRoomDto createRoomDto){
+        return accommodationService.saveRoom(createRoomDto);
+    }
+
 
     @GetMapping(value = "/all")
     public List<Accommodation> all (){
