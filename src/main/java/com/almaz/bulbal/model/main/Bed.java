@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,6 +29,11 @@ public class Bed {
     @JsonIgnore
     @Column(name = "accommodation_id")
     private Long accommodationId;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bed_id", referencedColumnName = "id")
+    private List<Booking> bookings;
 
     public Bed() {
 
