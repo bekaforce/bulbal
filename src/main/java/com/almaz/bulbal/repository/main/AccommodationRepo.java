@@ -13,7 +13,7 @@ import java.util.List;
 public interface AccommodationRepo extends JpaRepository<Accommodation, Long> {
     Accommodation findAccommodationById(Long id);
 
-    @Query(value = "SELECT x.id, x.region, x.locality_name as localityName, x.title_of_accommodation as titleOfAccomondation, x.price, i.file_name as imageFullName, " +
+    @Query(value = "SELECT x.id, x.region, x.locality_name as localityName, x.title_of_accommodation as titleOfAccommodation, x.price, i.file_name as imageFullName, " +
             "x.create_date as createDate " +
             "FROM public.accommodation x, public.image i \n" +
             "where i.accommodation_id = x.id \n" +
