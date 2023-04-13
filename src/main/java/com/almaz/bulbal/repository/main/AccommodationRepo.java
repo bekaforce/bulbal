@@ -35,7 +35,6 @@ public interface AccommodationRepo extends JpaRepository<Accommodation, Long> {
             "FROM booking b " +
             "WHERE b.check_in < :checkOutDateTime AND b.check_out > :checkInDateTime) " +
             "and x.region = :region " +
-            "and x.locality_name like :locality " +
             "order by x.create_date desc", nativeQuery = true)
-    Page<MainPageDto> searchAccommodations(PageRequest pageRequest, @Param(value = "checkInDateTime") LocalDateTime checkInDateTime, @Param(value = "checkOutDateTime") LocalDateTime checkOutDateTime, @Param(value = "region") String region, @Param(value = "locality") String locality);
+    Page<MainPageDto> searchAccommodations(PageRequest pageRequest, @Param(value = "checkInDateTime") LocalDateTime checkInDateTime, @Param(value = "checkOutDateTime") LocalDateTime checkOutDateTime, @Param(value = "region") String region);
 }

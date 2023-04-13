@@ -31,6 +31,6 @@ public class MainPageServiceImpl implements MainPageService {
     @Override
     public Page<MainPageDto> searchAccommodations(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime) {
         PageRequest pageRequest = PageRequest.of(pageSearchParametersDto.getPageNumber(), pageSearchParametersDto.getPageSize(), Sort.by(pageSearchParametersDto.getSortBy()));
-        return accommodationRepo.searchAccommodations(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getRegion(), pageSearchParametersDto.getLocality());
+        return accommodationRepo.searchAccommodations(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getRegion());
     }
 }
