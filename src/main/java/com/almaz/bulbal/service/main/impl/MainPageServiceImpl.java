@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,5 +26,11 @@ public class MainPageServiceImpl implements MainPageService {
     public Page<MainPageDto> getMainPage(PageParametersDto pageParametersDto) {
         PageRequest pageRequest = PageRequest.of(pageParametersDto.getPageNumber(), pageParametersDto.getPageSize(), Sort.by(pageParametersDto.getSortBy()));
         return accommodationRepo.getMainPage(pageRequest);
+    }
+
+    @Override
+    public Page<MainPageDto> searchAccommodations(PageParametersDto pageParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime) {
+        PageRequest pageRequest = PageRequest.of(pageParametersDto.getPageNumber(), pageParametersDto.getPageSize(), Sort.by(pageParametersDto.getSortBy()));
+        return accommodationRepo.searchAccommodations(pageRequest, checkInDateTime, checkOutDateTime);
     }
 }

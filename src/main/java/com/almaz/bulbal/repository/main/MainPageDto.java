@@ -10,6 +10,4 @@ public interface MainPageDto {
     Double getPrice();
     String getImageFullName();
     LocalDateTime getCreateDate();
-
-
 }
