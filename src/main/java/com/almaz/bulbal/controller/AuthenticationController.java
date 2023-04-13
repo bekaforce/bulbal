@@ -2,6 +2,7 @@ package com.almaz.bulbal.controller;
 
 import com.almaz.bulbal.security.domain.User;
 import com.almaz.bulbal.security.dto.AuthenticationRequestDto;
+import com.almaz.bulbal.security.dto.GetUserDto;
 import com.almaz.bulbal.security.jwt.JwtTokenProvider;
 import com.almaz.bulbal.security.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +50,11 @@ public class AuthenticationController {
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username or password");
         }
+    }
 
+    @GetMapping("userDtoById/{id}")
+    public GetUserDto userDtoById(@PathVariable(value = "id") Long id){
+        return userService.getUserDtoById(id);
     }
 
 }

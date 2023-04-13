@@ -1,6 +1,7 @@
 package com.almaz.bulbal.service.main.impl;
 
 import com.almaz.bulbal.dto.main.PageParametersDto;
+import com.almaz.bulbal.dto.main.PageSearchParametersDto;
 import com.almaz.bulbal.repository.main.AccommodationRepo;
 import com.almaz.bulbal.repository.main.MainPageDto;
 import com.almaz.bulbal.service.main.MainPageService;
@@ -11,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -29,8 +29,8 @@ public class MainPageServiceImpl implements MainPageService {
     }
 
     @Override
-    public Page<MainPageDto> searchAccommodations(PageParametersDto pageParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime) {
-        PageRequest pageRequest = PageRequest.of(pageParametersDto.getPageNumber(), pageParametersDto.getPageSize(), Sort.by(pageParametersDto.getSortBy()));
-        return accommodationRepo.searchAccommodations(pageRequest, checkInDateTime, checkOutDateTime);
+    public Page<MainPageDto> searchAccommodations(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime) {
+        PageRequest pageRequest = PageRequest.of(pageSearchParametersDto.getPageNumber(), pageSearchParametersDto.getPageSize(), Sort.by(pageSearchParametersDto.getSortBy()));
+        return accommodationRepo.searchAccommodations(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getRegion(), pageSearchParametersDto.getLocality());
     }
 }

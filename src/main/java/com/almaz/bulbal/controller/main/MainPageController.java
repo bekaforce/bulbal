@@ -1,6 +1,7 @@
 package com.almaz.bulbal.controller.main;
 
 import com.almaz.bulbal.dto.main.PageParametersDto;
+import com.almaz.bulbal.dto.main.PageSearchParametersDto;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.repository.main.MainPageDto;
 import com.almaz.bulbal.service.main.MainPageService;
@@ -29,8 +30,8 @@ public class MainPageController {
     }
 
     @PostMapping(value = "/searchAccommodations/{checkInDateTime}/{checkOutDateTime}")
-    public Page<MainPageDto> searchAccommodations (@RequestBody PageParametersDto pageParametersDto, @PathVariable(name = "checkInDateTime")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime checkInDateTime,
+    public Page<MainPageDto> searchAccommodations (@RequestBody PageSearchParametersDto pageSearchParametersDto, @PathVariable(name = "checkInDateTime")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime checkInDateTime,
                                                    @PathVariable(name = "checkOutDateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime checkOutDateTime){
-        return mainPageService.searchAccommodations(pageParametersDto, checkInDateTime, checkOutDateTime);
+        return mainPageService.searchAccommodations(pageSearchParametersDto, checkInDateTime, checkOutDateTime);
     }
 }

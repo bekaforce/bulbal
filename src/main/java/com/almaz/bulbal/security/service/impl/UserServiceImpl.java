@@ -5,6 +5,7 @@ import com.almaz.bulbal.enums.Status;
 import com.almaz.bulbal.security.domain.Role;
 import com.almaz.bulbal.security.domain.User;
 import com.almaz.bulbal.security.domain.repo.UserRepo;
+import com.almaz.bulbal.security.dto.GetUserDto;
 import com.almaz.bulbal.security.dto.UserDto;
 import com.almaz.bulbal.security.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -126,6 +127,12 @@ public class UserServiceImpl implements UserService {
             return "Error while sending mail!!!";
         }
     }
+
+    @Override
+    public GetUserDto getUserDtoById(Long id) {
+        return userRepo.getUserDtoById(id);
+    }
+
     public int generateDigits() {
         int min = 1000;
         int max = 9999;

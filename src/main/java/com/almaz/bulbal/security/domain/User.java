@@ -32,6 +32,9 @@ public class User {
     private Status status;
     private String otp;
     private String personalPass;
+    private String firstName;
+    private String lastName;
+    private String description;
     private String phoneNumber;
     private LocalDateTime date;
 
