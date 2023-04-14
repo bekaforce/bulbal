@@ -16,11 +16,11 @@ public class Endpoints {
     public final static String REGION = API + V1 + "/region";
     public final static String NOTIFICATION = ADMIN + "/notification";
     public final static String IMAGES = API + V1 + "/images";
-
     public static final String SWAGGER = "swagger-ui.html";
     public static final String SWAGGER_URL = "/" + SWAGGER + "/**";
     public static final String SWAGGER_RESOURCE_URL = "/swagger-resources/**";
     public static final String SWAGGER_WEBJARS_URL = "/webjars/springfox-swagger-ui/**";
     public static final String SWAGGER_API_URL = "/v2/api-docs/**";
+    public final static String BOOKING = API + V1 + "/booking";
 
 }

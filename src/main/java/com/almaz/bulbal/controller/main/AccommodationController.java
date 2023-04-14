@@ -31,7 +31,10 @@ public class AccommodationController {
     public Accommodation saveRoom (@RequestBody CreateRoomDto createRoomDto){
         return accommodationService.saveRoom(createRoomDto);
     }
-
+    @GetMapping(value = "/{id}")
+    public Accommodation accommodationById(@PathVariable(value = "id") Long id){
+        return accommodationService.accommodationById(id);
+    }
 
     @GetMapping(value = "/all")
     public List<Accommodation> all (){

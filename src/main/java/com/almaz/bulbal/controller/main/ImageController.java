@@ -40,9 +40,8 @@ public class ImageController {
                 : new ResponseEntity<>("Not found", HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/findAllByAccommodationId")
-    public List<Image> findAllByAccommodationId(@RequestBody Long id) {
-
+    @PostMapping("/findAllByAccommodationId/{id}")
+    public List<Image> findAllByAccommodationId(@PathVariable(value = "id") Long id) {
         return imageService.findAllByAccommodationId(id);
     }
 

@@ -4,11 +4,12 @@ spring:
       matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://psg/sweatter
+    url: jdbc:postgresql://psg/beebulbal
     username: postgres
-    password: beenav12345
-#  jpa:
-#    generate-ddl: true
+    password: beebulbal123!
+
+  jpa:
+    generate-ddl: true
 
   main:
     allow-circular-references: true
@@ -22,7 +23,6 @@ security:
 
 
 #    docker
-#    username: beenavigator
-#    password: beenav12345
-#  jpa:
-#    generate-ddl: true
+#    username: beebulbal
+#    password: beebulbal123!
+# /du

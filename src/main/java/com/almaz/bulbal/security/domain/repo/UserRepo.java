@@ -1,6 +1,7 @@
 package com.almaz.bulbal.security.domain.repo;
 
 import com.almaz.bulbal.security.domain.User;
+import com.almaz.bulbal.security.dto.GetUserDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,6 +25,12 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT personal_pass FROM public.users x where username =:email", nativeQuery = true)
     String getPersonalPass(@Param("email")String email);
+
+    @Query(value = "select u.first_name as name from users u, accommodation a " +
+            "where u.id = a.owner_id " +
+            "and a.owner_id = :id " +
+            "group by u.first_name", nativeQuery = true)
+    GetUserDto getUserDtoById(Long id);
 
 
 }
