@@ -1,27 +1,17 @@
 package com.almaz.bulbal.controller.main;
 
 import com.almaz.bulbal.dto.main.PageParametersDto;
-<<<<<<< HEAD
+import com.almaz.bulbal.dto.main.PageSearchParametersDto;
 import com.almaz.bulbal.repository.main.MainPageDto;
 import com.almaz.bulbal.service.main.MainPageService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.*;
-
-=======
-import com.almaz.bulbal.dto.main.PageSearchParametersDto;
-import com.almaz.bulbal.model.main.Accommodation;
-import com.almaz.bulbal.repository.main.MainPageDto;
-import com.almaz.bulbal.service.main.MainPageService;
-import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
->>>>>>> 82b19ce2505bc7677e0d9e234da879542e407bdc
 import static com.almaz.bulbal.endpoints.Endpoints.MAIN_PAGE;
 
 @RestController
