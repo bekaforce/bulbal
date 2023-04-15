@@ -7,12 +7,38 @@ spring:
     url: jdbc:postgresql://psg/beebulbal
     username: postgres
     password: beebulbal123!
-
   jpa:
     generate-ddl: true
-
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 386058975571-iq9eh4ftnae9fij25fqtnc4kkkif3j3c.apps.googleusercontent.com
+            client-secret: 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
+            scope: openid,profile,email
+  #      resourceserver:
+  #        jwt:
+  #          issuer-uri: https://accounts.google.com
+  #          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
   main:
     allow-circular-references: true
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    port: 587
+    username: atemirkanov89@gmail.com
+    password: pqdleunusseixhtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+      protocol: smtp
+      test-connection: false
+  thymeleaf:
+    check-template-location: true
 
 security:
   jwt:
@@ -20,9 +46,12 @@ security:
       secret-key: bulbalApp
       expire-length: 14400000
 
+server-config:
+  upload-path: '/var/lib/docker/volumes/bulbal/_data'
+#server-config:
+#  upload-path: C:\Users\atemirkanov\Desktop\bulbal
 
 
-#    docker
-#    username: beebulbal
-#    password: beebulbal123!
-# /du
+
+#/var/lib/docker/volumes/bulbal/_data
+#'${user.dir}/uploads'

@@ -107,11 +107,13 @@ public class UserServiceImpl implements UserService {
             Map<String, Object> model = new HashMap<>();
 
 //            model.put("userName", details.getUserName());
-            model.put("location", pass);
-            model.put("sign", "Java Developer");
+            model.put("location", "Кыргызстан");
+            model.put("pass", pass);
+            model.put("userName", details.getEmail().replaceAll("@.*", ""));
+            model.put("sign", "Команда Bulbal");
             helper.setFrom("bulbal@gmail.com");
             helper.setTo(details.getEmail());
-            helper.setSubject("Registration");
+            helper.setSubject("Регистрация на сайтe Bulbal");
             context.setVariables(model);
             String html = springTemplateEngine.process("welcome-email", context);
             helper.setText(html, true);
