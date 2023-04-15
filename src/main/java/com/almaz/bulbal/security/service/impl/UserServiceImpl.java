@@ -5,6 +5,7 @@ import com.almaz.bulbal.enums.Status;
 import com.almaz.bulbal.security.domain.Role;
 import com.almaz.bulbal.security.domain.User;
 import com.almaz.bulbal.security.domain.repo.UserRepo;
+import com.almaz.bulbal.security.dto.FormDto;
 import com.almaz.bulbal.security.dto.GetUserDto;
 import com.almaz.bulbal.security.dto.UserDto;
 import com.almaz.bulbal.security.service.UserService;
@@ -29,7 +30,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
     private final RoleServiceImpl roleService;
     private final BCryptPasswordEncoder passwordEncoder;
-
     private final JavaMailSender javaMailSender;
     private final SpringTemplateEngine springTemplateEngine;
 
@@ -131,6 +131,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public GetUserDto getUserDtoById(Long id) {
         return userRepo.getUserDtoById(id);
+    }
+
+    @Override
+    public User fillOutAForm(FormDto formDto) {
+        User user = userRepo.findUserById(formDto.getUserId());
+        if (user != null){
+            setUser(user, formDto);
+            return userRepo.save(user);
+        }
+        return null;
+    }
+
+    @Override
+    public void setUser(User user, FormDto formDto) {
+        user.setName(formDto.getName());
+        user.setNickName(formDto.getNickName());
+        user.setDescription(formDto.getDescription());
+        user.setPhoneNumber(formDto.getPhoneNumber());
+        user.setContactPerson(formDto.getContactPerson());
+        user.setLiveIn(formDto.getLiveIn());
+        user.setInstagramUrl(formDto.getInstagramUrl());
+        user.setTwitterUrl(formDto.getTwitterUrl());
+        user.setHobbies(formDto.getHobbies());
+        user.setLanguage(formDto.getLanguage());
     }
 
     public int generateDigits() {

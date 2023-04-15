@@ -32,6 +32,8 @@ public interface UserRepo extends JpaRepository<User, Long> {
             "group by u.first_name", nativeQuery = true)
     GetUserDto getUserDtoById(Long id);
 
+    User findUserById(Long id);
+
 
 }
 

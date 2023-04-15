@@ -3,6 +3,7 @@ package com.almaz.bulbal.security.domain;
 import com.almaz.bulbal.enums.Status;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.model.main.Booking;
+import com.almaz.bulbal.model.user.Hobby;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
+    @JsonIgnore
     private String password;
     @Column(name = "admin_login")
     private String adminLogin;
@@ -32,8 +34,13 @@ public class User {
     private Status status;
     private String otp;
     private String personalPass;
-    private String firstName;
-    private String lastName;
+    private String nickName;
+    private String name;
+    private String liveIn;
+    private String language;
+    private String contactPerson;
+    private String instagramUrl;
+    private String twitterUrl;
     private String description;
     private String phoneNumber;
     private LocalDateTime date;
@@ -45,6 +52,10 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<Booking> bookings;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<Hobby> hobbies;
 
 
 }

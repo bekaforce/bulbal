@@ -22,5 +22,8 @@ public class Endpoints {
     public static final String SWAGGER_WEBJARS_URL = "/webjars/springfox-swagger-ui/**";
     public static final String SWAGGER_API_URL = "/v2/api-docs/**";
     public final static String BOOKING = API + V1 + "/booking";
+    public final static String RESIDENCE = API + V1 + "/residence";
+
+    public final static String USER = API + V1 + "/user";
 
 }

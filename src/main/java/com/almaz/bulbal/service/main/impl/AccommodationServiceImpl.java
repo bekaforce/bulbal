@@ -5,6 +5,7 @@ import com.almaz.bulbal.dto.main.CreateAccommodationDto;
 import com.almaz.bulbal.dto.main.CreateRoomDto;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.model.main.Bed;
+import com.almaz.bulbal.model.main.Residence;
 import com.almaz.bulbal.repository.main.AccommodationRepo;
 import com.almaz.bulbal.service.main.AccommodationService;
 import org.springframework.stereotype.Service;
@@ -18,17 +19,24 @@ import java.util.Optional;
 @Service
 public class AccommodationServiceImpl implements AccommodationService {
     private final AccommodationRepo accommodationRepo;
+    private final ResidenceServiceImpl residenceService;
 
-    public AccommodationServiceImpl(AccommodationRepo accommodationRepo) {
+    public AccommodationServiceImpl(AccommodationRepo accommodationRepo, ResidenceServiceImpl residenceService) {
         this.accommodationRepo = accommodationRepo;
+        this.residenceService = residenceService;
     }
 
     @Override
     @Transactional
     public Accommodation saveAccommodation(CreateAccommodationDto createAccommodationDto) {
-        Accommodation accommodation = new Accommodation();
-        createAccommodation(createAccommodationDto, accommodation);
-        return accommodationRepo.save(accommodation);
+        Residence residence = residenceService.residenceById(createAccommodationDto.getResidenceId());
+        if (residence != null){
+            Accommodation accommodation = new Accommodation();
+            createAccommodation(createAccommodationDto, accommodation);
+            accommodation.setResidence(residence);
+            return accommodationRepo.save(accommodation);
+        }
+        return null;
     }
 
     @Override
@@ -80,6 +88,8 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     private void editAccommodation(AccommodationDto accommodationDto, Accommodation accommodation){
+        Residence residence = residenceService.residenceById(accommodationDto.getResidenceId());
+        accommodation.setResidence(residence);
         accommodation.setFullDescriptionOfAccommodation(accommodationDto.getFullDescriptionOfAccommodation());
         accommodation.setTitleOfAccommodation(accommodationDto.getTitleOfAccommodation());
         accommodation.setTypeOfAccommodation(accommodationDto.getTypeOfAccommodation());

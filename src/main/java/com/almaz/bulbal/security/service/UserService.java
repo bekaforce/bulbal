@@ -2,6 +2,7 @@ package com.almaz.bulbal.security.service;
 
 import com.almaz.bulbal.dto.email.EmailDetails;
 import com.almaz.bulbal.security.domain.User;
+import com.almaz.bulbal.security.dto.FormDto;
 import com.almaz.bulbal.security.dto.GetUserDto;
 import com.almaz.bulbal.security.dto.UserDto;
 import org.springframework.data.jpa.repository.Query;
@@ -23,5 +24,9 @@ public interface UserService {
     String sendSimpleMail(EmailDetails details) throws MessagingException;
 
     GetUserDto getUserDtoById(Long id);
+
+    User fillOutAForm(FormDto formDto);
+
+    void setUser(User user, FormDto formDto);
 }
 

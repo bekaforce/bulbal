@@ -1,5 +1,6 @@
 package com.almaz.bulbal.model.main;
 
+import com.almaz.bulbal.model.location.Region;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -62,6 +63,10 @@ public class Accommodation {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "accommodation_id", referencedColumnName = "id")
     private List<Booking> bookings;
+
+    @ManyToOne
+    @JoinColumn(name = "residence_id", referencedColumnName = "id")
+    private Residence residence;
 
     public Accommodation() {
 
