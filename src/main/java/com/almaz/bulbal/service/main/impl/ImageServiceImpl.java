@@ -95,4 +95,9 @@ public class ImageServiceImpl implements ImageService {
     public List<Image> findAllByAccommodationId(Long id) {
         return imageRepo.findAllByAccommodation_Id(id);
     }
+
+    @Override
+    public List<Image> findFiveByAccommodationId(Long id) {
+        return imageRepo.findFiveByAccommodation_id(id);
+    }
 }

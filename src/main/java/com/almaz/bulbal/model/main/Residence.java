@@ -16,8 +16,8 @@ public class Residence {
     private String name;
     private String description;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "residence", cascade = CascadeType.REMOVE)
-    private List<Accommodation> accommodations;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "residence", cascade = CascadeType.REMOVE)
+//    private List<Accommodation> accommodations;
 
 }

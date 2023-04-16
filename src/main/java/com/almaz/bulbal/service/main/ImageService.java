@@ -18,4 +18,5 @@ public interface ImageService {
 
     List<Image> findAllByAccommodationId(Long id);
 
+    List<Image> findFiveByAccommodationId(Long id);
 }

@@ -49,6 +49,7 @@ public class Accommodation {
     @JoinColumn(name = "accommodation_id", referencedColumnName = "id")
     private List<Bed> beds;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.REMOVE)
     private List<Image> images;
     private LocalDateTime createDate;
@@ -64,9 +65,9 @@ public class Accommodation {
     @JoinColumn(name = "accommodation_id", referencedColumnName = "id")
     private List<Booking> bookings;
 
-    @ManyToOne
-    @JoinColumn(name = "residence_id", referencedColumnName = "id")
-    private Residence residence;
+//    @ManyToOne
+//    @JoinColumn(name = "residence_id", referencedColumnName = "id")
+//    private Residence residence;
 
     public Accommodation() {
 

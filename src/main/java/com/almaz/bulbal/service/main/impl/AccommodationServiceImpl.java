@@ -29,14 +29,14 @@ public class AccommodationServiceImpl implements AccommodationService {
     @Override
     @Transactional
     public Accommodation saveAccommodation(CreateAccommodationDto createAccommodationDto) {
-        Residence residence = residenceService.residenceById(createAccommodationDto.getResidenceId());
-        if (residence != null){
+//        Residence residence = residenceService.residenceById(createAccommodationDto.getResidenceId());
+//        if (residence != null){
             Accommodation accommodation = new Accommodation();
             createAccommodation(createAccommodationDto, accommodation);
-            accommodation.setResidence(residence);
+           // accommodation.setResidence(residence);
             return accommodationRepo.save(accommodation);
-        }
-        return null;
+//        }
+//        return null;
     }
 
     @Override
@@ -88,8 +88,8 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     private void editAccommodation(AccommodationDto accommodationDto, Accommodation accommodation){
-        Residence residence = residenceService.residenceById(accommodationDto.getResidenceId());
-        accommodation.setResidence(residence);
+        //Residence residence = residenceService.residenceById(accommodationDto.getResidenceId());
+        //accommodation.setResidence(residence);
         accommodation.setFullDescriptionOfAccommodation(accommodationDto.getFullDescriptionOfAccommodation());
         accommodation.setTitleOfAccommodation(accommodationDto.getTitleOfAccommodation());
         accommodation.setTypeOfAccommodation(accommodationDto.getTypeOfAccommodation());

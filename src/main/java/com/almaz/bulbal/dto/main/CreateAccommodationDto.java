@@ -13,5 +13,4 @@ public class CreateAccommodationDto {
     private String titleOfAccommodation;
     private String fullDescriptionOfAccommodation;
     private List<Convenience> conveniences;
-    private Long residenceId;
 }

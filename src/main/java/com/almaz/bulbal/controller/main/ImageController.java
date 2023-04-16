@@ -45,6 +45,11 @@ public class ImageController {
         return imageService.findAllByAccommodationId(id);
     }
 
+    @PostMapping("/findFiveByAccommodationId/{id}")
+    public List<Image> findFiveByAccommodationId(@PathVariable(value = "id") Long id) {
+        return imageService.findFiveByAccommodationId(id);
+    }
+
     @PostMapping("/uploadMainImage/{accommodation_id}/{main}")
     public ResponseEntity<?> uploadMainImage(@RequestParam("multipartFile") MultipartFile multipartFile,
                                              @PathVariable(name = "accommodation_id") Long accommodation_id,
