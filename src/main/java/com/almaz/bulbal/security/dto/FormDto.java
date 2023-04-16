@@ -1,6 +1,7 @@
 package com.almaz.bulbal.security.dto;
 
 import com.almaz.bulbal.model.user.Hobby;
+import com.almaz.bulbal.model.user.LikeTravel;
 import lombok.Data;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public class FormDto {
     private String description;
     private String phoneNumber;
     private List<Hobby> hobbies;
+    private List<LikeTravel> travels;
 }

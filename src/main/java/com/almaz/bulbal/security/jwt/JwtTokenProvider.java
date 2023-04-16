@@ -2,6 +2,7 @@ package com.almaz.bulbal.security.jwt;
 
 
 import com.almaz.bulbal.security.domain.Role;
+import com.almaz.bulbal.security.domain.User;
 import com.almaz.bulbal.security.exception.JwtAuthenticationException;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,10 @@ public class JwtTokenProvider {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
     }
 
-    public String createToken(String username, List<Role> roles){
+    public String createToken(String username, List<Role> roles, Long getId){
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("roles", getRoleNames(roles));
+        claims.put("userId", getId);
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);

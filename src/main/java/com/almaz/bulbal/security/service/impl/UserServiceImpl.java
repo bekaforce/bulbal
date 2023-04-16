@@ -106,7 +106,6 @@ public class UserServiceImpl implements UserService {
             Context context = new Context();
             Map<String, Object> model = new HashMap<>();
 
-//            model.put("userName", details.getUserName());
             model.put("location", "Кыргызстан");
             model.put("pass", pass);
             model.put("userName", details.getEmail().replaceAll("@.*", ""));
@@ -156,6 +155,7 @@ public class UserServiceImpl implements UserService {
         user.setInstagramUrl(formDto.getInstagramUrl());
         user.setTwitterUrl(formDto.getTwitterUrl());
         user.setHobbies(formDto.getHobbies());
+        user.setLikeTravels(formDto.getTravels());
         user.setLanguage(formDto.getLanguage());
     }
 

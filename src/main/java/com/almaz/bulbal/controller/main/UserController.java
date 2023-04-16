@@ -16,7 +16,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/fillOutAForm")
+    @PutMapping("/fillOutAForm")
     public User fillOutAForm(@RequestBody FormDto formDto){
         return userService.fillOutAForm(formDto);
     }
