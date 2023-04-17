@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import static com.almaz.bulbal.endpoints.Endpoints.USER;
 
 @RestController
+@CrossOrigin
 @RequestMapping(USER)
 public class UserController {
     private final UserServiceImpl userService;
