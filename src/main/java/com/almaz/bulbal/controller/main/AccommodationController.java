@@ -27,9 +27,9 @@ public class AccommodationController {
         return accommodationService.saveAccommodation(createAccommodationDto);
     }
 
-    @PostMapping(value = "/saveRoom")
-    public Accommodation saveRoom (@RequestBody CreateRoomDto createRoomDto){
-        return accommodationService.saveRoom(createRoomDto);
+    @PostMapping(value = "/saveBeds")
+    public Accommodation saveBeds(@RequestBody CreateRoomDto createRoomDto){
+        return accommodationService.saveBeds(createRoomDto);
     }
     @GetMapping(value = "/{id}")
     public Accommodation accommodationById(@PathVariable(value = "id") Long id){

@@ -25,5 +25,6 @@ public class Endpoints {
     public final static String RESIDENCE = API + V1 + "/residence";
 
     public final static String USER = API + V1 + "/user";
+    public final static String COMMENT = API + V1 + "/comment";
 
 }

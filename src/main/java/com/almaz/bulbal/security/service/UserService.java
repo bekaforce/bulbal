@@ -23,10 +23,11 @@ public interface UserService {
 
     String sendSimpleMail(EmailDetails details) throws MessagingException;
 
-    GetUserDto getUserDtoById(Long id);
+    GetUserDto getUserDtoByAccommodationId(Long id);
 
     User fillOutAForm(FormDto formDto);
 
     void setUser(User user, FormDto formDto);
+    User userById(Long id);
 }
 

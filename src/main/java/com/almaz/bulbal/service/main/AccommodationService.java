@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface AccommodationService {
 
     Accommodation saveAccommodation(CreateAccommodationDto createAccommodationDto);
-    Accommodation saveRoom(CreateRoomDto createRoomDto);
+    Accommodation saveBeds(CreateRoomDto createRoomDto);
     List<Accommodation> all();
     void createAccommodation(CreateAccommodationDto createAccommodationDto, Accommodation accommodation);
     Accommodation accommodationById(Long id);

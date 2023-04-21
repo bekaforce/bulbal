@@ -52,9 +52,9 @@ public class AuthenticationController {
         }
     }
 
-    @GetMapping("userDtoById/{id}")
-    public GetUserDto userDtoById(@PathVariable(value = "id") Long id){
-        return userService.getUserDtoById(id);
+    @GetMapping("userDtoByByAccommodationId/{accommodation_Id}")
+    public GetUserDto userDtoByByAccommodationId(@PathVariable(value = "accommodation_Id") Long accommodation_Id){
+        return userService.getUserDtoByAccommodationId(accommodation_Id);
     }
 
 }

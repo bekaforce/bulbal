@@ -35,6 +35,9 @@ public class Accommodation {
     @Column(name = "locality_name", nullable = false)
     private String locality;
 
+    @Column(name = "address", nullable = false)
+    private String address;
+
     @Column(name = "title_of_accommodation", nullable = false)
     private String titleOfAccommodation;
 
@@ -64,6 +67,9 @@ public class Accommodation {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "accommodation_id", referencedColumnName = "id")
     private List<Booking> bookings;
+
+    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.REMOVE)
+    private List<Comment> comments;
 
 //    @ManyToOne
 //    @JoinColumn(name = "residence_id", referencedColumnName = "id")

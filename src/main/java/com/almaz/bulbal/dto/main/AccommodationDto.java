@@ -12,9 +12,9 @@ public class AccommodationDto {
     private Long ownerId;
     private String region;
     private String locality;
+    private String address;
     private String typeOfAccommodation;
     private String titleOfAccommodation;
-    private String typeOfRoom;
     private String fullDescriptionOfAccommodation;
     private List<Convenience> conveniences;
     private List<Bed> beds;

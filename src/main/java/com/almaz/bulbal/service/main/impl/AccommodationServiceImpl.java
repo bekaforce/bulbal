@@ -40,7 +40,7 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public Accommodation saveRoom(CreateRoomDto createRoomDto) {
+    public Accommodation saveBeds(CreateRoomDto createRoomDto) {
         Accommodation accommodation = accommodationById(createRoomDto.getAccommodation_id());
         if (accommodation != null){
             accommodation.setTypeOfAccommodation(createRoomDto.getTypeOfAccommodation());
@@ -66,6 +66,7 @@ public class AccommodationServiceImpl implements AccommodationService {
         accommodation.setTitleOfAccommodation(createAccommodationDto.getTitleOfAccommodation());
         accommodation.setFullDescriptionOfAccommodation(createAccommodationDto.getFullDescriptionOfAccommodation());
         accommodation.setConveniences(createAccommodationDto.getConveniences());
+        accommodation.setAddress(createAccommodationDto.getAddress());
     }
 
     @Override
@@ -96,6 +97,7 @@ public class AccommodationServiceImpl implements AccommodationService {
         accommodation.setOwnerId(accommodationDto.getOwnerId());
         accommodation.setLocality(accommodationDto.getLocality());
         accommodation.setRegion(accommodationDto.getRegion());
+        accommodation.setAddress(accommodationDto.getAddress());
         accommodation.setPrice(accommodationDto.getPrice());
         accommodation.setConveniences(accommodationDto.getConveniences());
         accommodation.setCreateDate(LocalDateTime.now());

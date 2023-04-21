@@ -26,11 +26,10 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Query(value = "SELECT personal_pass FROM public.users x where username =:email", nativeQuery = true)
     String getPersonalPass(@Param("email")String email);
 
-    @Query(value = "select u.first_name as name from users u, accommodation a " +
-            "where u.id = a.owner_id " +
-            "and a.owner_id = :id " +
-            "group by u.first_name", nativeQuery = true)
-    GetUserDto getUserDtoById(Long id);
+    @Query(value = "select u.id as id, u.nick_name as name, u.description as description from accommodation a, users u " +
+            "where a.owner_id = u.id " +
+            "and a.id = :accommodation_id", nativeQuery = true)
+    GetUserDto getUserDtoByAccommodationId(@Param(value = "accommodation_id") Long accommodationId);
 
     User findUserById(Long id);
 

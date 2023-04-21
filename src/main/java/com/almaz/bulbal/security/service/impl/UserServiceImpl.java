@@ -130,8 +130,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public GetUserDto getUserDtoById(Long id) {
-        return userRepo.getUserDtoById(id);
+    public GetUserDto getUserDtoByAccommodationId(Long id) {
+        return userRepo.getUserDtoByAccommodationId(id);
     }
 
     @Override
@@ -157,6 +157,11 @@ public class UserServiceImpl implements UserService {
         user.setHobbies(formDto.getHobbies());
         user.setLikeTravels(formDto.getTravels());
         user.setLanguage(formDto.getLanguage());
+    }
+
+    @Override
+    public User userById(Long id) {
+        return userRepo.findUserById(id);
     }
 
     public int generateDigits() {
