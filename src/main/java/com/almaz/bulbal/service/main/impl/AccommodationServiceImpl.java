@@ -2,10 +2,9 @@ package com.almaz.bulbal.service.main.impl;
 
 import com.almaz.bulbal.dto.main.AccommodationDto;
 import com.almaz.bulbal.dto.main.CreateAccommodationDto;
-import com.almaz.bulbal.dto.main.CreateRoomDto;
+import com.almaz.bulbal.dto.main.CreateBedsDto;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.model.main.Bed;
-import com.almaz.bulbal.model.main.Residence;
 import com.almaz.bulbal.repository.main.AccommodationRepo;
 import com.almaz.bulbal.service.main.AccommodationService;
 import org.springframework.stereotype.Service;
@@ -40,7 +39,7 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public Accommodation saveBeds(CreateRoomDto createRoomDto) {
+    public Accommodation saveBeds(CreateBedsDto createRoomDto) {
         Accommodation accommodation = accommodationById(createRoomDto.getAccommodation_id());
         if (accommodation != null){
             accommodation.setTypeOfAccommodation(createRoomDto.getTypeOfAccommodation());
@@ -79,7 +78,7 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public List<Bed> getBeds(CreateRoomDto createRoomDto) {
+    public List<Bed> getBeds(CreateBedsDto createRoomDto) {
         List<Bed> beds = new ArrayList<>();
         for (int i = 0; i < createRoomDto.getAmountOfBed(); i++){
             Bed bed = new Bed(0L, createRoomDto.getTypeOfBed(), createRoomDto.getSizeOfBed());

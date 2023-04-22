@@ -21,7 +21,7 @@ public class TypeOfBedServiceImpl implements TypeOfBedService {
     public TypeOfBed save(GetMapDto getMapDto) {
         TypeOfBed typeOfBed = new TypeOfBed();
         typeOfBed.setName(getMapDto.getName());
-//        typeOfBed.setValue(getMapDto.getValue());
+        typeOfBed.setSize(getMapDto.getSize());
         return typeOfBedRepo.save(typeOfBed);
     }
 
@@ -30,7 +30,7 @@ public class TypeOfBedServiceImpl implements TypeOfBedService {
         TypeOfBed typeOfBed = findById(id);
         if (typeOfBed != null){
             typeOfBed.setName(getMapDto.getName());
-//            typeOfBed.setValue(typeOfBed.getValue());
+            typeOfBed.setSize(typeOfBed.getSize());
             return typeOfBedRepo.save(typeOfBed);
         }
         return null;

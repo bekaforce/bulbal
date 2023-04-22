@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class GetMapDto {
     private String name;
-//    private Long value;
+    private Long size;
 }
