@@ -34,20 +34,30 @@ public class AdvantageController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody GetNameDto getNameDto){
-        Advantage response = advantageService.save(getNameDto);
-        return response != null
-                ? new ResponseEntity<>(response, HttpStatus.OK)
-                : new ResponseEntity<>("Try Again", HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> save(@RequestParam String name, @RequestParam("multipartFile") MultipartFile multipartFile,
+                                  @Validated HttpServletResponse result) throws IOException {
+        Advantage response = new Advantage();
+        if (multipartFile != null) {
+            result.setHeader("Content-Disposition", "Success. Upload file");
+            response = advantageService.save(name, multipartFile);
+        } else {
+            result.setStatus(HttpStatus.NO_CONTENT.value());
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping( "/update/{id}")
-    public ResponseEntity<?> update(@RequestParam("multipartFile") MultipartFile multipartFile,
-                                    @RequestParam("convenienceName")String convenienceName,
-                                    @PathVariable("id") Long id) throws IOException {
-        Advantage response = advantageService.update(multipartFile, id, convenienceName);
+    public ResponseEntity<?> update(@RequestParam String name, @RequestParam("multipartFile") MultipartFile multipartFile,
+                                    @Validated HttpServletResponse result, @PathVariable Long id) throws IOException {
+        Advantage response = new Advantage();
+        if (multipartFile != null) {
+            result.setHeader("Content-Disposition", "Success. Upload file");
+            response = advantageService.update(multipartFile, name, id);
+        } else {
+            result.setStatus(HttpStatus.NO_CONTENT.value());
+        }
         return response != null
-                ? new ResponseEntity<>("Advantage was updated by id: " + id, HttpStatus.OK)
+                ? new ResponseEntity<>("Advantage was updated by id: " + response.getId(), HttpStatus.OK)
                 : new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
     }
 
@@ -55,17 +65,5 @@ public class AdvantageController {
     public ResponseEntity<?> all(){
         List<Advantage> response = advantageService.all();
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @PostMapping("/upload")
-    public void uploadIcon(@RequestParam("multipartFile") MultipartFile multipartFile,
-                                        @RequestParam("convenienceName")String convenienceName,
-                                        @Validated HttpServletResponse response) throws IOException {
-        if (multipartFile != null) {
-            response.setHeader("Content-Disposition", "Success. Upload file");
-        } else {
-            response.setStatus(HttpStatus.NO_CONTENT.value());
-        }
-        advantageService.saveIcon(multipartFile, convenienceName);
     }
 }

@@ -25,13 +25,14 @@ public class AdvantageServiceImpl implements AdvantageService {
     private String UPLOADED_FOLDER;
 
     @Override
-    public Advantage save(GetNameDto getNameDto) {
-        Advantage advantage = new Advantage(getNameDto.getName());
+    public Advantage save(String name, MultipartFile multipartFile) throws IOException {
+        Advantage advantage = new Advantage(name);
+        saveIcon(advantage, multipartFile);
         return advantageRepo.save(advantage);
     }
 
     @Override
-    public Advantage update(MultipartFile multipartFile, Long id, String convenienceName) throws IOException {
+    public Advantage update(MultipartFile multipartFile, String name, Long id) throws IOException {
         Advantage advantage = advantageById(id);
         File file = findFileByFileName(advantage.getIcon());
         if (file != null) {
@@ -45,12 +46,11 @@ public class AdvantageServiceImpl implements AdvantageService {
                 }
             }
             if (multipartFile != null) {
-
                 String uuidFile = UUID.randomUUID().toString();
                 String resultFileName = uuidFile + "_-_" + multipartFile.getOriginalFilename();
 
                 multipartFile.transferTo(new File(UPLOADED_FOLDER + "/icon" + "/" + resultFileName));
-                advantage.setConvenienceName(convenienceName);
+                advantage.setName(name);
                 advantage.setIcon(resultFileName);
             }
         }
@@ -94,24 +94,21 @@ public class AdvantageServiceImpl implements AdvantageService {
     }
 
     @Override
-    public void saveIcon(MultipartFile multipartFile, String convenienceName) throws IOException {
+    public void saveIcon(Advantage advantage, MultipartFile multipartFile) throws IOException {
         if (multipartFile != null) {
-            File upload = new File(UPLOADED_FOLDER+"/icon");
+            File upload = new File(UPLOADED_FOLDER + "/icon");
 
             if (!upload.exists()) {
                 upload.mkdir();
             }
-        }
-        if (multipartFile != null) {
+
 
             String uuidFile = UUID.randomUUID().toString();
-            String resultFileName = uuidFile +"_-_"+ multipartFile.getOriginalFilename();
+            String resultFileName = uuidFile + "_-_" + multipartFile.getOriginalFilename();
 
-            multipartFile.transferTo(new File(UPLOADED_FOLDER+"/icon" + "/" + resultFileName));
-            Advantage advantage = new Advantage();
-            advantage.setConvenienceName(convenienceName);
+            multipartFile.transferTo(new File(UPLOADED_FOLDER + "/icon" + "/" + resultFileName));
             advantage.setIcon(resultFileName);
             advantageRepo.save(advantage);
         }
-    }
+        }
 }

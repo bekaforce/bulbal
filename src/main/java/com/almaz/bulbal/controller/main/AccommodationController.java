@@ -43,7 +43,7 @@ public class AccommodationController {
     }
 
     @PutMapping(value = "/editAccommodation")
-    public Optional<Accommodation> editAccommodation (@RequestBody AccommodationDto accommodationDto){
+    public Optional<Accommodation> editAccommodation(@RequestBody AccommodationDto accommodationDto){
         return accommodationService.editAccommodation(accommodationDto);
     }
 

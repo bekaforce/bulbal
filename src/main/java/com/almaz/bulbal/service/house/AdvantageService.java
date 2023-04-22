@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.util.List;
 
 public interface AdvantageService {
-    Advantage save(GetNameDto getNameDto);
-    Advantage update(MultipartFile multipartFile, Long id, String convenienceName) throws IOException;
+    Advantage save(String name, MultipartFile multipartFile) throws IOException;
+    Advantage update(MultipartFile multipartFile, String name, Long id) throws IOException;
     boolean delete(Long id);
     File findFileByFileName(String fileName);
     List<Advantage> all();
 
     Advantage advantageById(Long id);
-    void saveIcon(MultipartFile multipartFile, String convenienceName) throws IOException;
+    void saveIcon(Advantage advantage, MultipartFile multipartFile) throws IOException;
 
 }
