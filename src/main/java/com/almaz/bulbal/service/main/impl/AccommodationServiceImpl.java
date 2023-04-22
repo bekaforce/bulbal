@@ -7,6 +7,7 @@ import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.model.main.Bed;
 import com.almaz.bulbal.model.main.Residence;
 import com.almaz.bulbal.repository.main.AccommodationRepo;
+import com.almaz.bulbal.repository.main.MainPageDto;
 import com.almaz.bulbal.service.main.AccommodationService;
 import org.springframework.stereotype.Service;
 
@@ -86,6 +87,11 @@ public class AccommodationServiceImpl implements AccommodationService {
             beds.add(bed);
         }
         return beds;
+    }
+
+    @Override
+    public MainPageDto getPreview(Long accommodationId) {
+        return accommodationRepo.getPreview(accommodationId);
     }
 
     private void editAccommodation(AccommodationDto accommodationDto, Accommodation accommodation){
