@@ -3,7 +3,7 @@ package com.almaz.bulbal.dto.main;
 import lombok.Data;
 
 @Data
-public class CreateRoomDto {
+public class CreateBedsDto {
     private Long accommodation_id;
     private String typeOfAccommodation;
     private Long price;

@@ -2,7 +2,7 @@ package com.almaz.bulbal.controller.main;
 
 import com.almaz.bulbal.dto.main.AccommodationDto;
 import com.almaz.bulbal.dto.main.CreateAccommodationDto;
-import com.almaz.bulbal.dto.main.CreateRoomDto;
+import com.almaz.bulbal.dto.main.CreateBedsDto;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.repository.main.MainPageDto;
 import com.almaz.bulbal.service.main.AccommodationService;
@@ -29,8 +29,8 @@ public class AccommodationController {
     }
 
     @PostMapping(value = "/saveBeds")
-    public Accommodation saveBeds(@RequestBody CreateRoomDto createRoomDto){
-        return accommodationService.saveBeds(createRoomDto);
+    public Accommodation saveBeds(@RequestBody CreateBedsDto createBedsDto){
+        return accommodationService.saveBeds(createBedsDto);
     }
     @GetMapping(value = "/{id}")
     public Accommodation accommodationById(@PathVariable(value = "id") Long id){
@@ -50,6 +50,11 @@ public class AccommodationController {
     @GetMapping(value = "getPreview/{accommodationId}")
     public MainPageDto getPreview(@PathVariable(value = "accommodationId") Long accommodationId){
         return accommodationService.getPreview(accommodationId);
+    }
+
+    @PutMapping(value = "/approve/{id}")
+    public boolean approve(@PathVariable(value = "id") Long accommodationId){
+        return accommodationService.approve(accommodationId);
     }
 
 

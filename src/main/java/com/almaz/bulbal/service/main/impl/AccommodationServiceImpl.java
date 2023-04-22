@@ -2,10 +2,9 @@ package com.almaz.bulbal.service.main.impl;
 
 import com.almaz.bulbal.dto.main.AccommodationDto;
 import com.almaz.bulbal.dto.main.CreateAccommodationDto;
-import com.almaz.bulbal.dto.main.CreateRoomDto;
+import com.almaz.bulbal.dto.main.CreateBedsDto;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.model.main.Bed;
-import com.almaz.bulbal.model.main.Residence;
 import com.almaz.bulbal.repository.main.AccommodationRepo;
 import com.almaz.bulbal.repository.main.MainPageDto;
 import com.almaz.bulbal.service.main.AccommodationService;
@@ -41,7 +40,7 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public Accommodation saveBeds(CreateRoomDto createRoomDto) {
+    public Accommodation saveBeds(CreateBedsDto createRoomDto) {
         Accommodation accommodation = accommodationById(createRoomDto.getAccommodation_id());
         if (accommodation != null){
             accommodation.setTypeOfAccommodation(createRoomDto.getTypeOfAccommodation());
@@ -49,6 +48,7 @@ public class AccommodationServiceImpl implements AccommodationService {
             accommodation.setPricePerBed(createRoomDto.getPricePerBed());
             accommodation.setBeds(getBeds(createRoomDto));
             accommodation.setCreateDate(LocalDateTime.now());
+            accommodation.setStatus("На рассмотрении");
             return accommodationRepo.save(accommodation);
         }
         return null;
@@ -80,7 +80,7 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public List<Bed> getBeds(CreateRoomDto createRoomDto) {
+    public List<Bed> getBeds(CreateBedsDto createRoomDto) {
         List<Bed> beds = new ArrayList<>();
         for (int i = 0; i < createRoomDto.getAmountOfBed(); i++){
             Bed bed = new Bed(0L, createRoomDto.getTypeOfBed(), createRoomDto.getSizeOfBed());
@@ -92,6 +92,17 @@ public class AccommodationServiceImpl implements AccommodationService {
     @Override
     public MainPageDto getPreview(Long accommodationId) {
         return accommodationRepo.getPreview(accommodationId);
+    }
+
+    @Override
+    public boolean approve(Long accommodationId) {
+        Accommodation accommodation = accommodationById(accommodationId);
+        if (accommodation != null){
+            accommodation.setStatus("Опубликовано");
+            accommodationRepo.save(accommodation);
+            return true;
+        }
+        return false;
     }
 
     private void editAccommodation(AccommodationDto accommodationDto, Accommodation accommodation){
@@ -109,6 +120,7 @@ public class AccommodationServiceImpl implements AccommodationService {
         accommodation.setCreateDate(LocalDateTime.now());
         accommodation.setBeds(accommodationDto.getBeds());
         accommodation.setPricePerBed(accommodationDto.getPricePerBed());
+        accommodation.setStatus("На рассмотрении");
     }
 
     @Override

@@ -1,15 +1,10 @@
 package com.almaz.bulbal.controller.main;
 
-import com.almaz.bulbal.dto.main.AccommodationDto;
-import com.almaz.bulbal.dto.main.CreateAccommodationDto;
-import com.almaz.bulbal.dto.main.CreateRoomDto;
-import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.model.main.Residence;
 import com.almaz.bulbal.service.main.impl.ResidenceServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.almaz.bulbal.endpoints.Endpoints.RESIDENCE;
 
