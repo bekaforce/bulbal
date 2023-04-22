@@ -25,9 +25,8 @@ public class ImageServiceImpl implements ImageService {
         this.imageRepo = imageRepo;
         this.accommodationService = accommodationService;
     }
-
     @Override
-    public boolean upload(MultipartFile multipartFile, Long accommodation_id) throws IOException {
+    public Image uploadImage(MultipartFile multipartFile, Long accommodation_id) throws IOException{
         if (multipartFile != null && !multipartFile.toString().equals("")){
             File uploadDir = new File(UPLOADED_FOLDER);
             String uuidFile = UUID.randomUUID().toString();
@@ -36,15 +35,13 @@ public class ImageServiceImpl implements ImageService {
             if (accommodationService.accommodationById(accommodation_id)!=null) {
                 Accommodation accommodation = accommodationService.accommodationById(accommodation_id);
                 Image image = new Image(fileName, accommodation);
-                imageRepo.save(image);
-                return true;
+                return imageRepo.save(image);
             }
         }
-        return false;
+        return null;
     }
-
     @Override
-    public boolean uploadMainImage(MultipartFile multipartFile, Long accommodation_id, Boolean main) throws IOException {
+    public Image uploadMainImageNew (MultipartFile multipartFile, Long accommodation_id, Boolean main) throws IOException {
         if (multipartFile != null && !multipartFile.toString().equals("")){
             File uploadDir = new File(UPLOADED_FOLDER);
             String uuidFile = UUID.randomUUID().toString();
@@ -54,11 +51,11 @@ public class ImageServiceImpl implements ImageService {
                 Accommodation accommodation = accommodationService.accommodationById(accommodation_id);
                 Image image = new Image(fileName, accommodation);
                 image.setMain(main);
-                imageRepo.save(image);
-                return true;
+
+                return imageRepo.save(image);
             }
         }
-        return false;
+        return null;
     }
 
     @Override
