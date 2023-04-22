@@ -15,12 +15,10 @@ import java.util.List;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-    private final UserServiceImpl userService;
     private final AccommodationServiceImpl accommodationService;
     private final CommentRepo commentRepo;
 
-    public CommentServiceImpl(UserServiceImpl userService, AccommodationServiceImpl accommodationService, CommentRepo commentRepo) {
-        this.userService = userService;
+    public CommentServiceImpl(AccommodationServiceImpl accommodationService, CommentRepo commentRepo) {
         this.accommodationService = accommodationService;
         this.commentRepo = commentRepo;
     }
@@ -34,9 +32,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void setComment(Comment comment, CommentDto commentDto) {
-        User user = userService.userById(commentDto.getUserId());
         Accommodation accommodation = accommodationService.accommodationById(commentDto.getAccommodationId());
-        comment.setUser(user);
         comment.setAccommodation(accommodation);
         comment.setText(commentDto.getText());
         comment.setCreatedAt(LocalDateTime.now(ZoneId.of("Asia/Bishkek")));

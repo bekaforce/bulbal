@@ -63,8 +63,8 @@ public class User {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<LikeTravel> likeTravels;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<Comment> comments;
 
 
