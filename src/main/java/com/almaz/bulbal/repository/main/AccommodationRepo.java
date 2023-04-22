@@ -36,7 +36,7 @@ public interface AccommodationRepo extends JpaRepository<Accommodation, Long> {
             nativeQuery = true)
     List<MainPageDto> getAdminMainPage(@Param("start") LocalDateTime start,
                                        @Param("end") LocalDateTime end,
-                                       @Param("statusType") String type);
+                                       @Param("type") String type);
 
     @Query(value = "SELECT x.id, x.region, x.locality_name as localityName, x.title_of_accommodation as titleOfAccommodation, x.price, i.file_name as imageFullName, " +
             "x.create_date as createDate " +
