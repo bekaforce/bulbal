@@ -4,6 +4,7 @@ import com.almaz.bulbal.dto.main.AccommodationDto;
 import com.almaz.bulbal.dto.main.CreateAccommodationDto;
 import com.almaz.bulbal.dto.main.CreateBedsDto;
 import com.almaz.bulbal.model.main.Accommodation;
+import com.almaz.bulbal.repository.main.MainPageDto;
 import com.almaz.bulbal.service.main.AccommodationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,11 @@ public class AccommodationController {
     @PutMapping(value = "/editAccommodation")
     public Optional<Accommodation> editAccommodation (@RequestBody AccommodationDto accommodationDto){
         return accommodationService.editAccommodation(accommodationDto);
+    }
+
+    @GetMapping(value = "getPreview/{accommodationId}")
+    public MainPageDto getPreview(@PathVariable(value = "accommodationId") Long accommodationId){
+        return accommodationService.getPreview(accommodationId);
     }
 
 

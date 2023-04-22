@@ -5,6 +5,7 @@ import com.almaz.bulbal.dto.main.CreateAccommodationDto;
 import com.almaz.bulbal.dto.main.CreateBedsDto;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.model.main.Bed;
+import com.almaz.bulbal.repository.main.MainPageDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +19,5 @@ public interface AccommodationService {
     Accommodation accommodationById(Long id);
     Optional<Accommodation> editAccommodation(AccommodationDto accommodationDto);
     List<Bed> getBeds(CreateBedsDto createRoomDto);
+    MainPageDto getPreview(Long accommodationId);
 }
