@@ -67,6 +67,5 @@ public class AdvantageController {
             response.setStatus(HttpStatus.NO_CONTENT.value());
         }
         advantageService.saveIcon(multipartFile, convenienceName);
-
     }
 }
