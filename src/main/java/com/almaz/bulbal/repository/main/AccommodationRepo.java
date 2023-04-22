@@ -28,6 +28,18 @@ public interface AccommodationRepo extends JpaRepository<Accommodation, Long> {
 
     @Query(value = "SELECT x.id, x.region, x.locality_name as localityName, x.title_of_accommodation as titleOfAccommodation, x.price, i.file_name as imageFullName, " +
             "x.create_date as createDate " +
+            "FROM public.accommodation x, public.image i " +
+            "where i.accommodation_id = x.id " +
+            "and i.main is true " +
+            "and x.status =:type and x.create_date between :start and :end " +
+            "order by x.create_date desc",
+            nativeQuery = true)
+    List<MainPageDto> getAdminMainPage(@Param("start") LocalDateTime start,
+                                       @Param("end") LocalDateTime end,
+                                       @Param("statusType") String type);
+
+    @Query(value = "SELECT x.id, x.region, x.locality_name as localityName, x.title_of_accommodation as titleOfAccommodation, x.price, i.file_name as imageFullName, " +
+            "x.create_date as createDate " +
             "FROM public.accommodation x, public.image i \n" +
             "where i.accommodation_id = x.id \n" +
             "and i.main is true " +

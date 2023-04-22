@@ -52,9 +52,10 @@ public class AccommodationController {
         return accommodationService.getPreview(accommodationId);
     }
 
-    @PutMapping(value = "/approve/{id}")
-    public boolean approve(@PathVariable(value = "id") Long accommodationId){
-        return accommodationService.approve(accommodationId);
+    @PutMapping(value = "/approve/{id}/{type}")
+    public boolean approve(@PathVariable(value = "id") Long accommodationId,
+                           @PathVariable(value = "type")String type){
+        return accommodationService.approve(accommodationId, type);
     }
 
 

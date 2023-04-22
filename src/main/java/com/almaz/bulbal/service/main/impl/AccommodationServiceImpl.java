@@ -95,10 +95,10 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
-    public boolean approve(Long accommodationId) {
+    public boolean approve(Long accommodationId, String type) {
         Accommodation accommodation = accommodationById(accommodationId);
         if (accommodation != null){
-            accommodation.setStatus("Опубликовано");
+            accommodation.setStatus(type);
             accommodationRepo.save(accommodation);
             return true;
         }
