@@ -71,6 +71,9 @@ public class Accommodation {
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 
+    @Column(name = "status")
+    private String status;
+
 //    @ManyToOne
 //    @JoinColumn(name = "residence_id", referencedColumnName = "id")
 //    private Residence residence;

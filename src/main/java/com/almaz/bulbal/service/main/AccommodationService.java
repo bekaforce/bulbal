@@ -20,4 +20,6 @@ public interface AccommodationService {
     Optional<Accommodation> editAccommodation(AccommodationDto accommodationDto);
     List<Bed> getBeds(CreateBedsDto createRoomDto);
     MainPageDto getPreview(Long accommodationId);
+
+    boolean approve(Long accommodationId);
 }

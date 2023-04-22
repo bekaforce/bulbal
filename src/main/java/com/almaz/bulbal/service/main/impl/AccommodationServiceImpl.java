@@ -48,6 +48,7 @@ public class AccommodationServiceImpl implements AccommodationService {
             accommodation.setPricePerBed(createRoomDto.getPricePerBed());
             accommodation.setBeds(getBeds(createRoomDto));
             accommodation.setCreateDate(LocalDateTime.now());
+            accommodation.setStatus("На рассмотрении");
             return accommodationRepo.save(accommodation);
         }
         return null;
@@ -93,6 +94,17 @@ public class AccommodationServiceImpl implements AccommodationService {
         return accommodationRepo.getPreview(accommodationId);
     }
 
+    @Override
+    public boolean approve(Long accommodationId) {
+        Accommodation accommodation = accommodationById(accommodationId);
+        if (accommodation != null){
+            accommodation.setStatus("Опубликовано");
+            accommodationRepo.save(accommodation);
+            return true;
+        }
+        return false;
+    }
+
     private void editAccommodation(AccommodationDto accommodationDto, Accommodation accommodation){
         //Residence residence = residenceService.residenceById(accommodationDto.getResidenceId());
         //accommodation.setResidence(residence);
@@ -108,6 +120,7 @@ public class AccommodationServiceImpl implements AccommodationService {
         accommodation.setCreateDate(LocalDateTime.now());
         accommodation.setBeds(accommodationDto.getBeds());
         accommodation.setPricePerBed(accommodationDto.getPricePerBed());
+        accommodation.setStatus("На рассмотрении");
     }
 
     @Override
