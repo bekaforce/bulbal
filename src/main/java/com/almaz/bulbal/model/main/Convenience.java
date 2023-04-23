@@ -19,8 +19,8 @@ public class Convenience {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "convenience_name", nullable = false)
-    private String convenienceName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @JsonIgnore
     @Column(name = "accommodation_id")
