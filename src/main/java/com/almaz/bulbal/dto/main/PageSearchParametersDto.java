@@ -7,5 +7,5 @@ public class PageSearchParametersDto {
     private int pageNumber;
     private int pageSize;
     private String sortBy;
-    private String region;
+    private String locality;
 }

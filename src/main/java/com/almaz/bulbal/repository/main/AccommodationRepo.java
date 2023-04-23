@@ -57,8 +57,8 @@ public interface AccommodationRepo extends JpaRepository<Accommodation, Long> {
             "and x.id not in (SELECT b.accommodation_id " +
             "FROM booking b " +
             "WHERE b.check_in < :checkOutDateTime AND b.check_out > :checkInDateTime) " +
-            "and x.region = :region " +
+            "and x.locality_name  = :locality " +
             "and x.status = 'Опубликовано' " +
             "order by x.create_date desc", nativeQuery = true)
-    Page<MainPageDto> searchAccommodations(PageRequest pageRequest, @Param(value = "checkInDateTime") LocalDateTime checkInDateTime, @Param(value = "checkOutDateTime") LocalDateTime checkOutDateTime, @Param(value = "region") String region);
+    Page<MainPageDto> searchAccommodations(PageRequest pageRequest, @Param(value = "checkInDateTime") LocalDateTime checkInDateTime, @Param(value = "checkOutDateTime") LocalDateTime checkOutDateTime, @Param(value = "locality") String locality);
 }
