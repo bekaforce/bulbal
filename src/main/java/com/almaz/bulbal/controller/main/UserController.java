@@ -21,4 +21,9 @@ public class UserController {
     public User fillOutAForm(@RequestBody FormDto formDto){
         return userService.fillOutAForm(formDto);
     }
+
+    @GetMapping(value = "/findUserById/{id}")
+    public User userById(@PathVariable(value = "id") Long id) {
+    return userService.userById(id);
+    }
 }
