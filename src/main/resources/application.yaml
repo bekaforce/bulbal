@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: local
+    active: docker_prod
   servlet:
     multipart:
       enabled: true

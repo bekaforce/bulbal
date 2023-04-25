@@ -47,7 +47,7 @@ security:
       expire-length: 14400000
 
 server-config:
-  upload-path: '/var/lib/docker/volumes/bulbal/_data'
+  upload-path: '/var/www/html/img'
 #server-config:
 #  upload-path: C:\Users\atemirkanov\Desktop\bulbal
 

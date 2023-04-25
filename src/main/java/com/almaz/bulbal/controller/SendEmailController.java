@@ -1,6 +1,7 @@
 package com.almaz.bulbal.controller;
 
 import com.almaz.bulbal.dto.email.EmailDetails;
+import com.almaz.bulbal.security.domain.User;
 import com.almaz.bulbal.security.dto.UserDto;
 import com.almaz.bulbal.security.service.impl.UserServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -28,10 +29,7 @@ public class SendEmailController {
     }
 
     @PostMapping("/checkOtp")
-    public ResponseEntity<?> checkOtp(@RequestBody UserDto userDto) {
-        boolean response = userService.checkOtpPassword(userDto);
-        return response
-                ? new ResponseEntity<>("OTP correct: " + userDto.getEmail(), HttpStatus.OK)
-                : new ResponseEntity<>("Not found: " + userDto.getOtp(), HttpStatus.NOT_FOUND);
+    public String checkOtp(@RequestBody UserDto userDto) {
+        return userService.checkOtpPassword(userDto);
     }
 }

@@ -8,6 +8,7 @@ import com.almaz.bulbal.security.domain.repo.UserRepo;
 import com.almaz.bulbal.security.dto.FormDto;
 import com.almaz.bulbal.security.dto.GetUserDto;
 import com.almaz.bulbal.security.dto.UserDto;
+import com.almaz.bulbal.security.jwt.JwtTokenProvider;
 import com.almaz.bulbal.security.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -31,14 +32,16 @@ public class UserServiceImpl implements UserService {
     private final RoleServiceImpl roleService;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JavaMailSender javaMailSender;
+    private final JwtTokenProvider jwtTokenProvider;
     private final SpringTemplateEngine springTemplateEngine;
 
     public UserServiceImpl(UserRepo userRepo, RoleServiceImpl roleService,
-                           BCryptPasswordEncoder passwordEncoder, JavaMailSender javaMailSender, SpringTemplateEngine springTemplateEngine) {
+                           BCryptPasswordEncoder passwordEncoder, JavaMailSender javaMailSender, JwtTokenProvider jwtTokenProvider, SpringTemplateEngine springTemplateEngine) {
         this.userRepo = userRepo;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
         this.javaMailSender = javaMailSender;
+        this.jwtTokenProvider = jwtTokenProvider;
         this.springTemplateEngine = springTemplateEngine;
     }
     String pass = String.valueOf(generateDigits());
@@ -64,6 +67,25 @@ public class UserServiceImpl implements UserService {
         user.setPhoneNumber(userDto.getPhoneNumber());
         user.setDate(LocalDateTime.now());
         return userRepo.save(user);
+    }
+
+    public String checkOtpPassword(UserDto userDto){
+        String email = userDto.getEmail();
+        if (userDto.getOtp().equals(userRepo.getOtpByEmail(email))){
+            userRepo.findById(userRepo.getIdByUserName(email))
+                    .map(user -> {
+                        user.setPassword(passwordEncoder.encode(userRepo.getPersonalPass(email)));
+                        user.setDate(LocalDateTime.now());
+                        return userRepo.save(user);
+                    });
+            User user = findByUsername(userDto.getEmail());
+            return "token: " + jwtTokenProvider.createToken(user.getUsername(), user.getRoles(), user.getId());
+
+        }
+        else {
+            return null;
+        }
+
     }
 
     @Override
@@ -171,21 +193,6 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public Boolean checkOtpPassword(UserDto userDto){
-        String email = userDto.getEmail();
-        if (userDto.getOtp().equals(userRepo.getOtpByEmail(email))){
-            userRepo.findById(userRepo.getIdByUserName(email))
-                    .map(user -> {
-                        user.setPassword(passwordEncoder.encode(userRepo.getPersonalPass(email)));
-                        user.setDate(LocalDateTime.now());
-                        return userRepo.save(user);
-                    });
-            return true;
-        }
-        else {
-            return false;
-        }
 
-    }
 }
 
