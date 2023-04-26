@@ -8,4 +8,5 @@ public class PageSearchParametersDto {
     private int pageSize;
     private String sortBy;
     private String locality;
+    private Long capacity;
 }

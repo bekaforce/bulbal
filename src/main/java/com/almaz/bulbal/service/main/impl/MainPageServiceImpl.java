@@ -33,11 +33,17 @@ public class MainPageServiceImpl implements MainPageService {
     @Override
     public Page<MainPageDto> searchAccommodations(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime) {
         PageRequest pageRequest = PageRequest.of(pageSearchParametersDto.getPageNumber(), pageSearchParametersDto.getPageSize(), Sort.by(pageSearchParametersDto.getSortBy()));
-        return accommodationRepo.searchAccommodations(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getLocality());
+        return accommodationRepo.searchAccommodations(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getLocality(), pageSearchParametersDto.getCapacity());
     }
 
     @Override
     public List<MainPageDto> getAdminMainPage(GetLocalDateTimeDto getLocalDateTimeDto) {
         return accommodationRepo.getAdminMainPage(getLocalDateTimeDto.getStart(), getLocalDateTimeDto.getEnd(), getLocalDateTimeDto.getType());
+    }
+
+    @Override
+    public Page<MainPageDto> searchBeds(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime) {
+        PageRequest pageRequest = PageRequest.of(pageSearchParametersDto.getPageNumber(), pageSearchParametersDto.getPageSize(), Sort.by(pageSearchParametersDto.getSortBy()));
+        return accommodationRepo.searchBeds(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getLocality(), pageSearchParametersDto.getCapacity());
     }
 }
