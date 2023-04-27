@@ -41,7 +41,7 @@ public interface AccommodationRepo extends JpaRepository<Accommodation, Long> {
     @Query(value = "SELECT x.id, x.region, x.locality_name as localityName, x.title_of_accommodation as titleOfAccommodation, x.price, i.file_name as imageFullName, " +
             "x.create_date as createDate " +
             "FROM public.accommodation x, public.image i \n" +
-            "where i.accommodation_id = x.id \n" +
+            "where i.accommodation_id = x.id " +
             "and i.main is true " +
             "and x.id =:accommodationId " +
             "order by x.create_date desc",
@@ -67,7 +67,7 @@ public interface AccommodationRepo extends JpaRepository<Accommodation, Long> {
             "order by x.create_date desc", nativeQuery = true)
     Page<MainPageDto> searchAccommodations(PageRequest pageRequest, @Param(value = "checkInDateTime") LocalDateTime checkInDateTime, @Param(value = "checkOutDateTime") LocalDateTime checkOutDateTime, @Param(value = "locality") String locality, @Param(value = "capacity") Long capacity);
 
-    @Query(value = "SELECT r.id AS id, r.region, r.locality_name as localityName, r.title_of_accommodation as titleOfAccommodation, r.price_per_bed as price, i.file_name as imageFullName, r.create_date as createDate " +
+    @Query(value = "SELECT b.id AS id, r.region, r.locality_name as localityName, r.title_of_accommodation as titleOfAccommodation, r.price_per_bed as price, i.file_name as imageFullName, r.create_date as createDate " +
             "FROM bed b " +
             "JOIN public.accommodation r ON r.id = b.accommodation_id " +
             "join public.image i on i.accommodation_id = r.id " +
@@ -76,7 +76,7 @@ public interface AccommodationRepo extends JpaRepository<Accommodation, Long> {
             "  FROM booking bk " +
             "  WHERE bk.bed_id = b.id " +
             "    AND bk.check_in < :checkOutDateTime AND bk.check_out  > :checkInDateTime " +
-            "    having b.size > :capacity) " +
+            "    having b.size < :capacity) " +
             "AND NOT EXISTS (" +
             "  SELECT 1 " +
             "  FROM booking bk " +
@@ -84,6 +84,8 @@ public interface AccommodationRepo extends JpaRepository<Accommodation, Long> {
             "  AND bk.check_in  < :checkOutDateTime AND bk.check_out  > :checkInDateTime) " +
             "and r.locality_name = :locality " +
             "and r.status = 'Опубликовано' " +
+            "and i.accommodation_id = r.id " +
+            "and i.main = true " +
             "order by r.create_date desc", nativeQuery = true)
     Page<MainPageDto> searchBeds(PageRequest pageRequest, @Param(value = "checkInDateTime") LocalDateTime checkInDateTime, @Param(value = "checkOutDateTime") LocalDateTime checkOutDateTime, @Param(value = "locality") String locality, @Param(value = "capacity") Long capacity);
 }
