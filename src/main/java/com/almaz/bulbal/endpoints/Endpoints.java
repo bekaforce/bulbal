@@ -27,5 +27,5 @@ public class Endpoints {
 
     public final static String USER = API + V1 + "/user";
     public final static String COMMENT = API + V1 + "/comment";
-
+    public final static String MESSAGE = API + V1 + "/message";
 }

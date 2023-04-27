@@ -8,4 +8,6 @@ import java.time.LocalDateTime;
 public class BookAccommodationDto extends BookingDto {
     private Long accommodationId;
     private Long guests;
+    private Long rentPayment;
+    private Long commission;
 }

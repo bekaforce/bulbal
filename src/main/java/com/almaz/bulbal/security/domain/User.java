@@ -4,6 +4,7 @@ import com.almaz.bulbal.enums.Status;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.model.main.Booking;
 import com.almaz.bulbal.model.main.Comment;
+import com.almaz.bulbal.model.notification.Message;
 import com.almaz.bulbal.model.user.Hobby;
 import com.almaz.bulbal.model.user.LikeTravel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -66,6 +67,14 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<Comment> comments;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "sender_id", referencedColumnName = "id")
+    private List<Message> sent;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "receiver_id", referencedColumnName = "id")
+    private List<Message> received;
 
 
 }

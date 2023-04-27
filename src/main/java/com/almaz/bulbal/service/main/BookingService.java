@@ -12,7 +12,7 @@ public interface BookingService {
     Booking bookAccommodation(BookAccommodationDto bookingDto);
 
     Booking bookBed(BookBedDto bookingDto);
-    void setBooking(Booking booking, LocalDateTime checkIn, LocalDateTime checkOut, Long guests, Long userId);
+    void setBooking(Booking booking, LocalDateTime checkIn, LocalDateTime checkOut, Long guests, Long userId, Long rentPayment, Long commission);
 
     List<Booking> bookBeds(List<BookBedDto> bookBedDtoList);
 

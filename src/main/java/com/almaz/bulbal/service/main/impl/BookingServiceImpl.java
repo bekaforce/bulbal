@@ -25,7 +25,7 @@ public class BookingServiceImpl implements BookingService {
     public Booking bookAccommodation(BookAccommodationDto bookingDto) {
         Booking booking = new Booking();
         booking.setAccommodationId(bookingDto.getAccommodationId());
-        setBooking(booking, bookingDto.getCheckIn(), bookingDto.getCheckOut(), bookingDto.getGuests(), bookingDto.getUserId());
+        setBooking(booking, bookingDto.getCheckIn(), bookingDto.getCheckOut(), bookingDto.getGuests(), bookingDto.getUserId(), bookingDto.getRentPayment(), bookingDto.getCommission());
         return bookingRepo.save(booking);
     }
 
@@ -33,19 +33,21 @@ public class BookingServiceImpl implements BookingService {
     public Booking bookBed(BookBedDto bookingDto) {
         Booking booking = new Booking();
         booking.setBedId(bookingDto.getBedId());
-        setBooking(booking, bookingDto.getCheckIn(), bookingDto.getCheckOut(), null, bookingDto.getUserId());
+        setBooking(booking, bookingDto.getCheckIn(), bookingDto.getCheckOut(), null, bookingDto.getUserId(), bookingDto.getRentPayment(), bookingDto.getCommission());
         return bookingRepo.save(booking);
     }
 
     @Override
-    public void setBooking(Booking booking, LocalDateTime checkIn, LocalDateTime checkOut, Long guests, Long userId) {
+    public void setBooking(Booking booking, LocalDateTime checkIn, LocalDateTime checkOut, Long guests, Long userId, Long rentPayment, Long commission) {
         booking.setCheckIn(checkIn);
         booking.setCheckOut(checkOut);
         booking.setGuests(guests);
         booking.setBookingTime(LocalDateTime.now(ZoneId.of("Asia/Bishkek")));
         booking.setBookingStatus("Забронировано");
-        booking.setPaymentStatus("Не оплачено");
+        booking.setPaymentStatus("Оплачено");
         booking.setUserId(userId);
+        booking.setRentPayment(rentPayment);
+        booking.setCommission(commission);
     }
 
     @Override
