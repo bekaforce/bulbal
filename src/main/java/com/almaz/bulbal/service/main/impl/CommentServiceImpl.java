@@ -1,6 +1,7 @@
 package com.almaz.bulbal.service.main.impl;
 
 import com.almaz.bulbal.dto.main.CommentDto;
+import com.almaz.bulbal.dto.main.GetCommentDto;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.model.main.Comment;
 import com.almaz.bulbal.repository.CommentRepo;
@@ -25,21 +26,25 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment save(CommentDto commentDto) {
-        Comment comment = new Comment();
-        setComment(comment, commentDto);
-        return commentRepo.save(comment);
-    }
-
-    @Override
-    public void setComment(Comment comment, CommentDto commentDto) {
         Accommodation accommodation = accommodationService.accommodationById(commentDto.getAccommodationId());
-        comment.setAccommodation(accommodation);
-        comment.setText(commentDto.getText());
-        comment.setCreatedAt(LocalDateTime.now(ZoneId.of("Asia/Bishkek")));
+        if (accommodation != null){
+            Comment comment = new Comment();
+            setComment(comment, commentDto, accommodation);
+            return commentRepo.save(comment);
+        }
+        return null;
     }
 
     @Override
-    public List<Comment> allByAccommodationId(Long accommodationId) {
-        return commentRepo.findAllByAccommodationId(accommodationId);
+    public void setComment(Comment comment, CommentDto commentDto, Accommodation accommodation) {
+            comment.setAccommodation(accommodation);
+            comment.setText(commentDto.getText());
+            comment.setCreatedAt(LocalDateTime.now(ZoneId.of("Asia/Bishkek")));
+            comment.setUserId(commentDto.getUserId());
+    }
+
+    @Override
+    public List<GetCommentDto> allByAccommodationId(Long accommodationId) {
+        return commentRepo.getCommentsByAccommodationId(accommodationId);
     }
 }

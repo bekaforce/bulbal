@@ -2,6 +2,7 @@ package com.almaz.bulbal.controller.main;
 
 import com.almaz.bulbal.dto.main.CommentDto;
 import com.almaz.bulbal.dto.main.CreateAccommodationDto;
+import com.almaz.bulbal.dto.main.GetCommentDto;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.model.main.Comment;
 import com.almaz.bulbal.service.main.impl.CommentServiceImpl;
@@ -27,7 +28,7 @@ public class CommentController {
     }
 
     @GetMapping(value = "/allByAccommodationId/{accommodation_id}")
-    public List<Comment> allByAccommodationId (@PathVariable(value = "accommodation_id") Long accommodationId){
+    public List<GetCommentDto> allByAccommodationId (@PathVariable(value = "accommodation_id") Long accommodationId){
         return commentService.allByAccommodationId(accommodationId);
     }
 }
