@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
         }
         else {
-            return null;
+            return "Не верный OTP";
         }
 
     }
