@@ -138,12 +138,25 @@ public class UserServiceImpl implements UserService {
             context.setVariables(model);
             String html = springTemplateEngine.process("welcome-email", context);
             helper.setText(html, true);
-            register(UserDto.builder()
-                    .email(details.getEmail())
-                    .password(pass)
-                    .otp(pass)
-                    .personalPass(details.getPassword())
-                    .build());
+            if (!details.getEmail().equals(userRepo.getOtpByEmail(details.getEmail()))) {
+                register(UserDto.builder()
+                        .email(details.getEmail())
+                        .password(pass)
+                        .otp(pass)
+                        .personalPass(details.getPassword())
+                        .build());
+
+
+            }
+            else {
+                userRepo.findById(userRepo.getIdByUserName(details.getEmail())).map(
+                        user -> {
+                            user.setOtp(pass);
+                            user.setDate(LocalDateTime.now());
+                            return userRepo.save(user);
+                        }
+                );
+            }
             javaMailSender.send(message);
             return "Mail Sent Successfully...";
         } catch (MessagingException e) {
