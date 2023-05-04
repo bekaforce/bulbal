@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: docker_prod
+    active: local
   servlet:
     multipart:
       enabled: true
@@ -10,8 +10,8 @@ server:
   servlet:
     context-path: /bulbal
   port: 8080
-#  ssl:
-#    key-store: classpath:aza.jks
-#    key-store-type: JKS
-#    key-store-password: 3edcVFR$
+  ssl:
+    key-store: classpath:bulbal.jks
+    key-store-type: JKS
+    key-store-password: 3edcVFR$
 

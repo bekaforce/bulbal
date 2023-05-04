@@ -66,6 +66,6 @@ publish to prod:
     - docker image prune -a -f
   only:
     - bulbal
-  when: on_success
+  when: manual
   tags:
     - sks
