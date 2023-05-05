@@ -30,7 +30,7 @@ public class TypeOfBedServiceImpl implements TypeOfBedService {
         TypeOfBed typeOfBed = findById(id);
         if (typeOfBed != null){
             typeOfBed.setName(getMapDto.getName());
-            typeOfBed.setSize(typeOfBed.getSize());
+            typeOfBed.setSize(getMapDto.getSize());
             return typeOfBedRepo.save(typeOfBed);
         }
         return null;
