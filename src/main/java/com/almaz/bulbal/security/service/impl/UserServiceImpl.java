@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
             model.put("pass", pass);
             model.put("userName", details.getEmail().replaceAll("@.*", ""));
             model.put("sign", "Команда Bulbal");
-            helper.setFrom("bulbal@gmail.com");
+            helper.setFrom("bulbal@bulbal.services");
             helper.setTo(details.getEmail());
             helper.setSubject("Регистрация на сайтe Bulbal");
             context.setVariables(model);
