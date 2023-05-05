@@ -1,5 +1,6 @@
 package com.almaz.bulbal.model.main;
 
+import com.almaz.bulbal.security.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

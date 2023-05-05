@@ -4,6 +4,8 @@ package com.almaz.bulbal.service.main.impl;
 import com.almaz.bulbal.model.main.Image;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.repository.main.ImageRepo;
+import com.almaz.bulbal.security.domain.repo.UserRepo;
+import com.almaz.bulbal.security.service.UserService;
 import com.almaz.bulbal.service.main.ImageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,12 +19,16 @@ import java.util.UUID;
 @Service
 public class ImageServiceImpl implements ImageService {
     private final ImageRepo imageRepo;
+    private final UserService userService;
+    private final UserRepo userRepo;
     private final AccommodationServiceImpl accommodationService;
     @Value("${server-config.upload-path}")
     private String UPLOADED_FOLDER;
 
-    public ImageServiceImpl(ImageRepo imageRepo, AccommodationServiceImpl accommodationService) {
+    public ImageServiceImpl(ImageRepo imageRepo, UserService userService, UserRepo userRepo, AccommodationServiceImpl accommodationService) {
         this.imageRepo = imageRepo;
+        this.userService = userService;
+        this.userRepo = userRepo;
         this.accommodationService = accommodationService;
     }
     @Override
@@ -53,6 +59,27 @@ public class ImageServiceImpl implements ImageService {
                 image.setMain(main);
 
                 return imageRepo.save(image);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Image uploadAvatar(MultipartFile multipartFile, Long userId) throws IOException {
+        if (multipartFile != null && !multipartFile.toString().equals("")){
+            File uploadDir = new File(UPLOADED_FOLDER+"/avatar");
+            String uuidFile = UUID.randomUUID().toString();
+            String fileName = uuidFile +"_-_"+ multipartFile.getOriginalFilename();
+            multipartFile.transferTo(new File(uploadDir + "/" + fileName));
+            if (userRepo.findById(userId).isPresent()) {
+                Image image = new Image();
+                imageRepo.save(image);
+
+                userRepo.findById(userId).map(user -> {
+                    user.setImage(image);
+                    return userRepo.save(user);
+                });
+
             }
         }
         return null;

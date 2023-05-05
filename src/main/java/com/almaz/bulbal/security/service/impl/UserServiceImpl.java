@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
             model.put("pass", pass);
             model.put("userName", details.getEmail().replaceAll("@.*", ""));
             model.put("sign", "Команда Bulbal");
-            helper.setFrom("bulbal@bulbal.services");
+            helper.setFrom("bulbal@gmail.com");
             helper.setTo(details.getEmail());
             helper.setSubject("Регистрация на сайтe Bulbal");
             context.setVariables(model);
@@ -190,7 +190,7 @@ public class UserServiceImpl implements UserService {
         user.setInstagramUrl(formDto.getInstagramUrl());
         user.setTwitterUrl(formDto.getTwitterUrl());
         user.setHobbies(formDto.getHobbies());
-        user.setLikeTravels(formDto.getTravels());
+        user.setLikeTravels(formDto.getLikeTravels());
         user.setLanguage(formDto.getLanguage());
     }
 

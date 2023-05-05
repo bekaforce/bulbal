@@ -19,5 +19,5 @@ public class FormDto {
     private String description;
     private String phoneNumber;
     private List<Hobby> hobbies;
-    private List<LikeTravel> travels;
+    private List<LikeTravel> likeTravels;
 }

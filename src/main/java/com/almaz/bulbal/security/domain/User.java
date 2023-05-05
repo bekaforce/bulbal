@@ -4,6 +4,7 @@ import com.almaz.bulbal.enums.Status;
 import com.almaz.bulbal.model.main.Accommodation;
 import com.almaz.bulbal.model.main.Booking;
 import com.almaz.bulbal.model.main.Comment;
+import com.almaz.bulbal.model.main.Image;
 import com.almaz.bulbal.model.notification.Message;
 import com.almaz.bulbal.model.user.Hobby;
 import com.almaz.bulbal.model.user.LikeTravel;
@@ -48,12 +49,16 @@ public class User {
     private String phoneNumber;
     private LocalDateTime date;
 
+    @OneToOne
+    @JoinColumn(name = "avatar_id", referencedColumnName = "id")
+    private Image image;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private List<Accommodation> accommodation;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "avatar", referencedColumnName = "id")
     private List<Booking> bookings;
 
     @OneToMany(cascade = CascadeType.ALL)

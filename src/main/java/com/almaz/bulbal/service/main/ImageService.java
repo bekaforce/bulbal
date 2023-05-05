@@ -11,6 +11,7 @@ import java.util.List;
 public interface ImageService {
     Image uploadImage(MultipartFile multipartFile, Long accommodation_id) throws IOException;
     Image uploadMainImageNew (MultipartFile multipartFile, Long accommodation_id, Boolean main) throws IOException;
+    Image uploadAvatar (MultipartFile multipartFile, Long userId) throws IOException;
     boolean delete(Long id);
     File findFileByFileName(String fileName);
 
