@@ -20,6 +20,9 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT otp FROM public.users x where username =:email", nativeQuery = true)
     String getOtpByEmail(@Param("email")String email);
+
+    @Query(value = "SELECT x.username FROM public.users x where username =:email", nativeQuery = true)
+    String getUserNameByEmail(@Param("email")String email);
     @Query(value = "SELECT id FROM public.users x where username =:email", nativeQuery = true)
     Long getIdByUserName(@Param("email")String email);
 

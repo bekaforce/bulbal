@@ -127,9 +127,9 @@ public class UserServiceImpl implements UserService {
             MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
             Context context = new Context();
             Map<String, Object> model = new HashMap<>();
-
+            String pass2 = String.valueOf(generateDigits());
             model.put("location", "Кыргызстан");
-            model.put("pass", pass);
+            model.put("pass", pass2);
             model.put("userName", details.getEmail().replaceAll("@.*", ""));
             model.put("sign", "Команда Bulbal");
             helper.setFrom("bulbal@bulbal.services");
@@ -138,11 +138,11 @@ public class UserServiceImpl implements UserService {
             context.setVariables(model);
             String html = springTemplateEngine.process("welcome-email", context);
             helper.setText(html, true);
-            if (!details.getEmail().equals(userRepo.getOtpByEmail(details.getEmail()))) {
+            if (!details.getEmail().equals(userRepo.getUserNameByEmail(details.getEmail()))) {
                 register(UserDto.builder()
                         .email(details.getEmail())
-                        .password(pass)
-                        .otp(pass)
+                        .password(pass2)
+                        .otp(pass2)
                         .personalPass(details.getPassword())
                         .build());
 
@@ -151,7 +151,8 @@ public class UserServiceImpl implements UserService {
             else {
                 userRepo.findById(userRepo.getIdByUserName(details.getEmail())).map(
                         user -> {
-                            user.setOtp(pass);
+                            user.setOtp(pass2);
+                            user.setPersonalPass(details.getPassword());
                             user.setDate(LocalDateTime.now());
                             return userRepo.save(user);
                         }
