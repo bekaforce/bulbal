@@ -11,8 +11,8 @@
 	<groupId>com.almaz</groupId>
 	<artifactId>admin_bulbal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Balbul</name>
-	<description>Project for sale phone</description>
+	<name>Bulbal</name>
+	<description>Project</description>
 	<properties>
 		<java.version>1.8</java.version>
 		<maven.test.skip>true</maven.test.skip>

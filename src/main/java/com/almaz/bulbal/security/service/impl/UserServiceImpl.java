@@ -69,22 +69,17 @@ public class UserServiceImpl implements UserService {
         return userRepo.save(user);
     }
 
-    public String checkOtpPassword(UserDto userDto){
+    public boolean checkOtpPassword(UserDto userDto){
         String email = userDto.getEmail();
-        if (userDto.getOtp().equals(userRepo.getOtpByEmail(email))){
-            userRepo.findById(userRepo.getIdByUserName(email))
-                    .map(user -> {
-                        user.setPassword(passwordEncoder.encode(userRepo.getPersonalPass(email)));
-                        user.setDate(LocalDateTime.now());
-                        return userRepo.save(user);
-                    });
-            User user = findByUsername(userDto.getEmail());
-            return "token: " + jwtTokenProvider.createToken(user.getUsername(), user.getRoles(), user.getId());
-
-        }
-        else {
-            return "Не верный OTP";
-        }
+        //            userRepo.findById(userRepo.getIdByUserName(email))
+        //                    .map(user -> {
+        //                        user.setPassword(passwordEncoder.encode(userRepo.getPersonalPass(email)));
+        //                        user.setDate(LocalDateTime.now());
+        //                        return userRepo.save(user);
+        //                    });
+        //            User user = findByUsername(userDto.getEmail());
+        //            return "token: " + jwtTokenProvider.createToken(user.getUsername(), user.getRoles(), user.getId());
+        return userDto.getOtp().equals(userRepo.getOtpByEmail(email));
 
     }
 
