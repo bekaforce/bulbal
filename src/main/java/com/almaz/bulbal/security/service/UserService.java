@@ -13,6 +13,7 @@ import java.util.Optional;
 
 public interface UserService {
     User register(UserDto userDto);
+    String getToken(UserDto userDto);
     User findByUsername(String userName);
 
     List<User> findAllUsers();

@@ -44,21 +44,8 @@ public class SendEmailController {
     public ResponseEntity<?> checkOtp(@RequestBody UserDto userDto) {
         boolean response = userService.checkOtpPassword(userDto);
         return response
-                ? new ResponseEntity<>(getToken(userDto), HttpStatus.OK)
+                ? new ResponseEntity<>(userService.getToken(userDto), HttpStatus.OK)
                 : new ResponseEntity<>("Bad OTP", HttpStatus.NOT_FOUND);
     }
-
-private String getToken(UserDto userDto){
-    String email = userDto.getEmail();
-    userRepo.findById(userRepo.getIdByUserName(email))
-            .map(user -> {
-                user.setPassword(passwordEncoder.encode(userRepo.getPersonalPass(email)));
-                user.setDate(LocalDateTime.now());
-                return userRepo.save(user);
-            });
-    User user = userRepo.findByUsername(userDto.getEmail());
-    return "token: " + jwtTokenProvider.createToken(user.getUsername(), user.getRoles(), user.getId());
-
-}
 
 }

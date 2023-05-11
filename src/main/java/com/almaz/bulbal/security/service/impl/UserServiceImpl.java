@@ -68,17 +68,21 @@ public class UserServiceImpl implements UserService {
         user.setDate(LocalDateTime.now());
         return userRepo.save(user);
     }
+@Override
+    public String getToken(UserDto userDto){
+        String email = userDto.getEmail();
+        userRepo.findById(userRepo.getIdByUserName(email))
+                .map(user -> {
+                    user.setPassword(passwordEncoder.encode(userRepo.getPersonalPass(email)));
+                    user.setDate(LocalDateTime.now());
+                    return userRepo.save(user);
+                });
+        User user = userRepo.findByUsername(userDto.getEmail());
+        return "token: " + jwtTokenProvider.createToken(user.getUsername(), user.getRoles(), user.getId());
 
+    }
     public boolean checkOtpPassword(UserDto userDto){
         String email = userDto.getEmail();
-        //            userRepo.findById(userRepo.getIdByUserName(email))
-        //                    .map(user -> {
-        //                        user.setPassword(passwordEncoder.encode(userRepo.getPersonalPass(email)));
-        //                        user.setDate(LocalDateTime.now());
-        //                        return userRepo.save(user);
-        //                    });
-        //            User user = findByUsername(userDto.getEmail());
-        //            return "token: " + jwtTokenProvider.createToken(user.getUsername(), user.getRoles(), user.getId());
         return userDto.getOtp().equals(userRepo.getOtpByEmail(email));
 
     }
