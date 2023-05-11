@@ -14,7 +14,6 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
     private String text;
     @JsonProperty("sender_id")
     @Column(name = "sender_id")

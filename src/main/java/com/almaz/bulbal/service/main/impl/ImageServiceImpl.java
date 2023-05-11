@@ -73,6 +73,7 @@ public class ImageServiceImpl implements ImageService {
             multipartFile.transferTo(new File(uploadDir + "/" + fileName));
             if (userRepo.findById(userId).isPresent()) {
                 Image image = new Image();
+                image.setFileName(fileName);
                 imageRepo.save(image);
 
                 userRepo.findById(userId).map(user -> {

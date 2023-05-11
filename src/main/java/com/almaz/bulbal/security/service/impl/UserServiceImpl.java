@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
                     return userRepo.save(user);
                 });
         User user = userRepo.findByUsername(userDto.getEmail());
-        return "token: " + jwtTokenProvider.createToken(user.getUsername(), user.getRoles(), user.getId());
+        return jwtTokenProvider.createToken(user.getUsername(), user.getRoles(), user.getId());
 
     }
     public boolean checkOtpPassword(UserDto userDto){

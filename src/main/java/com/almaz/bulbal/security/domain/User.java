@@ -58,7 +58,7 @@ public class User {
     private List<Accommodation> accommodation;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "avatar", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<Booking> bookings;
 
     @OneToMany(cascade = CascadeType.ALL)
