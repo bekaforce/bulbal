@@ -1,7 +1,6 @@
 package com.almaz.bulbal.controller;
 
 import com.almaz.bulbal.dto.email.EmailDetails;
-import com.almaz.bulbal.security.domain.User;
 import com.almaz.bulbal.security.domain.repo.UserRepo;
 import com.almaz.bulbal.security.dto.UserDto;
 import com.almaz.bulbal.security.jwt.JwtTokenProvider;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 
-import java.time.LocalDateTime;
-
 import static com.almaz.bulbal.endpoints.Endpoints.SEND_MAIL;
 
 @RestController
@@ -23,15 +20,9 @@ import static com.almaz.bulbal.endpoints.Endpoints.SEND_MAIL;
 public class SendEmailController {
 
     private final UserServiceImpl userService;
-    private final UserRepo userRepo;
-    private final BCryptPasswordEncoder passwordEncoder;
-    private final JwtTokenProvider jwtTokenProvider;
 
-    public SendEmailController(UserServiceImpl userService, UserRepo userRepo, BCryptPasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider) {
+    public SendEmailController(UserServiceImpl userService) {
         this.userService = userService;
-        this.userRepo = userRepo;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @PostMapping("/send")
