@@ -53,8 +53,6 @@ server-config:
   upload-path: '/var/www/html1/img'
 #server-config:
 #  upload-path: C:\Users\atemirkanov\Desktop\bulbal
-#
-
 
 
 #/var/lib/docker/volumes/bulbal/_data
