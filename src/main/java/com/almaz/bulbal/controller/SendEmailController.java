@@ -31,12 +31,12 @@ public class SendEmailController {
     }
 
 
-//    @PostMapping("/checkOtp")
-//    public ResponseEntity<?> checkOtp(@RequestBody UserDto userDto) {
-//        boolean response = userService.checkOtpPassword(userDto);
-//        return response
-//                ? new ResponseEntity<>(userService.getToken(userDto), HttpStatus.OK)
-//                : new ResponseEntity<>("Bad OTP", HttpStatus.NOT_FOUND);
-//    }
+    @PostMapping("/checkOtp")
+    public ResponseEntity<?> checkOtp(@RequestBody UserDto userDto) {
+        boolean response = userService.checkOtpPassword(userDto);
+        return response
+                ? new ResponseEntity<>(userService.getToken(userDto), HttpStatus.OK)
+                : new ResponseEntity<>("Bad OTP", HttpStatus.NOT_FOUND);
+    }
 
 }
