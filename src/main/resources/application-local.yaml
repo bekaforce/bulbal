@@ -23,23 +23,23 @@ spring:
 #          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
   main:
     allow-circular-references: true
-  mail:
-    default-encoding: UTF-8
-    host: smtp.gmail.com
-    port: 587
-    username: atemirkanov89@gmail.com
-    password: pqdleunusseixhtp
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-      protocol: smtp
-      test-connection: false
 #  mail:
-#    host: 176.126.164.224
-#    port: 25
+#    default-encoding: UTF-8
+#    host: smtp.gmail.com
+#    port: 587
+#    username: atemirkanov89@gmail.com
+#    password: pqdleunusseixhtp
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#      protocol: smtp
+#      test-connection: false
+  mail:
+    host: 176.126.164.209
+    port: 25
   thymeleaf:
     check-template-location: true
 
