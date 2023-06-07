@@ -33,7 +33,17 @@ public class MainPageServiceImpl implements MainPageService {
     @Override
     public Page<MainPageDto> searchAccommodations(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime) {
         PageRequest pageRequest = PageRequest.of(pageSearchParametersDto.getPageNumber(), pageSearchParametersDto.getPageSize(), Sort.by(pageSearchParametersDto.getSortBy()));
-        return accommodationRepo.searchAccommodations(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getLocality(), pageSearchParametersDto.getCapacity());
+        return accommodationRepo.searchAccommodationsByLocality(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getLocality(), pageSearchParametersDto.getCapacity());
+    }
+
+    @Override
+    public Page<MainPageDto> searchAccommodationsByPlace(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime) {
+        PageRequest pageRequest = PageRequest.of(pageSearchParametersDto.getPageNumber(), pageSearchParametersDto.getPageSize(), Sort.by(pageSearchParametersDto.getSortBy()));
+        Page<MainPageDto> result = accommodationRepo.searchAccommodationsByLocality(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getLocality(), pageSearchParametersDto.getCapacity());
+        if (result.getTotalElements() == 0){
+            return accommodationRepo.searchAccommodationsByRegion(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getLocality(), pageSearchParametersDto.getCapacity());
+        }
+        return result;
     }
 
     @Override
@@ -44,6 +54,16 @@ public class MainPageServiceImpl implements MainPageService {
     @Override
     public Page<MainPageDto> searchBeds(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime) {
         PageRequest pageRequest = PageRequest.of(pageSearchParametersDto.getPageNumber(), pageSearchParametersDto.getPageSize(), Sort.by(pageSearchParametersDto.getSortBy()));
-        return accommodationRepo.searchBeds(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getLocality(), pageSearchParametersDto.getCapacity());
+        return accommodationRepo.searchBedsByLocality(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getLocality(), pageSearchParametersDto.getCapacity());
+    }
+
+    @Override
+    public Page<MainPageDto> searchBedsByPlace(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime) {
+        PageRequest pageRequest = PageRequest.of(pageSearchParametersDto.getPageNumber(), pageSearchParametersDto.getPageSize(), Sort.by(pageSearchParametersDto.getSortBy()));
+        Page<MainPageDto> result = accommodationRepo.searchBedsByLocality(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getLocality(), pageSearchParametersDto.getCapacity());
+        if (result.getTotalElements() == 0){
+            return accommodationRepo.searchBedsByRegion(pageRequest, checkInDateTime, checkOutDateTime, pageSearchParametersDto.getLocality(), pageSearchParametersDto.getCapacity());
+        }
+        return result;
     }
 }

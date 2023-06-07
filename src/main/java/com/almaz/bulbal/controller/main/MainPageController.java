@@ -41,4 +41,16 @@ public class MainPageController {
                                                    @PathVariable(name = "checkOutDateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime checkOutDateTime){
         return mainPageService.searchBeds(pageSearchParametersDto, checkInDateTime, checkOutDateTime);
     }
+
+    @PostMapping(value = "/searchBedsByPlace/{checkInDateTime}/{checkOutDateTime}")
+    public Page<MainPageDto> searchBedsByPlace(@RequestBody PageSearchParametersDto pageSearchParametersDto, @PathVariable(name = "checkInDateTime")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime checkInDateTime,
+                                        @PathVariable(name = "checkOutDateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime checkOutDateTime){
+        return mainPageService.searchBedsByPlace(pageSearchParametersDto, checkInDateTime, checkOutDateTime);
+    }
+
+    @PostMapping(value = "/searchAccommodationsByPlace/{checkInDateTime}/{checkOutDateTime}")
+    public Page<MainPageDto> searchAccommodationsByPlace(@RequestBody PageSearchParametersDto pageSearchParametersDto, @PathVariable(name = "checkInDateTime")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime checkInDateTime,
+                                                   @PathVariable(name = "checkOutDateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime checkOutDateTime){
+        return mainPageService.searchAccommodationsByPlace(pageSearchParametersDto, checkInDateTime, checkOutDateTime);
+    }
 }

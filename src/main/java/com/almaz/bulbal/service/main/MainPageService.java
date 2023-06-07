@@ -13,6 +13,10 @@ public interface MainPageService {
 
     Page<MainPageDto> getMainPage(PageParametersDto pageParametersDto);
     Page<MainPageDto> searchAccommodations(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime);
+
+    Page<MainPageDto> searchAccommodationsByPlace(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime);
     List<MainPageDto> getAdminMainPage(GetLocalDateTimeDto getLocalDateTimeDto);
     Page<MainPageDto> searchBeds(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime);
+
+    Page<MainPageDto> searchBedsByPlace(PageSearchParametersDto pageSearchParametersDto, LocalDateTime checkInDateTime, LocalDateTime checkOutDateTime);
 }
